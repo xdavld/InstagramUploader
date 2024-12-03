@@ -1,6 +1,6 @@
 import { Shell } from "@/components/shell"
 
-import { VariantTabs } from "./_components/variant-tabs"
+import { VariantTabs } from "@/components/uploader/variant-tabs"
 
 export default function IndexPage() {
   return (

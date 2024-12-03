@@ -3,7 +3,7 @@
 import { useUploadFile } from "@/hooks/use-upload-file"
 import { FileUploader } from "@/components/file-uploader"
 
-import { UploadedFilesCard } from "./uploaded-files-card"
+import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card"
 
 export function BasicUploaderDemo() {
   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile(

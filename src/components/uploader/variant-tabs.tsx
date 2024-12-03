@@ -7,11 +7,6 @@ import { ReactHookFormDemo } from "./react-hook-form-demo"
 export function VariantTabs() {
   return (
     <Tabs defaultValue="basic" className="w-full overflow-hidden">
-      <TabsList>
-        <TabsTrigger value="basic">Basic</TabsTrigger>
-        <TabsTrigger value="hook">React hook form</TabsTrigger>
-        <TabsTrigger value="dialog">Dialog</TabsTrigger>
-      </TabsList>
       <TabsContent value="basic" className="mt-6">
         <BasicUploaderDemo />
       </TabsContent>
