@@ -1,19 +1,22 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Image from "next/image"
-import { FileText, Upload, X } from "lucide-react"
-import Dropzone, {
-  type DropzoneProps,
-  type FileRejection,
-} from "react-dropzone"
-import { toast } from "sonner"
+import * as React from "react";
+import Image from "next/image";
+import { FileText, Upload, X } from "lucide-react";
+import Dropzone, { type DropzoneProps, type FileRejection } from "react-dropzone";
+import { toast } from "sonner";
 
-import { cn, formatBytes } from "@/lib/utils"
-import { useControllableState } from "@/hooks/use-controllable-state"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { ScrollArea } from "@/components/ui/scroll-area"
+
+
+import { cn, formatBytes } from "@/lib/utils";
+import { useControllableState } from "@/hooks/use-controllable-state";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+
+
+
 
 interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -99,7 +102,8 @@ export function FileUploader(props: FileUploaderProps) {
     onUpload,
     progresses,
     accept = {
-      "image/*": [],
+      "image/*": [".jpg", ".jpeg", ".png", ".gif"],
+      "video/*": [".mp4", ".mkv", ".avi"],
     },
     maxSize = 1024 * 1024 * 2,
     maxFileCount = 1,

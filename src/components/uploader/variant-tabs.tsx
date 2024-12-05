@@ -10,12 +10,6 @@ export function VariantTabs() {
       <TabsContent value="basic" className="mt-6">
         <BasicUploaderDemo />
       </TabsContent>
-      <TabsContent value="hook" className="mt-6">
-        <ReactHookFormDemo />
-      </TabsContent>
-      <TabsContent value="dialog" className="mt-6">
-        <DialogUploaderDemo />
-      </TabsContent>
     </Tabs>
   )
 }
