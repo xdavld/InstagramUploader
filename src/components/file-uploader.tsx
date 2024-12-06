@@ -326,7 +326,19 @@ function FilePreview({ file }: FilePreviewProps) {
         loading="lazy"
         className="aspect-square shrink-0 rounded-md object-cover"
       />
-    )
+    );
+  }
+
+  if (file.type.startsWith("video/")) {
+    return (
+      <video
+        src={file.preview}
+        width={48}
+        height={48}
+        controls
+        className="aspect-square shrink-0 rounded-md object-cover"
+      />
+    );
   }
 
   return (

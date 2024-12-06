@@ -82,13 +82,12 @@ __turbopack_esm__({
     "ourFileRouter": (()=>ourFileRouter)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rate$2d$limit$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/lib/rate-limit.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$uploadthing$2b$shared$40$7$2e$1$2e$1$2f$node_modules$2f40$uploadthing$2f$shared$2f$dist$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/.pnpm/@uploadthing+shared@7.1.1/node_modules/@uploadthing/shared/dist/index.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$3$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_pa5pseb4l3wutysdckn3vizqpm$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_import__("[project]/node_modules/.pnpm/uploadthing@7.3.0_next@15.0.3_react-dom@19.0.0-rc-fb9a90fa48-20240614_react@19.0.0-rc-fb9a90f_pa5pseb4l3wutysdckn3vizqpm/node_modules/uploadthing/next/index.js [app-route] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$uploadthing$2b$shared$40$7$2e$1$2e$2$2f$node_modules$2f40$uploadthing$2f$shared$2f$dist$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/.pnpm/@uploadthing+shared@7.1.2/node_modules/@uploadthing/shared/dist/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$4$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_icclmt6ip3iwvbdalruymir4ly$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_import__("[project]/node_modules/.pnpm/uploadthing@7.4.0_next@15.0.3_react-dom@19.0.0-rc-fb9a90fa48-20240614_react@19.0.0-rc-fb9a90f_icclmt6ip3iwvbdalruymir4ly/node_modules/uploadthing/next/index.js [app-route] (ecmascript) <locals>");
 ;
 ;
 ;
-const f = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$3$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_pa5pseb4l3wutysdckn3vizqpm$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createUploadthing"])();
-// Fake auth function
+const f = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$4$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_icclmt6ip3iwvbdalruymir4ly$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createUploadthing"])();
 async function auth(_req) {
     await new Promise((resolve)=>setTimeout(resolve, 100));
     return {
@@ -96,40 +95,36 @@ async function auth(_req) {
     };
 }
 const ourFileRouter = {
-    // Define as many FileRoutes as you like, each with a unique routeSlug
-    imageUploader: f({
+    // Define a route for multiple file types
+    fileUploader: f({
         image: {
             maxFileSize: "4MB",
-            maxFileCount: 8
+            maxFileCount: 5
+        },
+        video: {
+            maxFileSize: "16MB",
+            maxFileCount: 2
         }
-    })// Set permissions and file types for this FileRoute
-    .middleware(async ({ req })=>{
+    }).middleware(async ({ req })=>{
         // Rate limit the upload
         const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
         const { success } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rate$2d$limit$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["ratelimit"].limit(ip);
         if (!success) {
-            // eslint-disable-next-line @typescript-eslint/only-throw-error
-            throw new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$uploadthing$2b$shared$40$7$2e$1$2e$1$2f$node_modules$2f40$uploadthing$2f$shared$2f$dist$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["UploadThingError"]("Rate limit exceeded");
+            throw new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$uploadthing$2b$shared$40$7$2e$1$2e$2$2f$node_modules$2f40$uploadthing$2f$shared$2f$dist$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["UploadThingError"]("Rate limit exceeded");
         }
-        // This code runs on your server before upload
+        // Fake authentication
         const user = await auth(req);
-        // If you throw, the user will not be able to upload
-        // eslint-disable-next-line @typescript-eslint/only-throw-error
         if ("TURBOPACK compile-time falsy", 0) {
             "TURBOPACK unreachable";
         }
-        // Whatever is returned here is accessible in onUploadComplete as `metadata`
+        // Pass metadata to `onUploadComplete`
         return {
             userId: user.id
         };
     }).onUploadComplete(async ({ metadata, file })=>{
-        // This code RUNS ON YOUR SERVER after upload
+        // Logic after upload completes
         console.log("Upload complete for userId:", metadata.userId);
-        console.log("file url", file.url);
-        // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-        return {
-            uploadedBy: metadata.userId
-        };
+        console.log("File URL:", file.url);
     })
 };
 }}),
@@ -143,10 +138,10 @@ __turbopack_esm__({
     "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$uploadthing$2f$core$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/api/uploadthing/core.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$3$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_pa5pseb4l3wutysdckn3vizqpm$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_import__("[project]/node_modules/.pnpm/uploadthing@7.3.0_next@15.0.3_react-dom@19.0.0-rc-fb9a90fa48-20240614_react@19.0.0-rc-fb9a90f_pa5pseb4l3wutysdckn3vizqpm/node_modules/uploadthing/next/index.js [app-route] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$4$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_icclmt6ip3iwvbdalruymir4ly$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_import__("[project]/node_modules/.pnpm/uploadthing@7.4.0_next@15.0.3_react-dom@19.0.0-rc-fb9a90fa48-20240614_react@19.0.0-rc-fb9a90f_icclmt6ip3iwvbdalruymir4ly/node_modules/uploadthing/next/index.js [app-route] (ecmascript) <locals>");
 ;
 ;
-const { GET, POST } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$3$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_pa5pseb4l3wutysdckn3vizqpm$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createRouteHandler"])({
+const { GET, POST } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uploadthing$40$7$2e$4$2e$0_next$40$15$2e$0$2e$3_react$2d$dom$40$19$2e$0$2e$0$2d$rc$2d$fb9a90fa48$2d$20240614_react$40$19$2e$0$2e$0$2d$rc$2d$fb9a90f_icclmt6ip3iwvbdalruymir4ly$2f$node_modules$2f$uploadthing$2f$next$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createRouteHandler"])({
     router: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$uploadthing$2f$core$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["ourFileRouter"]
 });
 }}),

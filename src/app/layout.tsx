@@ -24,31 +24,24 @@ export const metadata: Metadata = {
     "react",
     "uploader",
     "file-uploader",
-    "file-input",
+    "Instagram-uploader",
     "shadcn-file-uploader",
     "uploadthing",
   ],
   authors: [
     {
-      name: "sadmann7",
+      name: "David Kreismann, Leonard Eckert, Nico Wagner, Tobias Schnarr",
       url: "https://www.sadmn.com",
     },
   ],
-  creator: "sadmann7",
+  creator: "David Kreismann",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "de_DE",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
-    creator: "@sadmann17",
   },
   icons: {
     icon: "/icon.png",
@@ -67,7 +60,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        {/* Add Facebook SDK Script */}
+        <script
+          async
+          defer
+          crossOrigin="anonymous"
+          src="https://connect.facebook.net/en_US/sdk.js"
+        ></script>
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

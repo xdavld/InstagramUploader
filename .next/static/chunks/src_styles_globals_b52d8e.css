@@ -480,6 +480,10 @@ body {
   margin-top: 5rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -618,10 +622,6 @@ body {
 
 .w-64 {
   width: 16rem;
-}
-
-.w-fit {
-  width: fit-content;
 }
 
 .w-full {
@@ -1586,10 +1586,6 @@ body {
 
   .sm\:hidden {
     display: none;
-  }
-
-  .sm\:max-w-xl {
-    max-width: 36rem;
   }
 
   .sm\:flex-row {
