@@ -3,8 +3,10 @@ import { env } from "@/env"
 
 // Define request body type
 type InstagramRequestBody = {
-  imageUrl: string
+  imageUrl?: string
+  videoUrl?: string
   caption: string
+  mediaType?: "REELS"
 }
 
 // Define API response types
@@ -19,22 +21,28 @@ type PublishResponse = {
 export async function POST(req: NextRequest) {
   try {
     // Parse and type the request body
-    const { imageUrl, caption } = (await req.json()) as InstagramRequestBody
+    const { imageUrl, videoUrl, caption, mediaType } =
+      (await req.json()) as InstagramRequestBody
 
-    if (!imageUrl || !caption) {
+    // Ensure required fields are present
+    if ((!imageUrl && !videoUrl) || !caption) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       )
     }
 
-    // Step 1: Upload the image and get the creation_id
+    const isVideo = !!videoUrl
+
+    // Step 1: Upload the media and get the creation_id
     const uploadResponse = await fetch(
       `https://graph.facebook.com/v21.0/17841427525169570/media`,
       {
         method: "POST",
         body: JSON.stringify({
-          image_url: imageUrl,
+          ...(isVideo
+            ? { video_url: videoUrl, media_type: mediaType || "REELS" }
+            : { image_url: imageUrl }),
           caption: caption,
           access_token: env.INSTAGRAM_ACCESS_TOKEN,
         }),
@@ -51,7 +59,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Step 2: Publish the image using the creation_id
+    // Step 2: Publish the media using the creation_id
     const publishResponse = await fetch(
       `https://graph.facebook.com/v21.0/17841427525169570/media_publish`,
       {

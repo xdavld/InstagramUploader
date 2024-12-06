@@ -1,11 +1,11 @@
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shell";
+import { BasicUploaderDemo } from "@/components/uploader/basic-uploader-demo"
 
-import { VariantTabs } from "@/components/uploader/variant-tabs"
 
 export default function IndexPage() {
   return (
     <Shell>
-      <VariantTabs />
+      <BasicUploaderDemo />
     </Shell>
   )
 }
