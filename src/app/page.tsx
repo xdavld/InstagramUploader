@@ -1,10 +1,16 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-import { SiteHeader } from "@/components/layouts/site-header"
-import { Shell } from "@/components/shell"
-import { BasicUploaderDemo } from "@/components/uploader/basic-uploader-demo"
+
+
+import { SiteHeader } from "@/components/layouts/site-header";
+import { Shell } from "@/components/shell";
+import { BasicUploaderDemo } from "@/components/uploader/basic-uploader-demo";
+
+
+
+
 
 export default function IndexPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -13,7 +19,9 @@ export default function IndexPage() {
     const accessToken = localStorage.getItem("instagram_access_token")
     if (!accessToken) {
       const clientId = "967181185255438"
-      const redirectUri = encodeURIComponent("http://localhost:3000/")
+      const redirectUri = encodeURIComponent(
+        "https://software-engineering-project-8hsfjxsn6-xdavlds-projects.vercel.app"
+      )
       const scope = encodeURIComponent(
         "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish"
       )
