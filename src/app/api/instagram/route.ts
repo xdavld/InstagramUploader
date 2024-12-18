@@ -20,11 +20,9 @@ type PublishResponse = {
 
 export async function POST(req: NextRequest) {
   try {
-    // Parse and type the request body
     const { imageUrl, videoUrl, caption, mediaType } =
       (await req.json()) as InstagramRequestBody
 
-    // Ensure required fields are present
     if ((!imageUrl && !videoUrl) || !caption) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -34,7 +32,9 @@ export async function POST(req: NextRequest) {
 
     const isVideo = !!videoUrl
 
-    // Step 1: Upload the media and get the creation_id
+    console.log("Incoming Request:", { imageUrl, videoUrl, caption, mediaType })
+
+    // Step 1: Upload the media
     const uploadResponse = await fetch(
       `https://graph.facebook.com/v21.0/17841427525169570/media`,
       {
@@ -51,30 +51,63 @@ export async function POST(req: NextRequest) {
     )
 
     const uploadData = (await uploadResponse.json()) as UploadResponse
+    console.log("Upload Response:", uploadData)
 
     if (!uploadResponse.ok) {
+      console.error("Upload Failed:", uploadData)
       return NextResponse.json(
         { error: uploadData },
         { status: uploadResponse.status }
       )
     }
 
-    // Step 2: Publish the media using the creation_id
-    const publishResponse = await fetch(
-      `https://graph.facebook.com/v21.0/17841427525169570/media_publish`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          creation_id: uploadData.id,
-          access_token: env.INSTAGRAM_ACCESS_TOKEN,
-        }),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    // Step 2: Poll for media status until it's ready
+    const creationId = uploadData.id
+    const statusUrl = `https://graph.facebook.com/v21.0/${creationId}?fields=status&access_token=${env.INSTAGRAM_ACCESS_TOKEN}`
+    let mediaReady = false
+    const maxAttempts = 10
+    let attempts = 0
 
-    const publishData = (await publishResponse.json()) as PublishResponse
+    while (!mediaReady && attempts < maxAttempts) {
+      const statusResponse = await fetch(statusUrl, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${env.INSTAGRAM_ACCESS_TOKEN}` },
+      })
+
+      const statusData = await statusResponse.json()
+      console.log(`Status Response [Attempt ${attempts + 1}]:`, statusData)
+
+      if (statusData.status?.startsWith("Finished")) {
+        mediaReady = true
+      } else {
+        attempts++
+        await new Promise((resolve) => setTimeout(resolve, 10000)) // Wait for 2 seconds before retrying
+      }
+    }
+
+    if (!mediaReady) {
+      console.error("Media is not ready after multiple attempts.")
+      return NextResponse.json(
+        { error: "Media is not ready after multiple attempts" },
+        { status: 408 }
+      )
+    }
+
+    // Step 3: Publish the media
+    const publishUrl = `https://graph.facebook.com/v21.0/17841427525169570/media_publish`
+    const publishQuery = `?creation_id=${creationId}&access_token=${env.INSTAGRAM_ACCESS_TOKEN}`
+
+    console.log(`Publish Request URL: ${publishUrl}${publishQuery}`)
+
+    const publishResponse = await fetch(`${publishUrl}${publishQuery}`, {
+      method: "POST", // Use POST without a body
+    })
+
+    const publishData = await publishResponse.json()
+    console.log("Publish Response:", publishData)
 
     if (!publishResponse.ok) {
+      console.error("Publish Failed:", publishData)
       return NextResponse.json(
         { error: publishData },
         { status: publishResponse.status }

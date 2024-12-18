@@ -125,6 +125,7 @@ const ourFileRouter = {
         // Logic after upload completes
         console.log("Upload complete for userId:", metadata.userId);
         console.log("File URL:", file.url);
+        console.log("File details:", file);
     })
 };
 }}),

@@ -1,16 +1,16 @@
-import React, { useState } from "react"
-import Image from "next/image"
-import type { UploadedFile } from "@/types"
+import React, { useState } from "react";
+import Image from "next/image";
+import type { UploadedFile } from "@/types";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { EmptyCard } from "@/components/empty-card"
+
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { EmptyCard } from "@/components/empty-card";
+
+
+
+
 
 interface UploadedFilesCardProps {
   uploadedFiles: UploadedFile[]
@@ -23,11 +23,11 @@ export function UploadedFilesCard({
 }: UploadedFilesCardProps) {
   const [selectedFile, setSelectedFile] = useState<string | null>(null)
 
-  const handleFileClick = (file: UploadedFile) => {
-    const newSelection = selectedFile === file.key ? null : file.key // Toggle selection
-    setSelectedFile(newSelection)
-    onSelectFile(newSelection ? file.url : null, newSelection ? file.type : "") // Pass file data or reset
-  }
+const handleFileClick = (file: UploadedFile) => {
+  const newSelection = selectedFile === file.key ? null : file.key // Toggle selection
+  setSelectedFile(newSelection)
+  onSelectFile(newSelection ? file.url : null, newSelection ? file.type : "") // Pass file data or reset
+}
 
   const isImage = (file: UploadedFile) => file.type.startsWith("image")
   const isVideo = (file: UploadedFile) => file.type.startsWith("video")

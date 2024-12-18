@@ -79,7 +79,7 @@ export function BasicUploaderDemo() {
     <div className="flex flex-col gap-6">
       <FileUploader
         maxFileCount={4}
-        maxSize={4 * 1024 * 1024}
+        maxSize={16 * 1024 * 1024}
         progresses={progresses}
         onUpload={onUpload}
         disabled={isUploading}

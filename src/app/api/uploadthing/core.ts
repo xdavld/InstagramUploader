@@ -1,7 +1,13 @@
-import { createUploadthing, type FileRouter } from "uploadthing/next"
-import { UploadThingError } from "uploadthing/server"
+import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { UploadThingError } from "uploadthing/server";
 
-import { ratelimit } from "@/lib/rate-limit"
+
+
+import { ratelimit } from "@/lib/rate-limit";
+
+
+
+
 
 const f = createUploadthing()
 
@@ -37,6 +43,7 @@ export const ourFileRouter = {
       // Logic after upload completes
       console.log("Upload complete for userId:", metadata.userId)
       console.log("File URL:", file.url)
+      console.log("File details:", file)
     }),
 } satisfies FileRouter
 
