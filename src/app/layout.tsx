@@ -1,16 +1,29 @@
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { SiteHeader } from "@/components/layouts/site-header"
-import { ThemeProvider } from "@/components/providers"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { SiteHeader } from "@/components/layouts/site-header";
+import { ThemeProvider } from "@/components/providers";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 
-import "@/styles/globals.css"
 
-import type { Metadata, Viewport } from "next"
-import { GeistMono } from "geist/font/mono"
-import { GeistSans } from "geist/font/sans"
 
-import { Toaster } from "@/components/ui/sonner"
+
+
+
+import "@/styles/globals.css";
+
+
+
+import type { Metadata, Viewport } from "next";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+
+
+
+import { Toaster } from "@/components/ui/sonner";
+
+
+
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -83,7 +96,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           disableTransitionOnChange
         >
           <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
             <main className="flex-1">{children}</main>
           </div>
           <TailwindIndicator />

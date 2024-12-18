@@ -1,5 +1,6 @@
 {
   "/page": "app/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/api/uploadthing/route": "app/api/uploadthing/route.js"
+  "/api/uploadthing/route": "app/api/uploadthing/route.js",
+  "/api/instagram/route": "app/api/instagram/route.js",
+  "/_not-found/page": "app/_not-found/page.js"
 }

@@ -10,7 +10,7 @@ export const siteConfig = {
   name: "Instagram Uploader",
   description: "File uploader built with shadcn-ui, and react-dropzone",
   url:
-    env.NODE_ENV === "development"
+    env.NEXT_PUBLIC_NODE_ENV === "development"
       ? "http://localhost:3000"
       : "https://uploader.sadmn.com",
   links: { github: "https://github.com/xdavld/SoftwareEngineering-Project" },

@@ -102,10 +102,14 @@ export function FileUploader(props: FileUploaderProps) {
     onUpload,
     progresses,
     accept = {
-      "image/*": [".jpg", ".jpeg", ".png", ".gif"],
-      "video/*": [".mp4", ".mkv", ".avi"],
+      "image/jpeg": [".jpg", ".jpeg"],
+      "image/png": [".png"],
+      "image/gif": [".gif"],
+      "video/mp4": [".mp4"],
+      "video/x-matroska": [".mkv"], // Explicit for MKV
+      "video/x-msvideo": [".avi"],  // Explicit for AVI
     },
-    maxSize = 1024 * 1024 * 2,
+    maxSize = 1024 * 1024 * 16,
     maxFileCount = 1,
     multiple = false,
     disabled = false,
