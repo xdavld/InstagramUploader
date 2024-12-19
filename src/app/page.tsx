@@ -20,14 +20,14 @@ export default function IndexPage() {
     if (!accessToken) {
       const clientId = "967181185255438"
       const redirectUri = encodeURIComponent(
-        "https://software-engineering-project-8hsfjxsn6-xdavlds-projects.vercel.app"
+        "https://software-engineering-project-eight.vercel.app/"
       )
       const scope = encodeURIComponent(
         "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish"
       )
       const oauthUrl = `https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`
 
-      window.location.href = oauthUrl
+      https: window.location.href = oauthUrl
     } else {
       setIsAuthenticated(true)
     }
