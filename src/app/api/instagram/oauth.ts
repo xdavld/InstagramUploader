@@ -1,48 +1,47 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next"
 
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", ["POST"])
+    return res.status(405).json({ error: `Method ${req.method} not allowed` })
+  }
 
-
-
-
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url)
-  const code = searchParams.get("code")
+  const { code } = req.body
 
   if (!code) {
-    return NextResponse.json(
-      { error: "Missing code parameter" },
-      { status: 400 }
-    )
+    return res.status(400).json({ error: "Missing code" })
   }
 
-  const clientId = "967181185255438"
-  const clientSecret = "fa780fc9e34c76b662d8d539e7d964e8"
-  const redirectUri = "http://localhost:3000/"
+  try {
+    const response = await fetch(
+      "https://api.instagram.com/oauth/access_token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          client_id: process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID || "",
+          client_secret: process.env.INSTAGRAM_CLIENT_SECRET || "",
+          grant_type: "authorization_code",
+          redirect_uri: process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || "",
+          code,
+        }).toString(),
+      }
+    )
 
-  const tokenResponse = await fetch(
-    "https://api.instagram.com/oauth/access_token",
-    {
-      method: "POST",
-      body: new URLSearchParams({
-        client_id: clientId,
-        client_secret: clientSecret,
-        grant_type: "authorization_code",
-        redirect_uri: redirectUri,
-        code,
-      }),
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    if (!response.ok) {
+      const errorData = await response.json()
+      return res.status(response.status).json({ error: errorData })
     }
-  )
 
-  const tokenData = await tokenResponse.json()
-
-  if (!tokenResponse.ok) {
-    return NextResponse.json(
-      { error: tokenData.error_message },
-      { status: 400 }
-    )
+    const data = await response.json()
+    return res.status(200).json({ access_token: data.access_token })
+  } catch (error) {
+    console.error("Error exchanging code for access token:", error)
+    return res.status(500).json({ error: "Internal server error" })
   }
-
-  // Save the access token in localStorage via frontend (or securely via cookies)
-  return NextResponse.json(tokenData, { status: 200 })
 }

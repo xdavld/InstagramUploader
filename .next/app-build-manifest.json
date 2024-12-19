@@ -20,23 +20,6 @@
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_3fc529._.js",
       "static/chunks/_c4c472._.js",
       "static/chunks/_a6d6e5._.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/_12663c._.js",
-      "static/chunks/src_app_icon--metadata_444f8c.js",
-      "static/chunks/27468_zod_lib_index_mjs_fe144a._.js",
-      "static/chunks/node_modules__pnpm_274089._.js",
-      "static/chunks/src_558299._.js",
-      "static/chunks/_5742e0._.css",
-      "static/chunks/src_app_layout_tsx_444f8c._.js",
-      "static/chunks/2638a_next_dist_compiled_react-dom_26d307._.js",
-      "static/chunks/2638a_next_dist_compiled_4dc66e._.js",
-      "static/chunks/2638a_next_dist_client_3a0ca3._.js",
-      "static/chunks/2638a_next_dist_47d03d._.js",
-      "static/chunks/90823_@swc_helpers_cjs_6ab2e1._.js",
-      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_3fc529._.js",
-      "static/chunks/_c4c472._.js",
-      "static/chunks/_a6d6e5._.js"
     ]
   }
 }

@@ -3,10 +3,6 @@
     "[project]/src/app/page": [
       "static/media/GeistMono_Variable.p.0ce97b8a.woff2",
       "static/media/Geist_Variable-s.p.781b491f.woff2"
-    ],
-    "[project]/src/app/_not-found/page": [
-      "static/media/GeistMono_Variable.p.0ce97b8a.woff2",
-      "static/media/Geist_Variable-s.p.781b491f.woff2"
     ]
   },
   "appUsingSizeAdjust": true,
