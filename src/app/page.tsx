@@ -28,7 +28,7 @@ export default function IndexPage() {
     if (code) {
       const fetchAccessToken = async () => {
         try {
-          const response = await fetch("/api/instagram/oauth.ts", {
+          const response = await fetch("/api/instagram/oauth.ts", { 
             method: "POST",
             headers: {
               "Content-Type": "application/json",
