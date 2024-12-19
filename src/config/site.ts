@@ -12,6 +12,6 @@ export const siteConfig = {
   url:
     env.NEXT_PUBLIC_NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://uploader.sadmn.com",
+      : "https://software-engineering-project-eight.vercel.app/",
   links: { github: "https://github.com/xdavld/SoftwareEngineering-Project" },
 }
