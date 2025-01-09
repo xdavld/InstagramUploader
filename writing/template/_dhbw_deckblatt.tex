@@ -1,0 +1,83 @@
+% 
+% in dieser Datei sind keine Anpassungen nötig
+%
+% alle erforderlichen Festlegungen treffen Sie in config.tex
+%
+\thispagestyle{empty}
+
+\begin{spacing}{1}
+\begin{center}	
+~\vspace{0mm}
+
+{\sffamily
+\schriftgroesseTitel  
+\textbf{\titelAufDeckblatt}
+}
+
+
+\vspace{15mm}
+
+{\Large%
+\DEoEN{%
+  \ifthenelse{\equal{\typMeinerArbeit}{PA1}}{1. Projektarbeit}{}%
+  \ifthenelse{\equal{\typMeinerArbeit}{PA2}}{2. Projektarbeit}{}%
+  \ifthenelse{\equal{\typMeinerArbeit}{BA}}{Bachelorarbeit}{}%
+  \ifthenelse{\equal{\typMeinerArbeit}{Seminar}}{Seminararbeit}{}%
+}{% 
+  \ifthenelse{\equal{\typMeinerArbeit}{PA1}}{1. Project work}{}%
+  \ifthenelse{\equal{\typMeinerArbeit}{PA2}}{2. Project work}{}%
+  \ifthenelse{\equal{\typMeinerArbeit}{BA}}{Bachelor thesis}{}%
+  \ifthenelse{\equal{\typMeinerArbeit}{Seminar}}{Seminar work}{}%
+}}
+
+\vspace{1cm}
+
+\DEoEN{vorgelegt am}{submitted on} \abgabeDatum 
+
+\vspace{15mm}
+
+\DEoEN{Fakultät Wirtschaft und Gesundheit}{Faculty of Economics and Health} 
+
+\medskip
+\DEoEN{Studiengang Wirtschaftsinformatik}{Business informatics degree programme}
+
+\medskip
+
+\DEoEN{Kurs}{Course} \meinKurs 
+
+\vspace{10mm}
+
+\DEoEN{von}{by}
+
+\vspace{10mm}
+
+{\large\textsc{\meinName}}
+
+\vspace{10mm}
+\end{center}
+
+\vfill
+
+
+
+\vspace{1cm}
+\end{spacing}
+
+\ifthenelse{\equal{\hatVermerk}{ja}}{%
+\begin{center}
+\small
+\DEoEN{%
+\textbf{Vertraulichkeitsvermerk}:
+Der Inhalt dieser Arbeit darf weder als Ganzes noch in Auszügen \\
+Personen außerhalb des Prüfungs- und Evaluationsverfahrens zugänglich gemacht werden, \\ sofern keine anders lautende Genehmigung des Dualen Partners vorliegt.%
+}{%
+\textbf{Confidentiality notice}:
+The content of this work may not be made accessible to people outside \\ of the testing process and the evaluation process neither as a whole nor as excerpts, unless an authorisation stating otherwise is presented by the training facility.%
+}
+\end{center}%
+}{}
+
+% Meta-Daten für PDF-Datei basierend auf obigen Angaben
+\hypersetup{pdftitle={\themaMeinerArbeit}}
+\hypersetup{pdfauthor={\meinName}}
+\hypersetup{pdfsubject={\typMeinerArbeit\ DHBW Stuttgart \the\year}}

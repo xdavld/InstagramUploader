@@ -1,0 +1,75 @@
+%%% LaTeX-Vorlage Version 2.0 %%%
+
+% TODO: individuelle Einstellungen (Name, Titel etc.)
+% -> bitte in Konfigurationsdatei anpassen
+\input{includes/config.tex}
+
+% Grundlegende Dokumenteneigenschaften gemäß DHBW-Vorgaben
+\documentclass[a4paper,fontsize=11pt,oneside,parskip=half,headings=normal,listof=no chaptergap]{scrreprt} 
+% \usepackage{showframe} % nur für Kontrolle der Ränder 
+
+%%% Präambel einbinden (mit Festlegungen gemäß DHBW-Vorgaben) %%%
+\input{template/_dhbw_praeambel.tex}
+
+%%% Name der eigenen Literatur-Datenbank (ggf. anpassen) %%%
+%\bibliography{includes/literature-database.bib}
+
+\begin{document}
+%%% Deckblatt gemäß DHBW-Vorgaben einbinden (keine Anpassung nötig) %%% 
+\input{template/_dhbw_deckblatt.tex}
+
+%%% Umstellung der Seiten-Nummerierung auf i, ii, iii ... %%%
+\pagenumbering{Roman} 
+
+%%% Abstract einbinden (optionale Kurzfassung Ihrer Arbeit) %%%
+% \input{includes/abstract.tex}
+\cleardoublepage
+
+%%% Inhalts-, Abbildungs-, Tabellenverzeichnisse %%%
+% werden einzeilig gesetzt, um Platz zu sparen 
+\begin{spacing}{1}
+\tableofcontents % Inhaltsverzeichnis ausgeben
+\clearpage
+\input{includes/abkuerzungen.tex} % Abkürzungsverzeichnis einbinden
+
+\clearpage
+\thispagestyle{kapitelkopfzeile}
+\listoffigures
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename} % Abb.verz. ins Inh.verz. aufnehmen
+
+\clearpage
+\listoftables
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename} % Tab.verz. ins Inh.verz. aufnehmen
+\end{spacing}
+
+%%% Umstellung der Seiten-Nummerierung auf 1, 2, 3 ... %%%
+\cleardoublepage
+\pagenumbering{arabic}
+
+%%% Ihr eigentlicher Inhalt %%%
+% Empfehlung: strukturieren Sie Ihren Text in einzelnen Dateien 
+% und binden Sie diese hier mit \input{includes/dateiname.tex} ein
+
+\input{includes/chapter1.tex}
+\input{includes/chapter2.tex}
+
+
+
+%\input{includes/anhang.tex}
+%%% Ende des eigentlichen Inhalts %%%
+
+
+%%% Quellenverzeichnisse (keine Anpassung nötig) %%%
+%\clearpage
+%\literaturverzeichnis
+%%% Ende Quellenverzeichnisse %%%
+
+
+%%% Erklärung (keine Anpassungen nötig) %%%
+% steht ganz am Ende des Dokuments
+\cleardoublepage
+\input{includes/erklaerung_ki.tex}
+\input{template/_dhbw_erklaerung.tex}
+\end{document}

@@ -1,0 +1,169 @@
+%%% Präambel %%%
+% hier sollten keine Änderungen erforderlich sein
+%
+\usepackage{ifthen}           % für Umschaltung DE/EN
+\newcommand{\DEoEN}[2]{\ifthenelse{\equal{\meineSprache}{DE}}{#1}{#2}}
+
+\usepackage[utf8]{inputenc}   % Zeichencodierung UTF-8 für Eingabe-Dateien
+\usepackage[T1]{fontenc}      % Darstellung von Umlauten im PDF
+\usepackage{amsmath} % for math
+\usepackage{multicol} % for multiple columns
+\usepackage{booktabs} % for table formation
+\usepackage{caption} % for captions in the appendix
+\renewcommand{\theequation}{\arabic{equation}} % disable chapter-based numbering
+\usepackage{float} % for figures
+\usepackage{array} % for tables
+
+\usepackage{listings}         % für Einbindung von Code-Listings
+\lstset{numbers=left,numberstyle=\tiny,numbersep=5pt,texcl=true}
+\lstset{literate=             % erlaubt Sonderzeichen in Code-Listings 
+{Ö}{{\"O}}1
+{Ä}{{\"A}}1
+{Ü}{{\"U}}1
+{ß}{{\ss}}2
+{ü}{{\"u}}1
+{ä}{{\"a}}1
+{ö}{{\"o}}1
+{€}{{\euro}}1
+}
+
+\usepackage[
+  inner=35mm,outer=15mm,top=25mm,
+  bottom=20mm,foot=12mm,includefoot
+]{geometry}                 % Einstellungen für Ränder
+
+\DEoEN{
+  \usepackage[ngerman]{babel} % Spracheinstellungen Deutsch
+  \usepackage[babel,german=quotes]{csquotes} % deutsche Anf.zeichen
+}{
+ \usepackage[english]{babel} % Spracheinstellungen Englisch
+ \usepackage[babel,english=british]{csquotes} % englische Anf.zeichen
+}
+
+\usepackage{enumerate}      % anpassbare Nummerier./Aufz.
+\usepackage{graphicx}       % Einbinden von Grafiken
+\usepackage[onehalfspacing]{setspace} % anderthalbzeilig
+
+\usepackage{blindtext}      % Textgenerierung für Testzwecke
+\usepackage{color}          % Verwendung von Farbe 
+
+\usepackage{acronym}        % für ein Abkürzungsverzeichnis
+
+\usepackage[                % Biblatex
+  backend=biber,
+  bibstyle=_dhbw_authoryear,maxbibnames=99,
+  citestyle=authoryear,     
+  uniquename=true, useprefix=true,
+  bibencoding=utf8]{biblatex}
+\input{template/_dhbw_biblatex-config.tex} % mit DHBW-spezifischen Einstellungen
+
+\usepackage{hyperref}       % URL-Formatierung, klickbare Verweise
+
+\usepackage{tocloft}        % für Verzeichnis der Anhänge
+
+\usepackage{multirow}       % Tabellenformatierung 
+
+\newcounter{anhcnt}
+\setcounter{anhcnt}{0}
+\newlistof{anhang}{app}{}
+
+\newcommand{\anhang}[1]{%
+  \refstepcounter{anhcnt}
+  \setcounter{anhteilcnt}{0}
+  \section*{\appendixname\ \theanhcnt: #1}
+  \addcontentsline{app}{section}{\protect\numberline{\appendixname\ \theanhcnt}#1}\par
+}
+
+\newcounter{anhteilcnt}
+\setcounter{anhteilcnt}{0}
+
+\newcommand{\anhangteil}[1]{%
+	\refstepcounter{anhteilcnt}
+	\subsection*{\appendixname\ \arabic{anhcnt}/\arabic{anhteilcnt}: #1}
+	\addcontentsline{app}{subsection}{\protect\numberline{\appendixname\ \theanhcnt/\arabic{anhteilcnt}}#1}\par
+}
+
+\renewcommand{\theanhteilcnt}{\appendixname\ \theanhcnt/\arabic{anhteilcnt}}
+
+% vgl. S. 4 Paket-Beschreibung tocloft 	
+% Einrückungen für Anhangverzeichnis
+\makeatletter
+\newcommand{\abstaendeanhangverzeichnis}{
+\renewcommand*{\l@section}{\@dottedtocline{1}{0em}{5.5em}}
+\renewcommand*{\l@subsection}{\@dottedtocline{2}{2.3em}{6.5em}}
+}
+\makeatother
+
+% Einrückungen
+\makeatletter
+\renewcommand*{\l@figure}{\@dottedtocline{1}{0em}{2.3em}}
+\renewcommand*{\l@table}{\@dottedtocline{1}{0em}{2.3em}}
+\makeatother
+
+
+\usepackage{chngcntr}                % fortlaufende Zähler für Fußnoten, Abbildungen und Tabellen
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{footnote}{chapter}
+
+\usepackage[automark]{scrlayer-scrpage} 
+\input{template/_dhbw_kopfzeilen.tex}		 % für schöne Kopfzeilen 
+
+\usepackage{textcomp}            % erlaubt EUR-Zeichen in Eingabedatei
+\usepackage{eurosym}             % offizielles EUR-Symbol in Ausgabe
+\renewcommand{\texteuro}{\euro}  % ACHTUNG: nach hyperref aufrufen!
+
+\usepackage{scrhack}             % stellt Kompatibilität zw. KOMA-Script
+                                 % (scrreprt) und anderen Paketen her
+                                 
+% Anpassung der Abstände bei Kapitelüberschriften
+% (betrifft auch Inhalts-, Abbildungs- und Tabellenverzeichnis)
+\renewcommand*\chapterheadstartvskip{\vspace*{-\topskip}}
+\newcommand{\myBeforeTitleSkip}{1mm}
+\newcommand{\myAfterTitleSkip}{10mm}
+\setlength\cftbeforetoctitleskip{\myBeforeTitleSkip}
+\setlength\cftbeforeloftitleskip{\myBeforeTitleSkip}
+\setlength\cftbeforelottitleskip{\myBeforeTitleSkip}
+
+\setlength\cftaftertoctitleskip{\myAfterTitleSkip}
+\setlength\cftafterloftitleskip{\myAfterTitleSkip}
+\setlength\cftafterlottitleskip{\myAfterTitleSkip}
+
+% Anhang beginnen
+\newcommand{\startAnhang}{%
+\chapter*{\appendixname}
+\addcontentsline{toc}{chapter}{\appendixname}
+\section*{\anhangVzBezeichnung}
+\vspace{-8em}
+
+% vor \listofanhang müssen Einrückungen angepasst werden
+\abstaendeanhangverzeichnis
+\spezialkopfzeile{\DEoEN{Anhang}{Appendix}} % damit in der Kopfzeile das Wort "Anhang" angezeigt wird
+}
+
+% Abkürzungsverzeichnis beginnen
+\newcommand{\startAbkVerzeichnis}{%
+\chapter*{\abkVzBezeichnung}
+\addcontentsline{toc}{chapter}{\abkVzBezeichnung}
+}
+
+% Sprach-spezifische Einstellungen
+\DEoEN{%
+\newcommand{\abkVzBezeichnung}{Abkürzungsverzeichnis}
+\newcommand{\anhangVzBezeichnung}{Anhangverzeichnis}
+
+\renewcaptionname{ngerman}{\refname}{Literaturverzeichnis} % statt "Literatur"
+\renewcaptionname{ngerman}{\figurename}{Abb.}
+\renewcaptionname{ngerman}{\tablename}{Tab.}
+}{
+\newcommand{\abkVzBezeichnung}{Abbreviations}
+\newcommand{\anhangVzBezeichnung}{Appendix directory}
+
+\renewcaptionname{english}{\contentsname}{Table of Contents}
+\renewcaptionname{english}{\figurename}{Fig.}
+\renewcaptionname{english}{\tablename}{Tab.}
+}
+
+
+                                                            
+%%% Ende der Präambel %%%

@@ -1,0 +1,64 @@
+%%%%
+%
+% Zentrale Konfigurationsdatei
+%
+% In dieser Datei sind eine Reihe verpflichtender Einstellungen 
+% (Nr. 1 bis 6) vorzunehmen.
+%
+% Die Einstellungen unter Nr. 7 bis 11 können im Regelfall unverändert
+% belassen werden. Ausnahmen sind:
+%  - Ihre Arbeit ist in englischer Sprache verfasst (Nr. 7)
+%  - der Titel Ihrer Arbeit ist sehr lang, so dass er nicht auf das
+%    Deckblatt passt oder anders umgebrochen werden soll (Nr. 8 und 9)
+%  - es soll ein besonderes Abgabedatum angegeben werden (Nr. 10)
+%  - Sie benötigen einen Vertraulichkeitsvermerk (Nr. 11)
+%
+%%%%
+
+
+% TODO 1. Typ der Arbeit (für Titelseite und Metadaten)
+% Zutreffendes auswählen:
+
+%\newcommand{\typMeinerArbeit}{PA1} 
+%\newcommand{\typMeinerArbeit}{PA2} 
+\newcommand{\typMeinerArbeit}{Seminararbeit} 
+%\newcommand{\typMeinerArbeit}{BA} 
+
+% TODO 2. Vorname, Name der Autorin/des Autors (für Deckblatt und Metadaten)
+\newcommand{\meinName}{Leonard Eckert, David Kreismann, Tobias Schnarr und Nico Wagner}
+
+% TODO 3. Kurs eintragen
+\newcommand{\meinKurs}{WWI2022F}
+
+% TODO 4. Titel der Arbeit (für Deckblatt, ehrenwörtliche Erklärung und Metadaten, ohne Umbrüche angeben)
+\newcommand{\themaMeinerArbeit}{Entwicklung einer Webanwendung zur automatisierten Veröffentlichung von Instagram-Beiträgen}
+
+
+
+% OPTIONALE Einstellungen
+
+% 7. Arbeit in Englisch
+% (nur ändern, falls Ihre Arbeit in englischer Sprache geschrieben ist)
+\newcommand{\meineSprache}{DE}	% Standard-Einstellung
+% \newcommand{\meineSprache}{EN}	% für Arbeiten in englischer Sprache
+
+% 8. Schriftgröße des Titels auf Deckblatt
+% (nur ändern, falls Sie einen sehr langen Titel haben)
+% Zutreffendes auswählen:
+\newcommand{\schriftgroesseTitel}{\LARGE}   % Standard-Einstellung
+%\newcommand{\schriftgroesseTitel}{\Large}  % bei sehr langen Titeln
+
+% 9. Titel mit Umbrüchen für Deckblatt
+% (nur ändern, falls Sie den Zeilenumbruch selbst beeinflussen möchten)
+\newcommand{\titelAufDeckblatt}{\themaMeinerArbeit}		% Standard-Einstellung
+%\newcommand{\titelAufDeckblatt}{Herausforderungen der Digitalisierung im globalen Wettbewerb von Industrieunternehmen \\ -- eine vergleichende Untersuchung unter Berücksichtigung aktueller und weniger aktueller Forschungsmethoden \\ am Beispiel der Firma Melanie Müller und Söhne AG} % explizite Angabe
+
+% 10. Abgabedatum anpassen
+% Zutreffendes auswählen:
+\newcommand{\abgabeDatum}{\today}  		% Standard-Einstellung
+%\newcommand{\abgabeDatum}{18.11.2024}  % falls nicht aktuelles Datum
+
+% 11. Vertraulichkeitsvermerk
+% (nur ändern, falls Ihre Arbeit einen Vertraulichkeitsvermerk tragen soll)
+\newcommand{\hatVermerk}{nein}  	% Standard-Einstellung
+%\newcommand{\hatVermerk}{ja}  	% falls Vertraulichkeitsvermerk
