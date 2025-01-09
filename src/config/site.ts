@@ -8,7 +8,7 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "Instagram Uploader",
-  description: "File uploader built with shadcn-ui, and react-dropzone",
+  description: "Log-in to your Instagram account and upload images and videos",
   url:
     env.NEXT_PUBLIC_NODE_ENV === "development"
       ? "http://localhost:3000"

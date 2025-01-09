@@ -37,6 +37,8 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NEXT_PUBLIC_NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: process.env.INSTAGRAM_CLIENT_ID,
+    NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI: process.env.INSTAGRAM_REDIRECT_URI,
     UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
@@ -44,8 +46,6 @@ export const env = createEnv({
     INSTAGRAM_ACCESS_TOKEN: process.env.INSTAGRAM_ACCESS_TOKEN,
     INSTAGRAM_APP_ID: process.env.INSTAGRAM_APP_ID,
     INSTAGRAM_CLIENT_SECRET: process.env.INSTAGRAM_CLIENT_SECRET,
-    NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: process.env.INSTAGRAM_CLIENT_ID,
-    NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI: process.env.INSTAGRAM_REDIRECT_URI,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
