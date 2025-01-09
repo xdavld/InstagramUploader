@@ -27,8 +27,6 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "test", "production"]),
     NEXT_PUBLIC_APP_URL: z.string().url(),
-    NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: z.string().min(1),
-    NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI: z.string().url(),
   },
 
   /**
@@ -37,8 +35,6 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NEXT_PUBLIC_NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: process.env.INSTAGRAM_CLIENT_ID,
-    NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI: process.env.INSTAGRAM_REDIRECT_URI,
     UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,

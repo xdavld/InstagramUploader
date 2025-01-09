@@ -1,4 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next"
+import { NextApiRequest, NextApiResponse } from "next";
+
+
+
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,10 +28,10 @@ export default async function handler(
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-          client_id: process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID || "",
+          client_id: "967181185255438",
           client_secret: process.env.INSTAGRAM_CLIENT_SECRET || "",
           grant_type: "authorization_code",
-          redirect_uri: process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || "",
+          redirect_uri: "https://software-engineering-project-eight.vercel.app/",
           code,
         }).toString(),
       }
