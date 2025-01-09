@@ -27,8 +27,6 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "test", "production"]),
     NEXT_PUBLIC_APP_URL: z.string().url(),
-    NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: z.string().min(1),
-    NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI: z.string().url(),
   },
 
   /**
@@ -44,8 +42,6 @@ export const env = createEnv({
     INSTAGRAM_ACCESS_TOKEN: process.env.INSTAGRAM_ACCESS_TOKEN,
     INSTAGRAM_APP_ID: process.env.INSTAGRAM_APP_ID,
     INSTAGRAM_CLIENT_SECRET: process.env.INSTAGRAM_CLIENT_SECRET,
-    NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: process.env.INSTAGRAM_CLIENT_ID,
-    NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI: process.env.INSTAGRAM_REDIRECT_URI,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

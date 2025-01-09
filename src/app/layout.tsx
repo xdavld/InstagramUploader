@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "David Kreismann, Leonard Eckert, Nico Wagner, Tobias Schnarr",
-      url: "https://www.sadmn.com",
+      url: "https://software-engineering-project-eight.vercel.app/",
     },
   ],
   creator: "David Kreismann",
