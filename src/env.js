@@ -17,12 +17,13 @@ export const env = createEnv({
     INSTAGRAM_ACCESS_TOKEN: z.string().min(1),
     INSTAGRAM_APP_ID: z.string().min(1),
     INSTAGRAM_CLIENT_SECRET: z.string().min(1),
+    OPENAI_API_KEY: z.string().min(1)
   },
 
   /**
    * Specify your client-side environment variables schema here. This way you can ensure the app
    * isn't built with invalid env vars. To expose them to the client, prefix them with
-   * `NEXT_PUBLIC_`.
+   * ⁠ NEXT_PUBLIC_ ⁠.
    */
   client: {
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "test", "production"]),
@@ -30,7 +31,7 @@ export const env = createEnv({
   },
 
   /**
-   * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
+   * You can't destruct ⁠ process.env ⁠ as a regular object in the Next.js edge runtimes (e.g.
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
@@ -42,15 +43,16 @@ export const env = createEnv({
     INSTAGRAM_ACCESS_TOKEN: process.env.INSTAGRAM_ACCESS_TOKEN,
     INSTAGRAM_APP_ID: process.env.INSTAGRAM_APP_ID,
     INSTAGRAM_CLIENT_SECRET: process.env.INSTAGRAM_CLIENT_SECRET,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY
   },
   /**
-   * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
+   * Run ⁠ build ⁠ or ⁠ dev ⁠ with ⁠ SKIP_ENV_VALIDATION ⁠ to skip env validation. This is especially
    * useful for Docker builds.
    */
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   /**
-   * Makes it so that empty strings are treated as undefined. `SOME_VAR: z.string()` and
-   * `SOME_VAR=''` will throw an error.
+   * Makes it so that empty strings are treated as undefined. ⁠ SOME_VAR: z.string() ⁠ and
+   * ⁠ SOME_VAR='' ⁠ will throw an error.
    */
   emptyStringAsUndefined: true,
 })

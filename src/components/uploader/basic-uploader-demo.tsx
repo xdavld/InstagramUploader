@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { FileUploader } from "@/components/file-uploader"
 import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card"
+import { getChatCompletion } from "@/components/openAI/core"
+
 
 export function BasicUploaderDemo() {
   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile(
@@ -25,6 +27,8 @@ export function BasicUploaderDemo() {
   const [loading, setLoading] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
   const [status, setStatus] = useState<string>("")
+  const [chatResponse, setChatResponse] = useState<string>("")
+
 
   const handlePublishToInstagram = async () => {
     if (!selectedFile) {
@@ -75,6 +79,18 @@ export function BasicUploaderDemo() {
     }
   }
 
+  const handleGenerateChatResponse = async () => {
+    try {
+      const response = await getChatCompletion(caption)
+      setChatResponse(response || "No response received")
+      console.log("Response from getChatCompletion:", response); // Print the return value
+
+    } catch (error) {
+      console.error("Error fetching chat completion:", error)
+      setChatResponse("Error fetching chat completion. Please try again.")
+    }
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <FileUploader
@@ -99,13 +115,21 @@ export function BasicUploaderDemo() {
         onChange={(e) => setCaption(e.target.value)}
         className="mt-4 w-full"
       />
-      <Button
-        className="mt-2 w-full"
-        onClick={handlePublishToInstagram}
-        disabled={loading}
-      >
-        {loading ? "Publishing..." : "Publish to Instagram"}
-      </Button>
+      <div className="flex gap-4">
+        <Button
+          className="mt-2 w-full"
+          onClick={handlePublishToInstagram}
+          disabled={loading}
+        >
+          {loading ? "Publishing..." : "Publish to Instagram"}
+        </Button>
+        <Button
+          className="mt-2 w-full"
+          onClick={handleGenerateChatResponse}
+        >
+          Generate AI Response
+        </Button>
+      </div>
       {loading && <Progress value={progress} className="mt-2 w-full" />}
       {/* Status message */}
       {status && <p className="mt-2 text-center text-sm">{status}</p>}
