@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { FileUploader } from "@/components/file-uploader"
 import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card"
-import { getChatCompletion } from "@/components/openAI/core"
+import { getSuggestion } from "@/components/openAI/core"
 
 
 export function BasicUploaderDemo() {
@@ -27,7 +27,7 @@ export function BasicUploaderDemo() {
   const [loading, setLoading] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
   const [status, setStatus] = useState<string>("")
-  const [chatResponse, setChatResponse] = useState<string>("")
+  const [Suggestion, setSuggestion] = useState<string>("")
 
 
   const handlePublishToInstagram = async () => {
@@ -79,15 +79,34 @@ export function BasicUploaderDemo() {
     }
   }
 
-  const handleGenerateChatResponse = async () => {
+  const generateHastags = async () => {
+    if (!selectedFile) {
+      console.error("No file selected to generate hashtags!")
+      setStatus("No file selected. Please upload and select a file.")
+      return
+    }
+  
+    setLoading(true) // Start loading
+    setStatus("") // Reset status message
+  
     try {
-      const response = await getChatCompletion(caption)
-      setChatResponse(response || "No response received")
-      console.log("Response from getChatCompletion:", response); // Print the return value
-
+      // Call the getSuggestion function with the selected file URL
+      const hashtags = await getSuggestion(selectedFile.url) // Directly get the string
+  
+      if (hashtags) {
+        console.log("Print_Generated hashtags:", hashtags)
+        setSuggestion(hashtags) // Update the state with generated hashtags
+        setCaption(hashtags); // Update the caption field with the generated hashtags
+        setStatus("Hashtags generated successfully!")
+      } else {
+        console.error("Failed to generate hashtags. No response received.")
+        setStatus("Failed to generate hashtags. Please try again.")
+      }
     } catch (error) {
-      console.error("Error fetching chat completion:", error)
-      setChatResponse("Error fetching chat completion. Please try again.")
+      console.error("An error occurred while generating hashtags:", error)
+      setStatus("An error occurred while generating hashtags. Please try again.")
+    } finally {
+      setLoading(false) // Stop loading
     }
   }
 
@@ -108,31 +127,40 @@ export function BasicUploaderDemo() {
           }
         }}
       />
-      <Input
-        type="text"
-        placeholder="Write your caption here..."
-        value={caption}
-        onChange={(e) => setCaption(e.target.value)}
-        className="mt-4 w-full"
-      />
-      <div className="flex gap-4">
-        <Button
-          className="mt-2 w-full"
-          onClick={handlePublishToInstagram}
-          disabled={loading}
-        >
-          {loading ? "Publishing..." : "Publish to Instagram"}
-        </Button>
-        <Button
-          className="mt-2 w-full"
-          onClick={handleGenerateChatResponse}
-        >
-          Generate AI Response
-        </Button>
+<div className="flex flex-col">
+  <div className="flex gap-4 items-center">
+    <Input
+      type="text"
+      placeholder="Write your caption here..."
+      value={caption}
+      onChange={(e) => setCaption(e.target.value)}
+      className="mt-4 w-full"
+    />
+    <Button
+      className="mt-4"
+      variant="gradient"
+      onClick={generateHastags}
+      >
+      <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-red-500 to-pink-500 rounded-full p-[0.1px]"></span>
+    
+      <span className="relative flex items-center justify-center h-full w-full bg-white text-black rounded-full px-4 py-2">
+        Generate with AI
+      </span>
+    </Button>
+  </div>
+  <Button
+    className="mt-2 w-full"
+    onClick={handlePublishToInstagram}
+    disabled={loading}
+  >
+    {loading ? "Publishing..." : "Publish to Instagram"}
+    </Button>
       </div>
       {loading && <Progress value={progress} className="mt-2 w-full" />}
       {/* Status message */}
-      {status && <p className="mt-2 text-center text-sm">{status}</p>}
+      {status && <p className="mt-2 text-center text-sm">{status}</p>
+      
+      }
     </div>
   )
 }
