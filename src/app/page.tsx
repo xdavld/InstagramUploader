@@ -1,16 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-
-
 import { SiteHeader } from "@/components/layouts/site-header";
 import { Shell } from "@/components/shell";
-import { BasicUploaderDemo } from "@/components/uploader/basic-uploader-demo";
-
-
-
-
+import { Uploader } from "@/components/uploader/uploader-gui"
 
 export default function IndexPage() {
 
@@ -19,7 +12,7 @@ export default function IndexPage() {
     <>
       <SiteHeader />
       <Shell>
-        <BasicUploaderDemo />
+        <Uploader />
       </Shell>
     </>
   )

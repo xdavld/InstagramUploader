@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS", // Required by Jest
+    "jsx": "react-jsx", // Ensure JSX is supported
+    "types": ["jest", "@testing-library/jest-dom", "msw"]
+  },
+  "include": ["src/**/*", "tests/**/*", "jest.setup.cjs"]
+}

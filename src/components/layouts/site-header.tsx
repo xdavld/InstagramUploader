@@ -27,6 +27,12 @@ export function SiteHeader() {
           </Link>
         </nav> */}
         <nav className="flex flex-1 items-center md:justify-end">
+          {/* Login Button */}
+          <Button size="lg" asChild style={{ marginRight: '20px' }}>
+            <Link href="/login">
+              Login
+            </Link>
+          </Button>
           <Button variant="ghost" size="icon" className="size-8" asChild>
             <Link
               aria-label="GitHub repo"
