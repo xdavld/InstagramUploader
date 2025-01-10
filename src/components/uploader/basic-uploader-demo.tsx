@@ -8,8 +8,6 @@ import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { FileUploader } from "@/components/file-uploader"
 import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card"
-import { getSuggestion } from "@/components/openAI/core"
-
 
 export function BasicUploaderDemo() {
   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile(
@@ -27,7 +25,6 @@ export function BasicUploaderDemo() {
   const [loading, setLoading] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
   const [status, setStatus] = useState<string>("")
-  const [Suggestion, setSuggestion] = useState<string>("")
 
 
   const handlePublishToInstagram = async () => {
@@ -79,36 +76,32 @@ export function BasicUploaderDemo() {
     }
   }
 
-  const generateHastags = async () => {
+  const generateHashtags = async () => {
     if (!selectedFile) {
-      console.error("No file selected to generate hashtags!")
-      setStatus("No file selected. Please upload and select a file.")
-      return
+      console.error("No file selected to generate hashtags!");
+      setStatus("No file selected. Please upload and select a file.");
+      return;
     }
-  
-    setLoading(true) // Start loading
-    setStatus("") // Reset status message
   
     try {
-      // Call the getSuggestion function with the selected file URL
-      const hashtags = await getSuggestion(selectedFile.url) // Directly get the string
+      const response = await fetch("/api/openAI", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageUrl: selectedFile.url }),
+      });
   
-      if (hashtags) {
-        console.log("Print_Generated hashtags:", hashtags)
-        setSuggestion(hashtags) // Update the state with generated hashtags
-        setCaption(hashtags); // Update the caption field with the generated hashtags
-        setStatus("Hashtags generated successfully!")
-      } else {
-        console.error("Failed to generate hashtags. No response received.")
-        setStatus("Failed to generate hashtags. Please try again.")
+      if (!response.ok) {
+        throw new Error("Failed to generate hashtags from the backend.");
       }
+  
+      const { hashtags } = await response.json();
+      setCaption(hashtags || ""); // Setze die generierten Hashtags als Caption
     } catch (error) {
-      console.error("An error occurred while generating hashtags:", error)
-      setStatus("An error occurred while generating hashtags. Please try again.")
-    } finally {
-      setLoading(false) // Stop loading
+      console.error("Error generating hashtags:", error);
+      setStatus("An error occurred while generating hashtags.");
     }
-  }
+  };
+  
 
   return (
     <div className="flex flex-col gap-6">
@@ -139,7 +132,10 @@ export function BasicUploaderDemo() {
     <Button
       className="mt-4"
       variant="gradient"
-      onClick={generateHastags}
+      onClick={generateHashtags}
+
+      //onClick={!loading ? generateHashtags : undefined} // Prevent triggering during loading
+      //disabled={loading}
       >
       <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-red-500 to-pink-500 rounded-full p-[0.1px]"></span>
     
