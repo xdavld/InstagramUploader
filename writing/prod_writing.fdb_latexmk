@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber prod_writing"] 1736415239.35724 "prod_writing.bcf" "prod_writing.bbl" "prod_writing" 1736416389.03351 0
-  "prod_writing.bcf" 1736416388.89767 107183 2bc4e265ed233da1585530c5ae75f06c "pdflatex"
+["biber prod_writing"] 1736415239.35724 "prod_writing.bcf" "prod_writing.bbl" "prod_writing" 1736512798.3486 0
+  "prod_writing.bcf" 1736512798.22268 107183 2bc4e265ed233da1585530c5ae75f06c "pdflatex"
   (generated)
   "prod_writing.bbl"
   "prod_writing.blg"
   (rewritten before read)
-["pdflatex"] 1736416387.14124 "/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/writing/prod_writing.tex" "prod_writing.pdf" "prod_writing" 1736416389.03377 0
+["pdflatex"] 1736512796.41943 "/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/writing/prod_writing.tex" "prod_writing.pdf" "prod_writing" 1736512798.34886 0
   "/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/writing/prod_writing.tex" 1736416323.41446 2192 8391c87585e0b41eadb0cda6bbefd1e5 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -49,6 +49,7 @@
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb" 1215737283 164227 3df942b4ff2124425d8fb1b6d3e01c7a ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb" 1215737283 149037 995a6f1e12c1d647b99b1cf55db78699 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb" 1215737283 145929 f25e56369a345c4ff583b067cd87ce8e ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb" 1215737283 158320 b2e637419eb81344af310d8483cced13 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb" 1215737283 145807 7e6525044e63a61de8529743665d16c8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb" 1215737283 148301 cb90e68db88ca98c49afbaaab3ac1967 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb" 1215737283 144018 fc22fd96cf4e9932a91e711da3e120b8 ""
@@ -177,19 +178,20 @@
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1719470985 8221430 78decad4de36644184ae2e680c81e72f ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
   "_dhbw_authoryear.bbx" 1722874847.61074 7837 f87e54d043d6b585fe5dd3ffac528549 ""
+  "graphics/sprint_3_jira.png" 1736503993.14595 290762 f6c4c2a0dca69cdb29e32e121010e87b ""
   "includes/abkuerzungen.tex" 1736414203.22675 99 cd444c0d5912872f04bfa95ef098a240 ""
-  "includes/chapter1.tex" 1736416386.88779 658 9e6541369f8d2aab9473912eff90c8e1 ""
+  "includes/chapter1.tex" 1736512794.08867 2975 e9c7c4b37db1c119d63074fbec06cc09 ""
   "includes/chapter2.tex" 1736415951.02702 42 6c779a6c996bec2a18f3c2ec6cfa6561 ""
   "includes/config.tex" 1736415237.40077 2712 65a451b2f614469b09c1da4716916a79 ""
-  "includes/erklaerung_ki.tex" 1736160259.44454 4276 c6dca95245b55dcf1ccbdd9b5c18a410 ""
-  "prod_writing.aux" 1736416388.89485 2999 3aa81aca9e73d86bd303c6fbd3f7b102 "pdflatex"
+  "includes/erklaerung_ki.tex" 1736504675.44885 4282 5820f25d355c7cd3f1c9c4da3f67bff1 ""
+  "prod_writing.aux" 1736512798.22002 3873 d016d067e7439a79a636a0accffac951 "pdflatex"
   "prod_writing.bbl" 1736415241.84957 0 d41d8cd98f00b204e9800998ecf8427e "biber prod_writing"
-  "prod_writing.lof" 1736416388.89857 70 a31aa18fa202e40667328a6661888bef "pdflatex"
-  "prod_writing.lot" 1736416388.89859 70 a31aa18fa202e40667328a6661888bef "pdflatex"
-  "prod_writing.out" 1736416388.67994 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "prod_writing.run.xml" 1736416388.89847 2322 cafb5ec34e51b01fd4f29efb3f21478d "pdflatex"
+  "prod_writing.lof" 1736512798.22337 156 6e41e6dd87cfa18ee622a53531b8a49c "pdflatex"
+  "prod_writing.lot" 1736512798.22339 180 0931d3c58039333d9e43896aad26d10c "pdflatex"
+  "prod_writing.out" 1736512797.86889 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "prod_writing.run.xml" 1736512798.22329 2322 cafb5ec34e51b01fd4f29efb3f21478d "pdflatex"
   "prod_writing.tex" 1736416323.41446 2192 8391c87585e0b41eadb0cda6bbefd1e5 ""
-  "prod_writing.toc" 1736416388.89854 433 a59c7fd218a9669884a964617cac703e "pdflatex"
+  "prod_writing.toc" 1736512798.22334 506 8fc1f6b66699f995d9e9c83b7b63285e "pdflatex"
   "template/_dhbw_biblatex-config.tex" 1722874847.62539 5294 ff8bf64f96bf7c22fb3f69fff76a9e71 ""
   "template/_dhbw_deckblatt.tex" 1735807564.97783 2090 79fd048f1419a7a34db06adbee403f9c ""
   "template/_dhbw_erklaerung.tex" 1731005100.64646 924 13f182951ae36c7ba91049ce26ef857d ""

@@ -4,4 +4,5 @@
 \contentsline {chapter}{Tabellenverzeichnis}{V}{section*.3}%
 \contentsline {chapter}{\numberline {1}Konzept}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Zielsetzung des Projekts}{1}{section.1.1}%
-\contentsline {chapter}{\numberline {2}Umsetzung}{2}{chapter.2}%
+\contentsline {section}{\numberline {1.2}Arbeitspakete}{2}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Umsetzung}{3}{chapter.2}%
