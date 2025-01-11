@@ -1,16 +1,10 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { FaInstagram } from "react-icons/fa";
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { FaInstagram } from "react-icons/fa"
 
-
-
-import { LoginForm } from "@/components/login-form";
-
-
-
-
+import { LoginForm } from "@/components/login-form"
 
 export default function LoginPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -25,8 +19,8 @@ export default function LoginPage() {
   }, [router])
 
   const handleLogin = () => {
-    const clientId = "YOUR_CLIENT_ID"
-    const redirectUri = "YOUR_REDIRECT_URI"
+    const clientId = "967181185255438"
+    const redirectUri = "https://your-redirect-uri.com" // Replace with your redirect URI
     const scope = encodeURIComponent(
       "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish"
     )
@@ -36,11 +30,8 @@ export default function LoginPage() {
   }
 
   const handlePreview = () => {
-    console.log("Preview button clicked") // Step 1
     sessionStorage.setItem("previewMode", "true")
-    console.log("Preview mode set in sessionStorage") // Step 2
     router.push("/uploader")
-    console.log("Redirected to /uploader") // Step 3
   }
 
   if (isAuthenticated) {
