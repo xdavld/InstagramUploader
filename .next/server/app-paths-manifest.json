@@ -1,8 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/api/uploadthing/route": "app/api/uploadthing/route.js",
-  "/api/instagram/route": "app/api/instagram/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/login/page": "app/login/page.js",
-  "/uploader/page": "app/uploader/page.js"
-}
