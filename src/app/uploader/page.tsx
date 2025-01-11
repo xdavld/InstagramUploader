@@ -10,24 +10,30 @@ import { Uploader } from "@/components/uploader/uploader-gui"
 export default function UploaderPage() {
   const [isPreviewMode, setIsPreviewMode] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
     const preview = sessionStorage.getItem("previewMode") === "true"
     const accessToken = localStorage.getItem("instagram_access_token")
 
-    if (accessToken) {
-      setIsAuthenticated(true)
-    } else if (preview) {
+    console.log("Preview mode:", preview)
+    console.log("Access token:", accessToken)
+
+    if (preview) {
       setIsPreviewMode(true)
-      sessionStorage.removeItem("previewMode") // Clear preview mode after use
+      sessionStorage.removeItem("previewMode") // Clear only after detection
+      setIsLoading(false)
+    } else if (accessToken) {
+      setIsAuthenticated(true)
+      setIsLoading(false)
     } else {
-      router.push("/login") // Redirect to login if not authenticated and not in preview mode
+      router.push("/login")
     }
   }, [router])
 
-  if (!isAuthenticated && !isPreviewMode) {
-    return <p>Loading...</p> // Loading state while deciding redirect
+  if (isLoading) {
+    return <p>Loading...</p>
   }
 
   return (

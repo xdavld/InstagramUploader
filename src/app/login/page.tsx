@@ -20,7 +20,7 @@ export default function LoginPage() {
 
   const handleLogin = () => {
     const clientId = "967181185255438"
-    const redirectUri = "https://your-redirect-uri.com" // Replace with your redirect URI
+    const redirectUri = "https://software-engineering-project-eight.vercel.app/"
     const scope = encodeURIComponent(
       "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish"
     )
@@ -30,7 +30,9 @@ export default function LoginPage() {
   }
 
   const handlePreview = () => {
+    console.log("Setting preview mode in sessionStorage...")
     sessionStorage.setItem("previewMode", "true")
+    console.log("Redirecting to uploader...")
     router.push("/uploader")
   }
 
