@@ -4,6 +4,7 @@ import React, { useState } from "react"
 
 import { useUploadFile } from "@/hooks/use-upload-file"
 import { Button } from "@/components/ui/button"
+import { SchedulerTabs } from "@/components/ui/schedulerTabs"
 import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { FileUploader } from "@/components/file-uploader"
@@ -25,6 +26,7 @@ export function BasicUploaderDemo() {
   const [loading, setLoading] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
   const [status, setStatus] = useState<string>("")
+  const [selectedTab, setSelectedTab] = useState<string>("now");
 
   const handlePublishToInstagram = async () => {
     if (!selectedFile) {
@@ -99,6 +101,8 @@ export function BasicUploaderDemo() {
         onChange={(e) => setCaption(e.target.value)}
         className="mt-4 w-full"
       />
+      <SchedulerTabs value={selectedTab} setSelectedTab={setSelectedTab}></SchedulerTabs>
+
       <Button
         className="mt-2 w-full"
         onClick={handlePublishToInstagram}
@@ -106,6 +110,7 @@ export function BasicUploaderDemo() {
       >
         {loading ? "Publishing..." : "Publish to Instagram"}
       </Button>
+      
       {loading && <Progress value={progress} className="mt-2 w-full" />}
       {/* Status message */}
       {status && <p className="mt-2 text-center text-sm">{status}</p>}
