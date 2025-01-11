@@ -1,5 +1,6 @@
 {
   "pages": {
+<<<<<<< HEAD
     "/_app": [
       "static/chunks/[root of the server]__6a1503._.js",
       "static/chunks/16403_react-dom_aac19c._.js",
@@ -16,6 +17,9 @@
       "static/chunks/pages__error_5771e1._.js",
       "static/chunks/pages__error_cf56c8._.js"
     ]
+=======
+    "/_app": []
+>>>>>>> origin/nico
   },
   "devFiles": [],
   "ampDevFiles": [],

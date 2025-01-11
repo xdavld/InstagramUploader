@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import { useUploadFile } from "@/hooks/use-upload-file"
 import { Button } from "@/components/ui/button"
+import { SchedulerTabs } from "@/components/ui/schedulerTabs"
 import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { FileUploader } from "@/components/uploader/file-uploader"
@@ -27,6 +28,7 @@ export function Uploader({ disabled = false }) {
   const [loading, setLoading] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
   const [status, setStatus] = useState<string>("")
+  const [selectedTab, setSelectedTab] = useState<string>("now");
 
   useEffect(() => {
     console.log("Component re-rendered, selectedFile state:", selectedFile)
@@ -107,6 +109,8 @@ export function Uploader({ disabled = false }) {
         disabled={disabled}
         data-testid="caption-input"
       />
+      <SchedulerTabs value={selectedTab} setSelectedTab={setSelectedTab}></SchedulerTabs>
+
       <Button
         className="mt-2 w-full"
         onClick={handlePublishToInstagram}
@@ -115,6 +119,7 @@ export function Uploader({ disabled = false }) {
       >
         {loading ? "Publishing..." : "Publish to Instagram"}
       </Button>
+      
       {loading && <Progress value={progress} className="mt-2 w-full" />}
       {status && (
         <p data-testid="status-message" className="mt-2 text-center text-sm">
