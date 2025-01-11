@@ -11,7 +11,7 @@ import {
 } from "@/components/uploader/instagramPublish"
 import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card"
 
-export function Uploader() {
+export function Uploader({ disabled = false }) {
   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile(
     "fileUploader",
     {
@@ -34,22 +34,18 @@ export function Uploader() {
   }, [selectedFile, uploadedFiles, isUploading])
 
   const handlePublishToInstagram = async () => {
-    console.log("Current selectedFile before publishing:", selectedFile)
+    if (disabled) return // Prevent publishing in preview mode
 
     if (!selectedFile) {
-      console.log("No file selected to publish!")
       setStatus("No file selected. Please upload and select a file.")
       return
     }
-
-    console.log("Publishing file:", selectedFile)
 
     setLoading(true)
     setProgress(0)
     setStatus("")
 
     try {
-      // Simulate progress
       for (let i = 0; i <= 100; i += 20) {
         setProgress(i)
         await new Promise((resolve) => setTimeout(resolve, 300))
@@ -64,7 +60,7 @@ export function Uploader() {
         caption: caption || "Default caption",
       }
 
-      const response = await publishToInstagram(payload)
+      await publishToInstagram(payload)
 
       setStatus("File published successfully!")
       setProgress(100)
@@ -76,19 +72,22 @@ export function Uploader() {
   }
 
   const handleFileClick = (file: { url: string; type: string }) => {
+    if (disabled) return // Prevent file selection in preview mode
     setSelectedFile(file)
-    console.log("Selected file state updated to:", file)
   }
 
   return (
-    <div data-testid="uploader-component" className="flex flex-col gap-6">
+    <div
+      data-testid="uploader-component"
+      className={`flex flex-col gap-6 ${disabled ? "pointer-events-none opacity-50" : ""}`}
+    >
       <FileUploader
         maxFileCount={4}
         maxSize={16 * 1024 * 1024}
         progresses={progresses}
         onUpload={onUpload}
-        disabled={isUploading}
-        data-testid="file-uploader" // Added data-testid
+        disabled={isUploading || disabled}
+        data-testid="file-uploader"
       />
       <UploadedFilesCard
         uploadedFiles={uploadedFiles}
@@ -97,7 +96,7 @@ export function Uploader() {
             handleFileClick({ url: fileUrl, type: fileType })
           }
         }}
-        data-testid="uploaded-files-card" // Added data-testid
+        data-testid="uploaded-files-card"
       />
       <Input
         type="text"
@@ -105,13 +104,14 @@ export function Uploader() {
         value={caption}
         onChange={(e) => setCaption(e.target.value)}
         className="mt-4 w-full"
-        data-testid="caption-input" // Added data-testid
+        disabled={disabled}
+        data-testid="caption-input"
       />
       <Button
         className="mt-2 w-full"
         onClick={handlePublishToInstagram}
-        disabled={loading}
-        data-testid="publish-button" // Added data-testid
+        disabled={loading || disabled}
+        data-testid="publish-button"
       >
         {loading ? "Publishing..." : "Publish to Instagram"}
       </Button>

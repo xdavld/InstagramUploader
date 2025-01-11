@@ -1,8 +1,12 @@
-import { defineConfig } from "cypress"
+import { defineConfig } from "cypress";
+
+
+
+
 
 export default defineConfig({
   e2e: {
-    baseUrl: "http://localhost:3000", // Replace with your app's URL
+    baseUrl: "https://software-engineering-project-eight.vercel.app/", // Replace with your app's URL
     setupNodeEvents(on, config) {
       // Event listeners go here
     },

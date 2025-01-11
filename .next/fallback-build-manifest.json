@@ -1,6 +1,21 @@
 {
   "pages": {
-    "/_app": []
+    "/_app": [
+      "static/chunks/[root of the server]__6a1503._.js",
+      "static/chunks/16403_react-dom_aac19c._.js",
+      "static/chunks/node_modules__pnpm_604b08._.js",
+      "static/chunks/[root of the server]__f265a1._.js",
+      "static/chunks/pages__app_5771e1._.js",
+      "static/chunks/pages__app_0b31ed._.js"
+    ],
+    "/_error": [
+      "static/chunks/[root of the server]__3e4922._.js",
+      "static/chunks/16403_react-dom_aac19c._.js",
+      "static/chunks/node_modules__pnpm_604b08._.js",
+      "static/chunks/[root of the server]__2e1cf5._.js",
+      "static/chunks/pages__error_5771e1._.js",
+      "static/chunks/pages__error_cf56c8._.js"
+    ]
   },
   "devFiles": [],
   "ampDevFiles": [],
