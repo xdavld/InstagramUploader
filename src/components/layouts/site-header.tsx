@@ -75,11 +75,9 @@ export function SiteHeader() {
           </span>
         </Link>
         <nav className="flex flex-1 items-center md:justify-end">
-          {/* Login Button */}
+          {/* Logout Button */}
           {!isAuthenticated ? (
             <Button
-              size="lg"
-              style={{ marginRight: "20px" }}
               onClick={handleLogin}
             >
               Logout

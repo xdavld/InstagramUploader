@@ -49,9 +49,7 @@ export default function UploaderPage() {
       <SiteHeader />
       <Shell>
         {isPreviewMode && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-10">
-            <p className="text-white">Preview Mode: Limited functionality</p>
-          </div>
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-05"></div>
         )}
         <Uploader disabled={isPreviewMode} />
       </Shell>

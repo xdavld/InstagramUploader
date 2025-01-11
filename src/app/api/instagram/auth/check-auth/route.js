@@ -1,6 +1,5 @@
-// app/api/auth/check-auth/route.js
+// app/api/instagram/auth/check-auth/route.js
 
-import { NextResponse } from "next/server"
 import { parse } from "cookie"
 
 export async function GET(request) {
@@ -9,8 +8,18 @@ export async function GET(request) {
   const accessToken = cookies.instagram_access_token
 
   if (accessToken) {
-    return NextResponse.json({ isAuthenticated: true }, { status: 200 })
+    return new Response(JSON.stringify({ isAuthenticated: true }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
   } else {
-    return NextResponse.json({ isAuthenticated: false }, { status: 200 })
+    return new Response(JSON.stringify({ isAuthenticated: false }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
   }
 }

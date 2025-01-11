@@ -1,4 +1,4 @@
-// app/api/auth/callback/route.js
+// app/api/instagram/callback/route.js
 
 import { NextResponse } from "next/server"
 import axios from "axios"
