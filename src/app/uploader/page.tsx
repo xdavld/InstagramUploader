@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import Cookies from "js-cookie"
 
 import { SiteHeader } from "@/components/layouts/site-header"
 import { Shell } from "@/components/shell"
@@ -15,20 +16,27 @@ export default function UploaderPage() {
 
   useEffect(() => {
     const preview = sessionStorage.getItem("previewMode") === "true"
-    const accessToken = localStorage.getItem("instagram_access_token")
-
-    console.log("Preview mode:", preview)
-    console.log("Access token:", accessToken)
 
     if (preview) {
       setIsPreviewMode(true)
       sessionStorage.removeItem("previewMode") // Clear only after detection
       setIsLoading(false)
-    } else if (accessToken) {
-      setIsAuthenticated(true)
-      setIsLoading(false)
     } else {
-      router.push("/login")
+      // Check authentication via API
+      fetch("/api/instagram/auth/check-auth")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.isAuthenticated) {
+            setIsAuthenticated(true)
+          } else {
+            router.push("/login")
+          }
+          setIsLoading(false)
+        })
+        .catch((err) => {
+          console.error("Error checking auth:", err)
+          setIsLoading(false)
+        })
     }
   }, [router])
 

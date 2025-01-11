@@ -1,27 +1,31 @@
+// app/api/upload/route.js
+
 import { NextRequest, NextResponse } from "next/server"
-import { env } from "@/env"
+import { env } from "@/env" // Ensure this points to your environment variables
 
 // Define request body type
-type InstagramRequestBody = {
-  imageUrl?: string
-  videoUrl?: string
-  caption: string
-  mediaType?: "REELS"
-}
+/**
+ * @typedef {Object} InstagramRequestBody
+ * @property {string} [imageUrl]
+ * @property {string} [videoUrl]
+ * @property {string} caption
+ * @property {"REELS"} [mediaType]
+ */
 
 // Define API response types
-type UploadResponse = {
-  id: string
-}
+/**
+ * @typedef {Object} UploadResponse
+ * @property {string} id
+ */
 
-type PublishResponse = {
-  id: string
-}
+/**
+ * @typedef {Object} PublishResponse
+ * @property {string} id
+ */
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   try {
-    const { imageUrl, videoUrl, caption, mediaType } =
-      (await req.json()) as InstagramRequestBody
+    const { imageUrl, videoUrl, caption, mediaType } = await req.json()
 
     if ((!imageUrl && !videoUrl) || !caption) {
       return NextResponse.json(
@@ -50,7 +54,7 @@ export async function POST(req: NextRequest) {
       }
     )
 
-    const uploadData = (await uploadResponse.json()) as UploadResponse
+    const uploadData = await uploadResponse.json()
     console.log("Upload Response:", uploadData)
 
     if (!uploadResponse.ok) {
@@ -81,7 +85,7 @@ export async function POST(req: NextRequest) {
         mediaReady = true
       } else {
         attempts++
-        await new Promise((resolve) => setTimeout(resolve, 10000)) // Wait for 2 seconds before retrying
+        await new Promise((resolve) => setTimeout(resolve, 10000)) // Wait for 10 seconds before retrying
       }
     }
 

@@ -46,11 +46,11 @@ export function LoginForm({
         variant="secondary"
         type="button"
         className="flex w-full items-center justify-center"
-        onClick={onPreview} // Ensure this is correctly passed
+        onClick={onPreview}
       >
         <FaEye className="mr-2" />
         Preview
       </Button>
     </form>
-  )
+  );
 }

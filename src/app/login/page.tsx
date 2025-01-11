@@ -8,19 +8,40 @@ import { LoginForm } from "@/components/login-form"
 
 export default function LoginPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [config, setConfig] = useState(null)
   const router = useRouter()
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("instagram_access_token")
-    if (accessToken) {
-      setIsAuthenticated(true)
-      router.push("/uploader")
-    }
+    // Check authentication via API
+    fetch("/api/instagram/auth/check-auth")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.isAuthenticated) {
+          setIsAuthenticated(true)
+          router.push("/uploader")
+        } else {
+          // Fetch configuration from the server
+          fetch("/api/instagram/config")
+            .then((res) => {
+              if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`)
+              }
+              return res.json()
+            })
+            .then((data) => setConfig(data))
+            .catch((err) => console.error("Error fetching config:", err))
+        }
+      })
+      .catch((err) => console.error("Error checking auth:", err))
   }, [router])
 
   const handleLogin = () => {
-    const clientId = "967181185255438"
-    const redirectUri = "https://software-engineering-project-eight.vercel.app/"
+    if (!config) {
+      console.error("Config not loaded yet.")
+      return
+    }
+
+    const { clientId, redirectUri } = config
     const scope = encodeURIComponent(
       "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish"
     )
@@ -38,6 +59,10 @@ export default function LoginPage() {
 
   if (isAuthenticated) {
     return <p>Redirecting...</p>
+  }
+
+  if (!config) {
+    return <p>Loading...</p>
   }
 
   return (
