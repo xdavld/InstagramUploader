@@ -1009,6 +1009,10 @@ body {
   --tw-bg-opacity: .5;
 }
 
+.bg-opacity-10 {
+  --tw-bg-opacity: .1;
+}
+
 .fill-current {
   fill: currentColor;
 }
