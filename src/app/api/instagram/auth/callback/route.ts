@@ -20,10 +20,10 @@ export async function GET(request: Request) {
     const tokenResponse = await axios.post(
       "https://api.instagram.com/oauth/access_token",
       new URLSearchParams({
-        client_id: process.env.INSTAGRAM_CLIENT_ID!,
-        client_secret: process.env.INSTAGRAM_CLIENT_SECRET!,
+        client_id: process.env.INSTAGRAM_CLIENT_ID || "",
+        client_secret: process.env.INSTAGRAM_CLIENT_SECRET || "",
         grant_type: "authorization_code",
-        redirect_uri: process.env.INSTAGRAM_REDIRECT_URI!,
+        redirect_uri: process.env.INSTAGRAM_REDIRECT_URI || "",
         code,
       }),
       {
@@ -38,13 +38,13 @@ export async function GET(request: Request) {
     // Set the access token in a secure HTTP-only cookie
     const cookie = serialize("instagram_access_token", access_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production", // Set to false in development if necessary
       maxAge: 60 * 60 * 24 * 7, // 1 week
       path: "/",
       sameSite: "lax",
     })
 
-    const response = NextResponse.redirect("/uploader") 
+    const response = NextResponse.redirect("/uploader") // Redirect to /uploader
     response.headers.set("Set-Cookie", cookie)
     return response
   } catch (error: any) {

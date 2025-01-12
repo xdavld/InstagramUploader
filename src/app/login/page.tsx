@@ -17,6 +17,7 @@ interface Config {
 export default function LoginPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [config, setConfig] = useState<Config | null>(null)
+  const [error, setError] = useState<string | null>(null) // State for error messages
   const router = useRouter()
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function LoginPage() {
       .then((data) => {
         if (data.isAuthenticated) {
           setIsAuthenticated(true)
-          router.push("/uploader") 
+          router.push("/uploader") // Redirect to /uploader
         } else {
           // Fetch configuration from the server
           fetch("/api/instagram/config") // Ensure this path matches your API route
@@ -37,15 +38,22 @@ export default function LoginPage() {
               return res.json()
             })
             .then((data: Config) => setConfig(data))
-            .catch((err) => console.error("Error fetching config:", err))
+            .catch((err) => {
+              console.error("Error fetching config:", err)
+              setError("Failed to load configuration. Please try again later.")
+            })
         }
       })
-      .catch((err) => console.error("Error checking auth:", err))
+      .catch((err) => {
+        console.error("Error checking auth:", err)
+        setError("Authentication check failed. Please try again later.")
+      })
   }, [router])
 
   const handleLogin = () => {
     if (!config) {
       console.error("Config not loaded yet.")
+      setError("Configuration not loaded. Please try again.")
       return
     }
 
@@ -61,12 +69,20 @@ export default function LoginPage() {
   const handlePreview = () => {
     console.log("Setting preview mode in sessionStorage...")
     sessionStorage.setItem("previewMode", "true")
-    console.log("Redirecting to dashboard...")
-    router.push("/uploader") 
+    console.log("Redirecting to uploader...")
+    router.push("/uploader") // Redirect to /uploader
   }
 
   if (isAuthenticated) {
     return <p>Redirecting...</p>
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center p-4">
+        <p className="text-lg text-red-500">{error}</p>
+      </div>
+    )
   }
 
   if (!config) {
