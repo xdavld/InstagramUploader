@@ -56,7 +56,8 @@ export async function GET(request: Request) {
     })
 
     console.log("Redirecting to /uploader...")
-    const response = NextResponse.redirect("/uploader")
+    const redirectUrl = new URL("/uploader", request.url).toString() // Construct absolute URL
+    const response = NextResponse.redirect(redirectUrl)
     response.headers.set("Set-Cookie", cookie)
     return response
   } catch (error: any) {
