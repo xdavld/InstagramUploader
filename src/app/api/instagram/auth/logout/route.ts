@@ -1,9 +1,10 @@
+;
 // app/api/instagram/auth/logout/route.ts
 
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 import { serialize } from "cookie"
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   const cookie = serialize("instagram_access_token", "", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
