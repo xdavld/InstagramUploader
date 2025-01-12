@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import Cookies from "js-cookie"
-
-import { SiteHeader } from "@/components/layouts/site-header"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { SiteHeader } from "@/components/layouts/site-header";
 import { Shell } from "@/components/shell"
 import { Uploader } from "@/components/uploader/uploader-gui"
+
 
 export default function UploaderPage() {
   const [isPreviewMode, setIsPreviewMode] = useState(false)

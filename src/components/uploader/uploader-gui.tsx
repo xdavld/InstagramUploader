@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
-import { useUploadFile } from "@/hooks/use-upload-file"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Progress } from "@/components/ui/progress"
-import { SchedulerTabs } from "@/components/ui/schedulerTabs"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/sidebar/app-sidebar"
-import { FileUploader } from "@/components/uploader/file-uploader"
-import {
-  PublishPayload,
-  publishToInstagram,
-} from "@/components/uploader/instagramPublish"
-import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card"
+
+
+import { useUploadFile } from "@/hooks/use-upload-file";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import { SchedulerTabs } from "@/components/ui/schedulerTabs";
+import { Separator } from "@/components/ui/separator";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { FileUploader } from "@/components/uploader/file-uploader";
+import { PublishPayload, publishToInstagram } from "@/components/uploader/instagramPublish";
+import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card";
+
+
+
+
 
 export function Uploader({ disabled = false }) {
   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile(
@@ -63,6 +57,14 @@ export function Uploader({ disabled = false }) {
 
     try {
       if (selectedTab === "now") {
+
+        for (let i = 0; i <= 100; i += 20) {
+          setProgress(i)
+          await new Promise((resolve) =>
+            setTimeout(resolve, 300)
+          )
+        }
+
         const isVideo = selectedFile.type.startsWith("video")
         const payload: PublishPayload = {
           ...(isVideo

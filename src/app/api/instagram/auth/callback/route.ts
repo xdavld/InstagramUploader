@@ -36,18 +36,30 @@ export async function GET(request: Request) {
     )
 
     console.log("Token response received:", tokenResponse.data)
-    const { access_token } = tokenResponse.data
+    const { access_token, user_id } = tokenResponse.data
 
-    if (!access_token) {
-      console.error("No access token in response")
+    if (!access_token || !user_id) {
+      console.error("Access token or user ID missing in response")
       return NextResponse.json(
-        { error: "Access token not provided in response" },
+        { error: "Access token or user ID not provided in response" },
         { status: 500 }
       )
     }
 
-    console.log("Setting access token cookie...")
-    const cookie = serialize("instagram_access_token", access_token, {
+    console.log("Setting access token and user ID cookies...")
+    const accessTokenCookie = serialize(
+      "instagram_access_token",
+      access_token,
+      {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        path: "/",
+        sameSite: "lax",
+      }
+    )
+
+    const userIdCookie = serialize("instagram_user_id", user_id, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60 * 24 * 7, // 1 week
@@ -58,7 +70,9 @@ export async function GET(request: Request) {
     console.log("Redirecting to /uploader...")
     const redirectUrl = new URL("/uploader", request.url).toString() // Construct absolute URL
     const response = NextResponse.redirect(redirectUrl)
-    response.headers.set("Set-Cookie", cookie)
+
+    response.headers.set("Set-Cookie", accessTokenCookie)
+    response.headers.append("Set-Cookie", userIdCookie)
     return response
   } catch (error: any) {
     console.error(
