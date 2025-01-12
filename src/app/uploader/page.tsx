@@ -28,13 +28,8 @@ export default function UploaderPage() {
   return (
     <>
       <SiteHeader />
-      <Shell>
-        {isPreviewMode && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-10">
-          </div>
-        )}
-        <Uploader disabled={isPreviewMode} />
-      </Shell>
+      <div className="h-14"></div>
+      <Uploader disabled={isPreviewMode} />
     </>
   )
 }

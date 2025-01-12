@@ -1,11 +1,9 @@
-import { AppSidebar } from "@/components/dashboard/app-sidebar"
+import { AppSidebar } from "@/components/sidebar/app-sidebar"
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -17,8 +15,9 @@ import {
 export function Dashboard() {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar className="top-14 h-[calc(100vh-14)]"/>
       <SidebarInset>
+        <div className="h-14"></div>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
@@ -26,13 +25,9 @@ export function Dashboard() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
+                  <BreadcrumbLink>
+                    Calendar
                   </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

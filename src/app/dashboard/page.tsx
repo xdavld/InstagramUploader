@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 
 import { SiteHeader } from "@/components/layouts/site-header";
-import { Shell } from "@/components/shell";
 import { Dashboard } from "@/components/dashboard/dashboard-gui";
 
 
@@ -27,9 +26,8 @@ export default function UploaderPage() {
 
   return (
     <>
-      <Shell>
-        <Dashboard/>
-      </Shell>
+    <SiteHeader />
+    <Dashboard />
     </>
   )
 }

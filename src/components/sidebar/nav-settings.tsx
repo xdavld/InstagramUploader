@@ -1,6 +1,7 @@
 "use client"
 
 import { ChevronRight, type LucideIcon } from "lucide-react"
+import { useTheme } from "next-themes"
 
 import {
   Collapsible,
@@ -18,7 +19,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 
-export function NavMain({
+export function NavSettings({
   items,
 }: {
   items: {
@@ -31,10 +32,12 @@ export function NavMain({
       url: string
     }[]
   }[]
-}) {
+})
+ {
+  const { setTheme } = useTheme()
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+      <SidebarGroupLabel>Settings</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible
@@ -55,8 +58,8 @@ export function NavMain({
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
+                      <SidebarMenuSubButton asChild onClick={() => setTheme(subItem.mode)}>
+                        <a>
                           <span>{subItem.title}</span>
                         </a>
                       </SidebarMenuSubButton>
