@@ -66,18 +66,19 @@ export function SiteHeader() {
   }, [])
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
+    <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex h-14 items-center px-4">
         <Link href="/" className="mr-2 flex items-center md:mr-6 md:space-x-2">
           <FaInstagram className="size-4" aria-hidden="true" />
           <span className="hidden font-bold md:inline-block">
             {siteConfig.name}
           </span>
         </Link>
-        <nav className="flex flex-1 items-center md:justify-end">
-          {/* Logout Button */}
+        <nav className="flex flex-1 items-center justify-end"> {/* md:justify-end */}
+          {/* Login Button
           {!isAuthenticated ? (
             <Button
+              size="lg"
               onClick={handleLogin}
             >
               Logout
@@ -85,6 +86,7 @@ export function SiteHeader() {
           ) : (
             <p>Welcome back!</p>
           )}
+          */}
           <Button variant="ghost" size="icon" className="size-8" asChild>
             <Link
               aria-label="GitHub repo"
@@ -95,7 +97,6 @@ export function SiteHeader() {
               <Icons.gitHub className="size-4" aria-hidden="true" />
             </Link>
           </Button>
-          <ModeToggle />
         </nav>
       </div>
     </header>
