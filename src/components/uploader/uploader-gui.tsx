@@ -71,7 +71,7 @@ export function Uploader({ disabled = false }) {
           caption: caption || "Default caption",
         }
 
-        const response = await fetch("/api/upload", {
+        const response = await fetch("/api/instagram/upload", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -107,7 +107,7 @@ export function Uploader({ disabled = false }) {
             caption: caption || "Default caption",
           }
 
-          const response = await fetch("/api/upload", {
+          const response = await fetch("/api/instagram/upload", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
