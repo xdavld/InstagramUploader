@@ -101,7 +101,6 @@ export default function LoginPage() {
 
   if (!config && !instagramProfile) {
     return <LoadingSpinner /> // Use the LoadingSpinner instead of <p>Loading...</p>
-  }
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">

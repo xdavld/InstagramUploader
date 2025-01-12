@@ -1,30 +1,19 @@
-// app/api/upload/route.js
-
 import { NextRequest, NextResponse } from "next/server"
 import { env } from "@/env" // Ensure this points to your environment variables
-
-// Define request body type
-/**
- * @typedef {Object} InstagramRequestBody
- * @property {string} [imageUrl]
- * @property {string} [videoUrl]
- * @property {string} caption
- * @property {"REELS"} [mediaType]
- */
-
-// Define API response types
-/**
- * @typedef {Object} UploadResponse
- * @property {string} id
- */
-
-/**
- * @typedef {Object} PublishResponse
- * @property {string} id
- */
+import { parse } from "cookie"
 
 export async function POST(req) {
   try {
+    const cookies = req.headers.get("cookie")
+    const { instagram_access_token: userToken } = cookies ? parse(cookies) : {}
+
+    if (!userToken) {
+      return NextResponse.json(
+        { error: "User not authenticated. Please log in first." },
+        { status: 401 }
+      )
+    }
+
     const { imageUrl, videoUrl, caption, mediaType } = await req.json()
 
     if ((!imageUrl && !videoUrl) || !caption) {
@@ -48,7 +37,7 @@ export async function POST(req) {
             ? { video_url: videoUrl, media_type: mediaType || "REELS" }
             : { image_url: imageUrl }),
           caption: caption,
-          access_token: env.INSTAGRAM_ACCESS_TOKEN,
+          access_token: userToken, // Use the user's token
         }),
         headers: { "Content-Type": "application/json" },
       }
@@ -67,16 +56,13 @@ export async function POST(req) {
 
     // Step 2: Poll for media status until it's ready
     const creationId = uploadData.id
-    const statusUrl = `https://graph.facebook.com/v21.0/${creationId}?fields=status&access_token=${env.INSTAGRAM_ACCESS_TOKEN}`
+    const statusUrl = `https://graph.facebook.com/v21.0/${creationId}?fields=status&access_token=${userToken}`
     let mediaReady = false
     const maxAttempts = 10
     let attempts = 0
 
     while (!mediaReady && attempts < maxAttempts) {
-      const statusResponse = await fetch(statusUrl, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${env.INSTAGRAM_ACCESS_TOKEN}` },
-      })
+      const statusResponse = await fetch(statusUrl, { method: "GET" })
 
       const statusData = await statusResponse.json()
       console.log(`Status Response [Attempt ${attempts + 1}]:`, statusData)
@@ -99,7 +85,7 @@ export async function POST(req) {
 
     // Step 3: Publish the media
     const publishUrl = `https://graph.facebook.com/v21.0/17841427525169570/media_publish`
-    const publishQuery = `?creation_id=${creationId}&access_token=${env.INSTAGRAM_ACCESS_TOKEN}`
+    const publishQuery = `?creation_id=${creationId}&access_token=${userToken}`
 
     console.log(`Publish Request URL: ${publishUrl}${publishQuery}`)
 

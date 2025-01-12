@@ -1,34 +1,29 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
   Bot,
+  Calendar,
   Command,
   Frame,
   GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  Grid3x3,
   SunMoon,
-  Calendar,
   Upload,
-  Github,
 } from "lucide-react"
 
-import { NavExplore } from "@/components/sidebar/nav-explore"
-import { NavSettings } from "@/components/sidebar/nav-settings"
-import { NavProfile } from "@/components/sidebar/nav-profile"
-import { NavLogout } from "@/components/sidebar/nav-logout"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar"
+
+
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
+import { NavExplore } from "@/components/sidebar/nav-explore";
+import { NavLogout } from "@/components/sidebar/nav-logout";
+import { NavProfile } from "@/components/sidebar/nav-profile";
+import { NavSettings } from "@/components/sidebar/nav-settings";
+
+
+
 
 
 const data = {
@@ -66,9 +61,9 @@ const data = {
       icon: Upload,
     },
     {
-      name: "Github",
-      url: "https://github.com/xdavld/SoftwareEngineering-Project",
-      icon: Github,
+      name: "Feed View",
+      url: "/feedview",
+      icon: Grid3x3,
     },
   ],
   navSettings: [
