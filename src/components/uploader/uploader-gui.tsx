@@ -166,7 +166,7 @@ export function Uploader({ disabled = false }) {
     <SidebarProvider>
       <AppSidebar className="top-14 h-[calc(100vh-14)]" />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -180,9 +180,8 @@ export function Uploader({ disabled = false }) {
           </div>
         </header>
         <div
-          className={`flex flex-col gap-6 px-4 ${
-            disabled ? "pointer-events-none opacity-50" : ""
-          }`}
+          data-testid="uploader-component"
+          className={`flex flex-col gap-6 px-4 ${disabled ? "pointer-events-none opacity-50" : ""}`}
         >
           <FileUploader
             maxFileCount={4}
@@ -190,12 +189,16 @@ export function Uploader({ disabled = false }) {
             progresses={progresses}
             onUpload={onUpload}
             disabled={isUploading || disabled}
+            data-testid="file-uploader"
           />
           <UploadedFilesCard
             uploadedFiles={uploadedFiles}
-            onSelectFile={(fileUrl, fileType) =>
-              handleFileClick({ url: fileUrl, type: fileType })
-            }
+            onSelectFile={(fileUrl, fileType) => {
+              if (fileUrl && fileType) {
+                handleFileClick({ url: fileUrl, type: fileType })
+              }
+            }}
+            data-testid="uploaded-files-card"
           />
           <div className="flex flex-col">
             <div className="flex items-center gap-4">
@@ -204,20 +207,34 @@ export function Uploader({ disabled = false }) {
                 placeholder="Write your caption here..."
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
+                className="mt-2 w-full"
               />
-              <Button onClick={generateHashtags}>Generate with AI</Button>
+              <Button
+                className="relative mt-2 w-[200px] rounded-full bg-transparent p-0 text-white"
+                onClick={generateHashtags}
+              >
+                <span className="pointer-events-none absolute inset-0 rounded-full border-[0px] bg-gradient-to-tl from-[#0fd850] via-[#f9f047] to-[#f9f047]"></span>
+                <span className="relative flex h-[80%] w-[95%] items-center justify-center rounded-full bg-black hover:bg-[#2F2F31]">
+                  Generate with AI
+                </span>
+              </Button>
             </div>
           </div>
           <SchedulerTabs
             value={selectedTab}
             setSelectedTab={setSelectedTab}
             setScheduledTime={setScheduledTime}
-          />
-          <Button onClick={handlePublishToInstagram} disabled={loading}>
+          ></SchedulerTabs>
+          <Button
+            className="mt-4 w-full"
+            onClick={handlePublishToInstagram}
+            disabled={loading}
+          >
             {loading ? "Publishing..." : "Publish to Instagram"}
           </Button>
-          {loading && <Progress value={progress} />}
-          {status && <p>{status}</p>}
+          {loading && <Progress value={progress} className="mt-2 w-full" />}
+          {/* Status message */}
+          {status && <p className="mt-2 text-center text-sm">{status}</p>}
         </div>
       </SidebarInset>
     </SidebarProvider>
