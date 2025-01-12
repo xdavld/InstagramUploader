@@ -18,6 +18,7 @@ export default function LoginPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [config, setConfig] = useState<Config | null>(null)
   const [error, setError] = useState<string | null>(null) // State for error messages
+  const [instagramProfile, setInstagramProfile] = useState(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -27,6 +28,19 @@ export default function LoginPage() {
       .then((data) => {
         if (data.isAuthenticated) {
           setIsAuthenticated(true)
+          fetch("/api/instagram/profile", {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            })
+            .then((res) => res.json())
+            .then((profileData) => {
+              setInstagramProfile(profileData)
+              console.log(profileData)
+            })
+            .catch((err) => {
+              console.error("Error fetching profile data:", err)
+              setError("Failed to load profile data. Please try again later.")
+            })
           router.push("/uploader") // Redirect to /uploader
         } else {
           // Fetch configuration from the server
@@ -85,9 +99,8 @@ export default function LoginPage() {
     )
   }
 
-  if (!config) {
-    return <LoadingSpinner /> 
-  }
+  if (!config && !instagramProfile) {
+    return <LoadingSpinner /> // Use the LoadingSpinner instead of <p>Loading...</p>
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
