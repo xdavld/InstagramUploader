@@ -10,14 +10,16 @@ export function NavLogout() {
 
   const handleLogout = async () => {
     try {
-      // Clear cookies or tokens on the client side
-      document.cookie = "instagram_access_token=; Max-Age=0; path=/"
+      // Call the logout API
+      const res = await fetch("/api/instagram/auth/logout", { method: "GET" })
 
-      // Optionally call a logout API to clear tokens on the server side
-      await fetch("/api/instagram/auth/logout", { method: "POST" })
-
-      // Redirect to login or home page
-      router.push("/login")
+      if (res.ok) {
+        console.log("Logout successful")
+        // Redirect to login page
+        router.push("/login")
+      } else {
+        console.error("Failed to log out")
+      }
     } catch (error) {
       console.error("Logout failed:", error)
     }
