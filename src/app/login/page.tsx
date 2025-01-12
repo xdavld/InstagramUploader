@@ -86,7 +86,7 @@ export default function LoginPage() {
   }
 
   if (!config) {
-    return <LoadingSpinner /> // Use the LoadingSpinner instead of <p>Loading...</p>
+    return <LoadingSpinner /> 
   }
 
   return (
