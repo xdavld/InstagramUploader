@@ -1,32 +1,63 @@
-"use client";
+// app/login/page.tsx
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { FaInstagram } from "react-icons/fa";
+"use client"
 
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { FaInstagram } from "react-icons/fa"
 
+import { LoadingSpinner } from "@/components/loading-spinner" // Import the spinner
+import { LoginForm } from "@/components/login-form"
 
-import { LoginForm } from "@/components/login-form";
-
-
-
-
+interface Config {
+  clientId: string
+  redirectUri: string
+}
 
 export default function LoginPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [config, setConfig] = useState<Config | null>(null)
+  const [error, setError] = useState<string | null>(null) // State for error messages
   const router = useRouter()
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("instagram_access_token")
-    if (accessToken) {
-      setIsAuthenticated(true)
-      router.push("/uploader")
-    }
+    // Check authentication via API
+    fetch("/api/instagram/auth/check-auth")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.isAuthenticated) {
+          setIsAuthenticated(true)
+          router.push("/uploader") // Redirect to /uploader
+        } else {
+          // Fetch configuration from the server
+          fetch("/api/instagram/config") // Ensure this path matches your API route
+            .then((res) => {
+              if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`)
+              }
+              return res.json()
+            })
+            .then((data: Config) => setConfig(data))
+            .catch((err) => {
+              console.error("Error fetching config:", err)
+              setError("Failed to load configuration. Please try again later.")
+            })
+        }
+      })
+      .catch((err) => {
+        console.error("Error checking auth:", err)
+        setError("Authentication check failed. Please try again later.")
+      })
   }, [router])
 
   const handleLogin = () => {
-    const clientId = "YOUR_CLIENT_ID"
-    const redirectUri = "YOUR_REDIRECT_URI"
+    if (!config) {
+      console.error("Config not loaded yet.")
+      setError("Configuration not loaded. Please try again.")
+      return
+    }
+
+    const { clientId, redirectUri } = config
     const scope = encodeURIComponent(
       "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish"
     )
@@ -36,15 +67,26 @@ export default function LoginPage() {
   }
 
   const handlePreview = () => {
-    console.log("Preview button clicked") // Step 1
+    console.log("Setting preview mode in sessionStorage...")
     sessionStorage.setItem("previewMode", "true")
-    console.log("Preview mode set in sessionStorage") // Step 2
-    router.push("/uploader")
-    console.log("Redirected to /uploader") // Step 3
+    console.log("Redirecting to uploader...")
+    router.push("/uploader") // Redirect to /uploader
   }
 
   if (isAuthenticated) {
     return <p>Redirecting...</p>
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center p-4">
+        <p className="text-lg text-red-500">{error}</p>
+      </div>
+    )
+  }
+
+  if (!config) {
+    return <LoadingSpinner /> // Use the LoadingSpinner instead of <p>Loading...</p>
   }
 
   return (

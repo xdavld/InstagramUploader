@@ -27,7 +27,7 @@ export function LoginForm({
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Login to your account</h1>
+        <h1 className="text-4xl font-bold">Login to your account</h1>
         <p className="text-sm text-muted-foreground">
           Click the button below to log in to your Instagram account
         </p>
@@ -46,11 +46,11 @@ export function LoginForm({
         variant="secondary"
         type="button"
         className="flex w-full items-center justify-center"
-        onClick={onPreview} // Ensure this is correctly passed
+        onClick={onPreview}
       >
         <FaEye className="mr-2" />
         Preview
       </Button>
     </form>
-  )
+  );
 }

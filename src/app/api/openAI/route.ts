@@ -4,7 +4,6 @@ import { env } from "@/env";
 
 // Lade Umgebungsvariablen
 const openAiApiKey = env.OPENAI_API_KEY;
-console.log('OpenAI API Key:', openAiApiKey);
 
 const openai = new OpenAI({
   apiKey: openAiApiKey,
