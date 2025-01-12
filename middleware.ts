@@ -1,20 +1,37 @@
-// middleware.ts
-
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { parse } from "cookie"
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname, searchParams } = request.nextUrl
   console.log(`Middleware invoked for path: ${pathname}`) // Debug log
 
   // Define paths that are public and do not require authentication
-  const publicPaths = ["/login", "/api/", "/favicon.ico", "/_next/", "/static/"]
+  const publicPaths = [
+    "/login",
+    "/api/",
+    "/favicon.ico",
+    "/_next/",
+    "/static/",
+    "/api/instagram/auth/callback", // Allow callback route
+  ]
 
   // If the request is for a public path, allow it
   if (publicPaths.some((path) => pathname.startsWith(path))) {
     console.log(`Allowing public path: ${pathname}`)
     return NextResponse.next()
+  }
+
+  // Handle OAuth callback redirection if the "code" parameter exists
+  const code = searchParams.get("code")
+  if (code) {
+    console.log(`OAuth code detected: ${code}`)
+
+    const callbackUrl = new URL("/api/instagram/auth/callback", request.url)
+    callbackUrl.searchParams.set("code", code)
+
+    console.log(`Redirecting to callback route: ${callbackUrl}`)
+    return NextResponse.redirect(callbackUrl)
   }
 
   // For other paths, check if the user is authenticated
@@ -36,7 +53,7 @@ export function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// Apply middleware to the /uploader route and its subpaths
+// Apply middleware to all routes except explicitly excluded paths
 export const config = {
-  matcher: ["/uploader/:path*"],
+  matcher: ["/((?!api/|_next/|static/|favicon.ico).*)"],
 }
