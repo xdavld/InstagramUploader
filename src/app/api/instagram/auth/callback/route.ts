@@ -1,10 +1,10 @@
-// app/api/instagram/callback/route.js
+// app/api/instagram/callback/route.ts
 
 import { NextResponse } from "next/server"
 import axios from "axios"
 import { serialize } from "cookie"
 
-export async function GET(request) {
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const code = searchParams.get("code")
 
@@ -20,10 +20,10 @@ export async function GET(request) {
     const tokenResponse = await axios.post(
       "https://api.instagram.com/oauth/access_token",
       new URLSearchParams({
-        client_id: process.env.INSTAGRAM_CLIENT_ID,
-        client_secret: process.env.INSTAGRAM_CLIENT_SECRET,
+        client_id: process.env.INSTAGRAM_CLIENT_ID!,
+        client_secret: process.env.INSTAGRAM_CLIENT_SECRET!,
         grant_type: "authorization_code",
-        redirect_uri: process.env.INSTAGRAM_REDIRECT_URI,
+        redirect_uri: process.env.INSTAGRAM_REDIRECT_URI!,
         code,
       }),
       {
@@ -44,10 +44,10 @@ export async function GET(request) {
       sameSite: "lax",
     })
 
-    const response = NextResponse.redirect("/uploader")
+    const response = NextResponse.redirect("/uploader") 
     response.headers.set("Set-Cookie", cookie)
     return response
-  } catch (error) {
+  } catch (error: any) {
     console.error(
       "Error exchanging code for access token:",
       error.response?.data || error.message

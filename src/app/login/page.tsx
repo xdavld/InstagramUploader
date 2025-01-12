@@ -1,14 +1,22 @@
+// app/login/page.tsx
+
 "use client"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { FaInstagram } from "react-icons/fa"
 
+import { LoadingSpinner } from "@/components/loading-spinner" // Import the spinner
 import { LoginForm } from "@/components/login-form"
 
+interface Config {
+  clientId: string
+  redirectUri: string
+}
+
 export default function LoginPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [config, setConfig] = useState(null)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [config, setConfig] = useState<Config | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -18,17 +26,17 @@ export default function LoginPage() {
       .then((data) => {
         if (data.isAuthenticated) {
           setIsAuthenticated(true)
-          router.push("/uploader")
+          router.push("/uploader") 
         } else {
           // Fetch configuration from the server
-          fetch("/api/instagram/config")
+          fetch("/api/instagram/config") // Ensure this path matches your API route
             .then((res) => {
               if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`)
               }
               return res.json()
             })
-            .then((data) => setConfig(data))
+            .then((data: Config) => setConfig(data))
             .catch((err) => console.error("Error fetching config:", err))
         }
       })
@@ -53,8 +61,8 @@ export default function LoginPage() {
   const handlePreview = () => {
     console.log("Setting preview mode in sessionStorage...")
     sessionStorage.setItem("previewMode", "true")
-    console.log("Redirecting to uploader...")
-    router.push("/uploader")
+    console.log("Redirecting to dashboard...")
+    router.push("/uploader") 
   }
 
   if (isAuthenticated) {
@@ -62,7 +70,7 @@ export default function LoginPage() {
   }
 
   if (!config) {
-    return <p>Loading...</p>
+    return <LoadingSpinner /> // Use the LoadingSpinner instead of <p>Loading...</p>
   }
 
   return (
