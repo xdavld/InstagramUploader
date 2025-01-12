@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { SiteHeader } from "@/components/layouts/site-header";
+import { LoadingSpinner } from "@/components/loading-spinner"; // Import the spinner
 import { Shell } from "@/components/shell"
 import { Uploader } from "@/components/uploader/uploader-gui"
 
@@ -41,7 +42,7 @@ export default function UploaderPage() {
   }, [router])
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return <LoadingSpinner />
   }
 
   return (

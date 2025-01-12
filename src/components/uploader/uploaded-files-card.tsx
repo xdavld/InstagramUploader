@@ -38,16 +38,16 @@ const handleFileClick = (file: UploadedFile) => {
         <ScrollArea className="pb-4">
           <div className="flex w-max space-x-2.5">
             {uploadedFiles.map((file) => (
-              <div
-                key={file.key}
-                data-testid={`uploaded-file-${file.key}`}
-                className={`relative aspect-video w-64 cursor-pointer rounded-md border transition-all duration-300 ${
-                  selectedFile === file.key
-                    ? "border-blue-500 bg-blue-100" // Selected file styles
-                    : "border-gray-200 bg-white" // Default styles
-                }`}
-                onClick={() => handleFileClick(file)}
-              >
+                <div
+                  key={file.key}
+                  data-testid={`uploaded-file-${file.key}`}
+                  className={`relative aspect-video w-64 cursor-pointer rounded-md border transition-all duration-300 ${
+                    selectedFile === file.key
+                      ? "border-gray-500 bg-gray-100" // Selected file styles
+                      : "border-gray-200 bg-white" // Default styles
+                  }`}
+                  onClick={() => handleFileClick(file)}
+                >
                 {isImage(file) ? (
                   <Image
                     src={file.url}
@@ -71,9 +71,9 @@ const handleFileClick = (file: UploadedFile) => {
                   </div>
                 )}
                 {selectedFile === file.key && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-blue-500 bg-opacity-50 font-bold text-white">
-                    Selected
-                  </div>
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 font-bold text-white focus-within:outline-none focus-within:ring-0">
+                  Selected
+                </div>
                 )}
               </div>
             ))}
