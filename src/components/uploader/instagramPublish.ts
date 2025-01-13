@@ -3,6 +3,8 @@ export interface PublishPayload {
   videoUrl?: string
   caption: string
   mediaType?: "REELS"
+  selectedTab?: string
+  scheduledTime?: Date
 }
 
 export interface PublishResponse {

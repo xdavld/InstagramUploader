@@ -1,10 +1,33 @@
-import Component  from "@/components/instafeed"
+"use client";
 
-export default function FeedView() {
+import { useEffect, useState } from "react";
+
+
+
+import { SiteHeader } from "@/components/layouts/site-header";
+import { FeedView } from "@/components/feedview/feedview-gui";
+
+
+
+
+
+export default function FeedViewPage() {
+  const [isPreviewMode, setIsPreviewMode] = useState(false)
+
+  useEffect(() => {
+    const preview = sessionStorage.getItem("previewMode") === "true"
+    console.log("Preview mode detected:", preview)
+    setIsPreviewMode(preview)
+
+    if (preview) {
+      sessionStorage.removeItem("previewMode")
+    }
+  }, [])
+
   return (
-    <div className="feedview-container">
-      <h1 className="mb-4 text-center text-2xl font-bold">Feed View</h1>
-      <Component />
-    </div>
+    <>
+    <SiteHeader />
+    <FeedView />
+    </>
   )
 }

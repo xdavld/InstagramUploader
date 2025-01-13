@@ -12,7 +12,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-export function Dashboard() {
+export function FeedView() {
   return (
     <SidebarProvider>
       <AppSidebar className="top-14 h-[calc(100vh-14)]"/>
@@ -26,21 +26,14 @@ export function Dashboard() {
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink>
-                    Calendar
+                    Feed View
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-        </div>
+        {/*FEED VIEW CODE*/}
       </SidebarInset>
     </SidebarProvider>
   )
