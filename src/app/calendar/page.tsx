@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 
 
 import { SiteHeader } from "@/components/layouts/site-header";
-import { Dashboard } from "@/components/dashboard/dashboard-gui";
+import { Calendar } from "@/components/calendar/calendar-gui";
 
 
 
 
 
-export default function UploaderPage() {
+export default function CalendarPage() {
   const [isPreviewMode, setIsPreviewMode] = useState(false)
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function UploaderPage() {
   return (
     <>
     <SiteHeader />
-    <Dashboard />
+    <Calendar />
     </>
   )
 }

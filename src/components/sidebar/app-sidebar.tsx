@@ -52,7 +52,7 @@ const data = {
   explore: [
     {
       name: "Calendar",
-      url: "/dashboard",
+      url: "/calendar",
       icon: Calendar,
     },
     {
