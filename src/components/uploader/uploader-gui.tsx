@@ -44,94 +44,83 @@ export function Uploader({ disabled = false }) {
   }, [selectedFile, uploadedFiles, isUploading])
 
   const handlePublishToInstagram = async () => {
-    if (disabled) return // Prevent publishing in preview mode
-
+    if (disabled) return; // Prevent publishing in preview mode
+  
     if (!selectedFile) {
-      setStatus("No file selected. Please upload and select a file.")
-      return
+      setStatus("No file selected. Please upload and select a file.");
+      return;
     }
-
-    setLoading(true)
-    setProgress(0)
-    setStatus("")
-
+    setProgress(0);
+    setStatus("");
+  
+    const isVideo = selectedFile.type.startsWith("video");
+    const payload: PublishPayload = {
+      ...(isVideo
+        ? { videoUrl: selectedFile.url, mediaType: "REELS" }
+        : { imageUrl: selectedFile.url }),
+      caption: caption || "Default caption",
+      selectedTab,
+      scheduledTime,
+    };
+  
     try {
       if (selectedTab === "now") {
-
+        setLoading(true);
         for (let i = 0; i <= 100; i += 20) {
-          setProgress(i)
-          await new Promise((resolve) =>
-            setTimeout(resolve, 300)
-          )
+          setProgress(i);
+          await new Promise((resolve) => setTimeout(resolve, 300));
         }
-
-        const isVideo = selectedFile.type.startsWith("video")
-        const payload: PublishPayload = {
-          ...(isVideo
-            ? { videoUrl: selectedFile.url, mediaType: "REELS" }
-            : { imageUrl: selectedFile.url }),
-          caption: caption || "Default caption",
-        }
-
+  
         const response = await fetch("/api/instagram/upload", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        })
-
+        });
+  
         if (!response.ok) {
-          const errorData = await response.json()
-          setStatus(`Failed to publish: ${errorData.error}`)
-          return
+          const errorData = await response.json();
+          setStatus(`Failed to publish: ${errorData.error}`);
+          return;
         }
-
-        setStatus("File published successfully!")
+  
+        setStatus("File published successfully!");
+        setProgress(100);
       } else if (selectedTab === "schedule") {
         if (!scheduledTime) {
-          setStatus("Please select a date and time to schedule your post.")
-          return
+          setStatus("Please select a date and time to schedule your post.");
+          return;
         }
-
-        const now = new Date()
-        const timeDifference = scheduledTime.getTime() - now.getTime()
-
+  
+        const now = new Date();
+        const timeDifference = scheduledTime.getTime() - now.getTime();
+  
         if (timeDifference < 0) {
-          setStatus("Please select a date and time in the future.")
-          return
+          setStatus("Please select a date and time in the future.");
+          return;
         }
 
-        setTimeout(async () => {
-          const isVideo = selectedFile.type.startsWith("video")
-          const payload: PublishPayload = {
-            ...(isVideo
-              ? { videoUrl: selectedFile.url, mediaType: "REELS" }
-              : { imageUrl: selectedFile.url }),
-            caption: caption || "Default caption",
-          }
-
-          const response = await fetch("/api/instagram/upload", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          })
-
-          if (!response.ok) {
-            const errorData = await response.json()
-            setStatus(`Failed to publish scheduled post: ${errorData.error}`)
-            return
-          }
-
-          setStatus("Scheduled post published successfully!")
-        }, timeDifference)
+        setStatus("File scheduled successfully!");
+  
+        const response = await fetch("/api/instagram/upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          setStatus(`Failed to publish scheduled post: ${errorData.error}`);
+          return;
+        }
       }
-    } catch (error: any) {
-      console.error("Publishing error:", error)
-      setStatus("An unexpected error occurred while publishing.")
+    } catch (error) {
+      console.error("Publishing error:", error);
+      setStatus("An unexpected error occurred while publishing.");
     } finally {
-      setLoading(false)
-      setProgress(100)
+      setLoading(false);
+      setProgress(100);
     }
-  }
+  };
 
   const handleFileClick = (file: { url: string; type: string }) => {
     if (disabled) return // Prevent file selection in preview mode
