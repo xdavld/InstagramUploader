@@ -53,7 +53,7 @@ export async function GET(request: Request) {
       {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        maxAge: 60 * 60 * 24 * 7, // 1 week
+        maxAge: 60 * 60, // 1 week
         path: "/",
         sameSite: "lax",
       }
@@ -62,7 +62,7 @@ export async function GET(request: Request) {
     const userIdCookie = serialize("instagram_user_id", user_id, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60 * 24 * 7, // 1 week
+      maxAge: 60 * 60, // 1 week
       path: "/",
       sameSite: "lax",
     })

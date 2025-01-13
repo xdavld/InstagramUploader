@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useUploadFile } from "@/hooks/use-upload-file";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { SchedulerTabs } from "@/components/ui/schedulerTabs";
@@ -176,7 +177,7 @@ export function Uploader({ disabled = false }) {
         >
           <FileUploader
             maxFileCount={4}
-            maxSize={16 * 1024 * 1024}
+            maxSize={8 * 1024 * 1024}
             progresses={progresses}
             onUpload={onUpload}
             disabled={isUploading || disabled}
@@ -193,7 +194,7 @@ export function Uploader({ disabled = false }) {
           />
           <div className="flex flex-col">
             <div className="flex items-center gap-4">
-              <Input
+              <Textarea
                 type="text"
                 placeholder="Write your caption here..."
                 value={caption}

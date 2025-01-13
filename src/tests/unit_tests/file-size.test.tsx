@@ -77,7 +77,7 @@ describe("FileUploader Component", () => {
 
     // Create a mock file of 16MB
     const validFile = new File(
-      [new ArrayBuffer(16 * 1024 * 1024)],
+      [new ArrayBuffer(8 * 1024 * 1024)],
       "valid-image.jpg",
       {
         type: "image/jpeg",

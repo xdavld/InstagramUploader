@@ -1,27 +1,12 @@
 "use client"
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"
+import { type LucideIcon } from "lucide-react"
 
-import {
-  Folder,
-  Forward,
-  MoreHorizontal,
-  Trash2,
-  type LucideIcon,
-} from "lucide-react"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
@@ -39,21 +24,19 @@ export function NavExplore({
   const { isMobile } = useSidebar()
   const router = useRouter()
 
-  const handlePage = (item) => {
-    router.push(item)
-  };
+  const handlePage = (url: string) => {
+    router.push(url) // Client-side navigation
+  }
 
   return (
-    <SidebarGroup >
+    <SidebarGroup>
       <SidebarGroupLabel>Explore</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild onClick={() => handlePage(item.url)}>
-              <a href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
-              </a>
+            <SidebarMenuButton onClick={() => handlePage(item.url)}>
+              <item.icon />
+              <span>{item.name}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}

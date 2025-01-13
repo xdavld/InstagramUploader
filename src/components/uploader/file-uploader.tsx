@@ -102,7 +102,7 @@ export function FileUploader(props: FileUploaderProps) {
       "video/x-matroska": [".mkv"], // Explicit for MKV
       "video/x-msvideo": [".avi"], // Explicit for AVI
     },
-    maxSize = 1024 * 1024 * 16,
+    maxSize = 1024 * 1024 * 8,
     maxFileCount = 1,
     multiple = false,
     disabled = false,

@@ -1,22 +1,29 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { SidebarMenu } from "@/components/ui/sidebar";
+import React, { useEffect, useState } from "react"
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { SidebarMenu } from "@/components/ui/sidebar"
 
 export function NavProfile() {
-  const [profile, setProfile] = useState({ username: "", profilePictureUrl: "" });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [profile, setProfile] = useState({
+    username: "",
+    profilePictureUrl: "",
+    followersCount: 0,
+    followsCount: 0,
+    mediaCount: 0,
+  })
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Check sessionStorage on client side
-      const storedProfile = sessionStorage.getItem("profile");
+      const storedProfile = sessionStorage.getItem("profile")
       if (storedProfile) {
-        setProfile(JSON.parse(storedProfile));
-        setLoading(false);
-        return;
+        setProfile(JSON.parse(storedProfile))
+        setLoading(false)
+        return
       }
 
       const fetchProfile = async () => {
@@ -26,31 +33,34 @@ export function NavProfile() {
             headers: {
               "Content-Type": "application/json",
             },
-          });
+          })
 
           if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Failed to fetch profile");
+            const errorData = await response.json()
+            throw new Error(errorData.error || "Failed to fetch profile")
           }
 
-          const data = await response.json();
+          const data = await response.json()
           const newProfile = {
             username: data.username,
             profilePictureUrl: data.profilePictureUrl,
-          };
-          setProfile(newProfile);
-          sessionStorage.setItem("profile", JSON.stringify(newProfile));
+            followersCount: data.followersCount,
+            followsCount: data.followsCount,
+            mediaCount: data.mediaCount,
+          }
+          setProfile(newProfile)
+          sessionStorage.setItem("profile", JSON.stringify(newProfile))
         } catch (err) {
-          console.error("Fetch Profile Error:", err);
-          setError(err.message);
+          console.error("Fetch Profile Error:", err)
+          setError(err.message)
         } finally {
-          setLoading(false);
+          setLoading(false)
         }
-      };
+      }
 
-      fetchProfile();
+      fetchProfile()
     }
-  }, []);
+  }, [])
 
   if (loading) {
     return (
@@ -60,7 +70,7 @@ export function NavProfile() {
         </Avatar>
         <div className="relative top-4 pb-4 text-transparent">username</div>
       </SidebarMenu>
-    );
+    )
   }
 
   if (error) {
@@ -68,7 +78,7 @@ export function NavProfile() {
       <SidebarMenu className="flex items-center justify-center">
         Error: {error}
       </SidebarMenu>
-    );
+    )
   }
 
   return (
@@ -81,6 +91,8 @@ export function NavProfile() {
         )}
       </Avatar>
       <div className="relative top-4 pb-4">@{profile.username}</div>
+      <div className="text-sm text-gray-600">
+      </div>
     </SidebarMenu>
-  );
+  )
 }
