@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext", // Ensure ES module support
+    "jsx": "react-jsx",
+    "types": ["cypress"]
+  },
+  "include": ["cypress/**/*.ts"]
+}

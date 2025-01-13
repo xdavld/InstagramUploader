@@ -1,6 +1,6 @@
-# [File Uploader](https://uploader.sadmn.com)
+# [Instagram Uploader](https://software-engineering-project-eight.vercel.app/)
 
-This is a file uploader built with `shadnc/ui`, and `react-dropzone`. It is bootstrapped with `create-t3-app`.
+This is a Instagram Uploader uploader built with `shadnc/ui`, and `react-dropzone`. It is bootstrapped with `create-t3-app` and inspired from the template `file-uploader` from Sadman Sakib.
 
 [![File Uploader](./public/images/screenshot.png)](https://uploader.sadmn.com)
 
@@ -25,7 +25,7 @@ This is a file uploader built with `shadnc/ui`, and `react-dropzone`. It is boot
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/sadmann7/file-uploader
+   git clone https://github.com/xdavld/SoftwareEngineering-Project.git
    ```
 
 2. Install dependencies using pnpm

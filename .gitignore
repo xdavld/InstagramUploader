@@ -1,3 +1,7 @@
 node_modules
 .env
-.next
+.next/
+*.pem
+*.crt
+*.key
+certificates
