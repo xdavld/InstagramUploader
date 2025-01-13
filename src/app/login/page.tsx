@@ -87,10 +87,6 @@ export default function LoginPage() {
     router.push("/uploader") // Redirect to /uploader
   }
 
-  if (isAuthenticated) {
-    return <p>Redirecting...</p>
-  }
-
   if (error) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center p-4">

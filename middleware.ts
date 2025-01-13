@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
   console.log(`Middleware invoked for path: ${pathname}`) // Debug log
 
   // Define paths that are public and do not require authentication
-  const publicPaths = ["/login", "/api/", "/favicon.ico", "/_next/", "/static/"]
+  const publicPaths = ["/login", "/favicon.ico", "/_next/", "/static/"]
 
   // If the request is for a public path, allow it
   if (publicPaths.some((path) => pathname.startsWith(path))) {

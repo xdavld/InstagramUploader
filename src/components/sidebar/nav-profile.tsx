@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SidebarMenu } from "@/components/ui/sidebar";
-
+import { LoadingSpinner } from "@/components/loading-spinner"; // Import the spinner
 
 
 
@@ -54,7 +54,6 @@ export function NavProfile() {
   if (loading) {
     return (
       <SidebarMenu className="flex items-center justify-center">
-        Loading...
       </SidebarMenu>
     )
   }
