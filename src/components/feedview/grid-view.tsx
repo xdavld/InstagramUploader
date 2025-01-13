@@ -84,13 +84,13 @@ export default function InstaClone({
       </div>
 
 
-        <div className="mx-auto w-full max-w-6xl px-4 py-6">
+        <div className="mx-auto w-full max-w-4xl px-4 py-6">
             <div className="relative text-center text-sm after:content-[''] after:absolute after:inset-0 after:top-1/2 after:z-0 after:h-[1px] after:bg-border">
             </div>
         </div>
 
       {/* Spinner or Post Grid */}
-      <div className="mx-auto w-full max-w-6xl px-4">
+      <div className="mx-auto w-full max-w-4xl px-4">
         {isLoading ? (
         <div className="flex justify-center">
             <LoadingSpinner />
