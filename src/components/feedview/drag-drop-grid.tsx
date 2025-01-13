@@ -54,7 +54,7 @@ export const DragDropGrid: React.FC = () => {
               />
             )
           ) : (
-            <span className="px-2 text-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
+            <span className="px-2 text-center text-xm">
               Drop Image or Video Here
             </span>
           )}
