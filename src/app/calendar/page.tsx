@@ -13,6 +13,13 @@ export default function CalendarPage() {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
+  const handlePreview = () => {
+    console.log("Setting preview mode in sessionStorage...")
+    sessionStorage.setItem("previewMode", "true")
+    console.log("Redirecting to Calendar...")
+    router.push("/calendar") // Redirect to the current page but with preview mode set
+  }
+
   useEffect(() => {
     const preview = sessionStorage.getItem("previewMode") === "true"
 
@@ -46,6 +53,16 @@ export default function CalendarPage() {
   return (
     <>
       <SiteHeader />
+      {!isAuthenticated && (
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={handlePreview}
+            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          >
+            Preview Calendar
+          </button>
+        </div>
+      )}
       <Calendar />
     </>
   )
