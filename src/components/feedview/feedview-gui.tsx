@@ -1,72 +1,40 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 
-
-
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import InstaClone from "@/components/feedview/grid-view";
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
-
-
-
-
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+import InstaClone from "@/components/feedview/grid-view"
+import { AppSidebar } from "@/components/sidebar/app-sidebar"
 
 export function FeedView() {
   const [profile, setProfile] = useState({
     username: "",
-    profilePictureUrl:
-      "/images/dummy_pb.png",
+    profilePictureUrl: "/images/dummy_pb.png",
     followersCount: 0,
     followsCount: 0,
     mediaCount: 0,
   })
   const [posts, setPosts] = useState<{ type: string; src: string }[]>([])
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check if in preview mode
-    const isPreviewMode = sessionStorage.getItem("previewMode") === "true"
-    if (isPreviewMode) {
-      console.log("Preview mode detected. Skipping fetch operations.")
-      setIsLoading(false) // Skip loading state
-      return
-    }
-
-    // Fetch profile from sessionStorage
+    // Load profile from sessionStorage
     if (typeof window !== "undefined") {
       const storedProfile = sessionStorage.getItem("profile")
       if (storedProfile) {
-        const parsedProfile = JSON.parse(storedProfile)
-        setProfile(parsedProfile)
+        setProfile(JSON.parse(storedProfile))
       }
     }
-
-    // Fetch media data
-    const fetchMedia = async () => {
-      try {
-        const response = await fetch("/api/instagram/fetchMedia")
-        if (!response.ok) {
-          throw new Error("Failed to fetch media data")
-        }
-        const data = await response.json()
-
-        const transformedPosts = data.map((media: any) => ({
-          type: media.media_type.toLowerCase(),
-          src: media.media_url,
-        }))
-
-        setPosts(transformedPosts)
-      } catch (error) {
-        console.error("Failed to fetch media:", error.message)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchMedia()
   }, [])
 
   return (
@@ -88,19 +56,8 @@ export function FeedView() {
           </div>
         </header>
 
-        {/* Pass the isLoading state to InstaClone */}
-        <InstaClone
-          isLoading={isLoading}
-          profilePicture={profile.profilePictureUrl || "/images/dummy_pb.png"}
-          username={profile.username || ""}
-          postsCount={profile.mediaCount || 0}
-          followersCount={profile.followersCount || 0}
-          followingCount={profile.followsCount || 0}
-          bio={"Feed View Page"}
-          website={""}
-          categories={""}
-          posts={posts}
-        />
+        {/* Pass the posts and setPosts to InstaClone */}
+        <InstaClone profile={profile} posts={posts} setPosts={setPosts} />
       </SidebarInset>
     </SidebarProvider>
   )
