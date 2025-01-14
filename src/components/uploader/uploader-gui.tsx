@@ -1,28 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "sonner"; // Importieren Sie die toast-Funktion von Sonner
+import React, { useEffect, useState } from "react"
+import { toast } from "sonner" // Importieren Sie die toast-Funktion von Sonner
 
-
-
-import { useUploadFile } from "@/hooks/use-upload-file";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
-import { SchedulerTabs } from "@/components/ui/schedulerTabs";
-import { Separator } from "@/components/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Textarea } from "@/components/ui/textarea";
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
-import { FileUploader } from "@/components/uploader/file-uploader";
-import { PublishPayload } from "@/components/uploader/instagramPublish";
-import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card";
-
-
-
-
+import { useUploadFile } from "@/hooks/use-upload-file"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+} from "@/components/ui/breadcrumb"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Progress } from "@/components/ui/progress"
+import { SchedulerTabs } from "@/components/ui/schedulerTabs"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+import { Textarea } from "@/components/ui/textarea"
+import { AppSidebar } from "@/components/sidebar/app-sidebar"
+import { FileUploader } from "@/components/uploader/file-uploader"
+import { PublishPayload } from "@/components/uploader/instagramPublish"
+import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card"
 
 export function Uploader({ disabled = false }) {
   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile(
@@ -43,11 +52,25 @@ export function Uploader({ disabled = false }) {
   const [scheduledTime, setScheduledTime] = useState<Date | null>(null)
   const [mediaType, setMediaType] = useState<string>("REELS") // Default mediaType
   const [isStory, setIsStory] = useState<boolean>(false) // Neuer State
+  const [isAnimating, setIsAnimating] = useState<boolean>(false) // Neuer State
+
+  // Variable zur Überprüfung, ob ein Bild ausgewählt ist
+  const isImageSelected = selectedFile && selectedFile.type.startsWith("image/")
 
   useEffect(() => {
     console.log("Component re-rendered, selectedFile state:", selectedFile)
     console.log("Uploader props:", { uploadedFiles, isUploading })
   }, [selectedFile, uploadedFiles, isUploading])
+
+  const animateText = async (fullText: string, interval = 30) => {
+    setIsAnimating(true)
+    setCaption("") // Textarea leeren
+    for (let i = 0; i <= fullText.length; i++) {
+      setCaption(fullText.slice(0, i))
+      await new Promise((resolve) => setTimeout(resolve, interval))
+    }
+    setIsAnimating(false)
+  }
 
   const handlePublishToInstagram = async () => {
     if (disabled) return // Prevent publishing in preview mode
@@ -69,7 +92,7 @@ export function Uploader({ disabled = false }) {
     }
 
     try {
-      if (selectedTab === "now") {
+      if (selectedTab === "now" || selectedTab === "more") {
         setLoading(true)
         for (let i = 0; i <= 100; i += 20) {
           setProgress(i)
@@ -106,7 +129,9 @@ export function Uploader({ disabled = false }) {
           return
         }
 
-        toast.success(`Post successfully planned for ${scheduledTime.toLocaleString()}!`) // Erfolgsmeldung bleibt auf Deutsch
+        toast.success(
+          `Post successfully planned for ${scheduledTime.toLocaleString()}!`
+        ) // Erfolgsmeldung bleibt auf Deutsch
 
         const response = await fetch("/api/instagram/upload", {
           method: "POST",
@@ -155,8 +180,12 @@ export function Uploader({ disabled = false }) {
       }
 
       const { hashtags } = await response.json()
-      setCaption(hashtags || "") // Set generated hashtags as caption
-      toast.success("Die Hashtags wurden erfolgreich generiert.") // Erfolgsmeldung bleibt auf Deutsch
+      const fullText = hashtags || ""
+
+      // Start der Textanimation
+      await animateText(fullText)
+
+      toast.success("The Text was successfully generated!") // Erfolgsmeldung bleibt auf Englisch
     } catch (error) {
       console.error("Error generating hashtags:", error)
       toast.error("An error occurred while generating hashtags.")
@@ -215,10 +244,12 @@ export function Uploader({ disabled = false }) {
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
                 className="w-full"
+                disabled={isAnimating} // Deaktivieren während der Animation
               />
               <Button
                 className="relative mt-4 w-[200px] rounded-full bg-transparent p-0 text-white"
                 onClick={generateHashtags}
+                disabled={isAnimating || !isImageSelected} // Deaktivieren, wenn animiert oder kein Bild ausgewählt
               >
                 <span className="pointer-events-none absolute inset-0 rounded-full border-[0px] bg-gradient-to-tl from-[#0fd850] via-[#f9f047] to-[#f9f047]"></span>
                 <span className="relative flex h-[80%] w-[95%] items-center justify-center rounded-full bg-black hover:bg-[#2F2F31]">
@@ -251,6 +282,7 @@ export function Uploader({ disabled = false }) {
                   id="story"
                   checked={isStory}
                   onCheckedChange={(checked) => setIsStory(checked)}
+                  disabled={!isImageSelected} // Deaktivieren, wenn kein Bild ausgewählt
                 />
                 <div>
                   <Label htmlFor="story">Share as a Story</Label>
@@ -262,13 +294,15 @@ export function Uploader({ disabled = false }) {
             </CardContent>
           </Card>
           <Button
-            className="mt-2 mb-4 w-full"
+            className="mt-2 w-full"
             onClick={handlePublishToInstagram}
             disabled={loading}
           >
             {loading ? "Publishing..." : "Publish to Instagram"}
           </Button>
-          {loading && <Progress value={progress} className="mt-2 w-full" />}
+          {loading && (
+            <Progress value={progress} className="mb-4 mt-2 w-full" />
+          )}
           {/* Entfernen Sie das Status-<p>-Element */}
         </div>
       </SidebarInset>

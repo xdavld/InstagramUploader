@@ -49,7 +49,7 @@ export async function GET(req) {
     const mediaDetailsPromises = uniqueMedia.map(async (media) => {
       try {
         const mediaDetailsResponse = await fetch(
-          `https://graph.instagram.com/v21.0/${media.id}?fields=id,media_type,media_url`,
+          `https://graph.instagram.com/v21.0/${media.id}?fields=id,media_type,media_url,timestamp,caption`,
           {
             method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },
@@ -66,6 +66,8 @@ export async function GET(req) {
           id: mediaDetails.id,
           media_type: mediaDetails.media_type,
           media_url: mediaDetails.media_url,
+          timestamp: mediaDetails.timestamp,
+          caption: mediaDetails.caption,
         }
       } catch (err) {
         console.error("Error fetching media details:", err.message)
