@@ -47,7 +47,13 @@ export default function InstaClone({
   }
 
   useEffect(() => {
-    fetchMedia() // Automatically fetch media when the component is rendered
+    const isPreviewMode =
+      typeof window !== "undefined" &&
+      sessionStorage.getItem("previewMode") === "true"
+
+    if (!isPreviewMode) {
+      fetchMedia() // Fetch media only if not in preview mode
+    }
   }, [])
 
   return (
@@ -89,8 +95,7 @@ export default function InstaClone({
 
       {/* Separator line */}
       <div className="mx-auto w-full max-w-3xl px-4 py-6">
-          <div className="relative text-center text-sm after:content-[''] after:absolute after:inset-0 after:top-1/2 after:z-0 after:h-[1px] after:bg-border">
-          </div>
+        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:h-[1px] after:bg-border after:content-['']"></div>
       </div>
 
       {/* Spinner or Post Grid */}

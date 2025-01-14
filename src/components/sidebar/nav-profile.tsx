@@ -1,9 +1,15 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { SidebarMenu } from "@/components/ui/sidebar"
+
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SidebarMenu } from "@/components/ui/sidebar";
+
+
+
+
 
 export function NavProfile() {
   const [profile, setProfile] = useState({
@@ -18,7 +24,21 @@ export function NavProfile() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Check sessionStorage on client side
+      const isPreviewMode = sessionStorage.getItem("previewMode") === "true"
+
+      if (isPreviewMode) {
+        // Mock data for preview mode
+        setProfile({
+          username: "preview_user",
+          profilePictureUrl: "/images/dummy_pb.png",
+          followersCount: 0,
+          followsCount: 0,
+          mediaCount: 0,
+        })
+        setLoading(false)
+        return
+      }
+
       const storedProfile = sessionStorage.getItem("profile")
       if (storedProfile) {
         setProfile(JSON.parse(storedProfile))
@@ -28,10 +48,16 @@ export function NavProfile() {
 
       const fetchProfile = async () => {
         try {
+          const token = sessionStorage.getItem("accessToken")
+          if (!token) {
+            throw new Error("Access token not found")
+          }
+
           const response = await fetch("/api/instagram/profile", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
             },
           })
 
@@ -92,6 +118,7 @@ export function NavProfile() {
       </Avatar>
       <div className="relative top-4 pb-4">@{profile.username}</div>
       <div className="text-sm text-gray-600">
+        Followers: {profile.followersCount} | Following: {profile.followsCount}
       </div>
     </SidebarMenu>
   )
