@@ -79,5 +79,8 @@
     <requires type="dynamic">
       <file>prod_writing.bcf</file>
     </requires>
+    <requires type="editable">
+      <file>includes/literature-database.bib</file>
+    </requires>
   </external>
 </requests>

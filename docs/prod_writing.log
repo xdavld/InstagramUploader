@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  9 JAN 2025 10:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  14 JAN 2025 23:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/writing/prod_writing.tex"
-(/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/writing/prod_writing.tex
+**"/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/docs/prod_writing.tex"
+(/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/docs/prod_writing.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (./includes/config.tex) (/usr/local/texlive/2024/texmf-dist/tex/latex/koma-script/scrreprt.cls
@@ -1095,13 +1095,43 @@ File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 
 ] (./includes/chapter1.tex
 chapter 1.
-) (./includes/chapter2.tex [1
+
+Overfull \hbox (21.64413pt too wide) in paragraph at lines 30--38
+ [][] 
+ []
+
+<graphics/sprint_3_jira.png, id=55, 1174.3875pt x 407.5225pt>
+File: graphics/sprint_3_jira.png Graphic file (type png)
+<use graphics/sprint_3_jira.png>
+Package pdftex.def Info: graphics/sprint_3_jira.png  used on input line 47.
+(pdftex.def)             Requested size: 364.19667pt x 126.37419pt.
+[1
 
 
 
-{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [2 <./graphics/sprint_3_jira.png>]
+<graphics/activity_diagram.png, id=90, 767.86874pt x 1927.2pt>
+File: graphics/activity_diagram.png Graphic file (type png)
+<use graphics/activity_diagram.png>
+Package pdftex.def Info: graphics/activity_diagram.png  used on input line 87.
+(pdftex.def)             Requested size: 364.20247pt x 443.83482pt.
+ [3] [4 <./graphics/activity_diagram.png>]
+<graphics/use_case_diagram.png, id=101, 683.55376pt x 553.06625pt>
+File: graphics/use_case_diagram.png Graphic file (type png)
+<use graphics/use_case_diagram.png>
+Package pdftex.def Info: graphics/use_case_diagram.png  used on input line 104.
+(pdftex.def)             Requested size: 364.19667pt x 294.67651pt.
+ [5
+
+ <./graphics/use_case_diagram.png>]
+<graphics/sequence_diagram.png, id=108, 307.1475pt x 302.12875pt>
+File: graphics/sequence_diagram.png Graphic file (type png)
+<use graphics/sequence_diagram.png>
+Package pdftex.def Info: graphics/sequence_diagram.png  used on input line 138.
+(pdftex.def)             Requested size: 227.62206pt x 223.90369pt.
+) (./includes/chapter2.tex [6 <./graphics/sequence_diagram.png>] [7]
 chapter 2.
-) [2
+) [8
 
 ] (./includes/erklaerung_ki.tex
 Overfull \hbox (1.558pt too wide) in paragraph at lines 103--103
@@ -1118,11 +1148,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 103--103
 []|\T1/cmr/bx/n/10.95 Eingesetzte(s)
  []
 
-) (./template/_dhbw_erklaerung.tex [3
+) (./template/_dhbw_erklaerung.tex [9
 
 
 
-]) [4
+]) [10
 
 ] (./prod_writing.aux)
  ***********
@@ -1136,18 +1166,30 @@ Package logreq Info: Writing requests to 'prod_writing.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28859 strings out of 474116
- 572841 string characters out of 5743682
- 1934187 words of memory out of 5000000
- 50817 multiletter control sequences out of 15000+600000
+ 29158 strings out of 474116
+ 579636 string characters out of 5743682
+ 1939187 words of memory out of 5000000
+ 51096 multiletter control sequences out of 15000+600000
  575376 words of font info for 70 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 108i,17n,107p,10986b,2369s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on prod_writing.pdf (9 pages, 199958 bytes).
+ 108i,17n,107p,10983b,2369s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{cite.0@tailwindcss_v2_docs} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@shadcn_ui_docs} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@facebook_graph_api} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@nextjs_docs} has been referenced but does not exist, replaced by a fixed one
+
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
+Output written on prod_writing.pdf (15 pages, 506576 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 106 compressed objects within 2 object streams
- 18 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 221 PDF objects out of 1000 (max. 8388607)
+ 171 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 77 words of extra memory for PDF output out of 10000 (max. 10000000)
 
