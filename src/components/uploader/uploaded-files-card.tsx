@@ -30,7 +30,7 @@ const handleFileClick = (file: UploadedFile) => {
     <CardHeader>
       <CardTitle data-testid="uploaded-files-title">Uploaded files</CardTitle>
       <CardDescription data-testid="uploaded-files-description">
-        View the uploaded files here
+        Select the files here
       </CardDescription>
     </CardHeader>
     <CardContent>
