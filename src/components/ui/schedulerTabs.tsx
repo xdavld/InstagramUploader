@@ -1,22 +1,31 @@
-import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DateTimePicker } from "@/components/ui/calendarForm";
+import React from "react"
+
+import { DateTimePicker } from "@/components/ui/calendarForm"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface SchedulerTabsProps {
-  value: string;
-  setSelectedTab: (value: string) => void;
-  setScheduledTime: (value: Date) => void;
+  value: string
+  setSelectedTab: (value: string) => void
+  setScheduledTime: (value: Date) => void
 }
 
-export function SchedulerTabs({ value, setSelectedTab, setScheduledTime }: SchedulerTabsProps) {
+export function SchedulerTabs({
+  value,
+  setSelectedTab,
+  setScheduledTime,
+}: SchedulerTabsProps) {
   const handleTabChange = (tabValue: string) => {
-    setSelectedTab(tabValue);
+    setSelectedTab(tabValue)
 
     if (tabValue === "now") {
-      setScheduledTime(new Date());
+      setScheduledTime(new Date())
     }
-  };
+  }
 
   return (
     <Tabs value={value} className="w-full" onValueChange={handleTabChange}>
@@ -36,5 +45,5 @@ export function SchedulerTabs({ value, setSelectedTab, setScheduledTime }: Sched
         </Card>
       </TabsContent>
     </Tabs>
-  );
+  )
 }
