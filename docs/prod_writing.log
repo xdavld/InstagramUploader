@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  14 JAN 2025 23:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  14 JAN 2025 23:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1114,24 +1114,22 @@ Package pdftex.def Info: graphics/sprint_3_jira.png  used on input line 47.
 File: graphics/activity_diagram.png Graphic file (type png)
 <use graphics/activity_diagram.png>
 Package pdftex.def Info: graphics/activity_diagram.png  used on input line 87.
-(pdftex.def)             Requested size: 364.20247pt x 443.83482pt.
- [3] [4 <./graphics/activity_diagram.png>]
-<graphics/use_case_diagram.png, id=101, 683.55376pt x 553.06625pt>
+(pdftex.def)             Requested size: 364.20247pt x 409.72308pt.
+ [3 <./graphics/activity_diagram.png>]
+<graphics/use_case_diagram.png, id=97, 683.55376pt x 553.06625pt>
 File: graphics/use_case_diagram.png Graphic file (type png)
 <use graphics/use_case_diagram.png>
 Package pdftex.def Info: graphics/use_case_diagram.png  used on input line 104.
 (pdftex.def)             Requested size: 364.19667pt x 294.67651pt.
- [5
-
- <./graphics/use_case_diagram.png>]
-<graphics/sequence_diagram.png, id=108, 307.1475pt x 302.12875pt>
+ [4 <./graphics/use_case_diagram.png>]
+<graphics/sequence_diagram.png, id=104, 307.1475pt x 302.12875pt>
 File: graphics/sequence_diagram.png Graphic file (type png)
 <use graphics/sequence_diagram.png>
 Package pdftex.def Info: graphics/sequence_diagram.png  used on input line 138.
 (pdftex.def)             Requested size: 227.62206pt x 223.90369pt.
-) (./includes/chapter2.tex [6 <./graphics/sequence_diagram.png>] [7]
+) (./includes/chapter2.tex [5 <./graphics/sequence_diagram.png>] [6]
 chapter 2.
-) [8
+) [7
 
 ] (./includes/erklaerung_ki.tex
 Overfull \hbox (1.558pt too wide) in paragraph at lines 103--103
@@ -1148,11 +1146,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 103--103
 []|\T1/cmr/bx/n/10.95 Eingesetzte(s)
  []
 
-) (./template/_dhbw_erklaerung.tex [9
+) (./template/_dhbw_erklaerung.tex [8
 
 
 
-]) [10
+]) [9
 
 ] (./prod_writing.aux)
  ***********
@@ -1167,9 +1165,9 @@ Package logreq Info: Writing requests to 'prod_writing.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  29158 strings out of 474116
- 579636 string characters out of 5743682
+ 579639 string characters out of 5743682
  1939187 words of memory out of 5000000
- 51096 multiletter control sequences out of 15000+600000
+ 51097 multiletter control sequences out of 15000+600000
  575376 words of font info for 70 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  108i,17n,107p,10983b,2369s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1186,10 +1184,10 @@ pdfTeX warning (dest): name{cite.0@facebook_graph_api} has been referenced but d
 pdfTeX warning (dest): name{cite.0@nextjs_docs} has been referenced but does not exist, replaced by a fixed one
 
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on prod_writing.pdf (15 pages, 506576 bytes).
+Output written on prod_writing.pdf (14 pages, 505932 bytes).
 PDF statistics:
- 221 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
+ 217 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
  77 words of extra memory for PDF output out of 10000 (max. 10000000)
 
