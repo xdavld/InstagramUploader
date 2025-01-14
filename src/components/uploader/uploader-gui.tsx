@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner"; // Importieren Sie die toast-Funktion von Sonner
 
 
 
@@ -6,7 +7,9 @@ import { useUploadFile } from "@/hooks/use-upload-file";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { SchedulerTabs } from "@/components/ui/schedulerTabs";
 import { Separator } from "@/components/ui/separator";
@@ -36,10 +39,10 @@ export function Uploader({ disabled = false }) {
   const [caption, setCaption] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
-  const [status, setStatus] = useState<string>("")
   const [selectedTab, setSelectedTab] = useState<string>("now")
   const [scheduledTime, setScheduledTime] = useState<Date | null>(null)
   const [mediaType, setMediaType] = useState<string>("REELS") // Default mediaType
+  const [isStory, setIsStory] = useState<boolean>(false) // Neuer State
 
   useEffect(() => {
     console.log("Component re-rendered, selectedFile state:", selectedFile)
@@ -50,11 +53,10 @@ export function Uploader({ disabled = false }) {
     if (disabled) return // Prevent publishing in preview mode
 
     if (!selectedFile) {
-      setStatus("No file selected. Please upload and select a file.")
+      toast.error("No file selected. Please upload and select a file.")
       return
     }
     setProgress(0)
-    setStatus("")
 
     const payload: PublishPayload = {
       ...(selectedFile.type.startsWith("video")
@@ -63,10 +65,11 @@ export function Uploader({ disabled = false }) {
       caption: caption || "Default caption",
       selectedTab,
       scheduledTime,
+      isStory,
     }
 
     try {
-      if (selectedTab === "now" || selectedTab === "more") {
+      if (selectedTab === "now") {
         setLoading(true)
         for (let i = 0; i <= 100; i += 20) {
           setProgress(i)
@@ -81,15 +84,17 @@ export function Uploader({ disabled = false }) {
 
         if (!response.ok) {
           const errorData = await response.json()
-          setStatus(`Failed to publish: ${errorData.error}`)
+          toast.error(
+            `Publishing failed: ${errorData.error || "An error occurred."}`
+          )
           return
         }
 
-        setStatus("File published successfully!")
+        toast.success("Datei erfolgreich veröffentlicht!") // Erfolgsmeldung bleibt auf Deutsch
         setProgress(100)
       } else if (selectedTab === "schedule") {
         if (!scheduledTime) {
-          setStatus("Please select a date and time to schedule your post.")
+          toast.error("Please select a date and time to schedule your post.")
           return
         }
 
@@ -97,11 +102,11 @@ export function Uploader({ disabled = false }) {
         const timeDifference = scheduledTime.getTime() - now.getTime()
 
         if (timeDifference < 0) {
-          setStatus("Please select a date and time in the future.")
+          toast.error("Please select a future date and time.")
           return
         }
 
-        setStatus("File scheduled successfully!")
+        toast.success(`Post successfully planned for ${scheduledTime.toLocaleString()}!`) // Erfolgsmeldung bleibt auf Deutsch
 
         const response = await fetch("/api/instagram/upload", {
           method: "POST",
@@ -111,13 +116,15 @@ export function Uploader({ disabled = false }) {
 
         if (!response.ok) {
           const errorData = await response.json()
-          setStatus(`Failed to publish scheduled post: ${errorData.error}`)
+          toast.error(
+            `Scheduling failed: ${errorData.error || "An error occurred."}`
+          )
           return
         }
       }
     } catch (error) {
       console.error("Publishing error:", error)
-      setStatus("An unexpected error occurred while publishing.")
+      toast.error("An unexpected error occurred while publishing.")
     } finally {
       setLoading(false)
       setProgress(100)
@@ -132,7 +139,7 @@ export function Uploader({ disabled = false }) {
   const generateHashtags = async () => {
     if (!selectedFile) {
       console.error("No file selected to generate hashtags!")
-      setStatus("No file selected. Please upload and select a file.")
+      toast.error("No file selected. Please upload and select a file.")
       return
     }
 
@@ -149,9 +156,10 @@ export function Uploader({ disabled = false }) {
 
       const { hashtags } = await response.json()
       setCaption(hashtags || "") // Set generated hashtags as caption
+      toast.success("Die Hashtags wurden erfolgreich generiert.") // Erfolgsmeldung bleibt auf Deutsch
     } catch (error) {
       console.error("Error generating hashtags:", error)
-      setStatus("An error occurred while generating hashtags.")
+      toast.error("An error occurred while generating hashtags.")
     }
   }
 
@@ -223,17 +231,45 @@ export function Uploader({ disabled = false }) {
             value={selectedTab}
             setSelectedTab={setSelectedTab}
             setScheduledTime={setScheduledTime}
-            setMediaType={setMediaType} // Pass the setMediaType function
           />
+          <Card>
+            <CardHeader>
+              <CardTitle>Additional Options</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Limit Number of Posts per Day */}
+              <div className="max-w grid w-full items-center gap-1.5">
+                <Label htmlFor="quantity">Limit Posts per Day</Label>
+                <div className="flex items-center space-x-2">
+                  <Input type="number" id="quantity" defaultValue="0" min="0" />
+                  <Button type="submit">Set Limit</Button>
+                </div>
+              </div>
+              {/* Story Posts */}
+              <div className="flex items-center space-x-4">
+                <Checkbox
+                  id="story"
+                  checked={isStory}
+                  onCheckedChange={(checked) => setIsStory(checked)}
+                />
+                <div>
+                  <Label htmlFor="story">Share as a Story</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Your post will be visible on your profile for 24 hours.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
           <Button
-            className="mt-4 w-full"
+            className="mt-2 mb-4 w-full"
             onClick={handlePublishToInstagram}
             disabled={loading}
           >
             {loading ? "Publishing..." : "Publish to Instagram"}
           </Button>
           {loading && <Progress value={progress} className="mt-2 w-full" />}
-          {status && <p className="mt-2 text-center text-sm">{status}</p>}
+          {/* Entfernen Sie das Status-<p>-Element */}
         </div>
       </SidebarInset>
     </SidebarProvider>
