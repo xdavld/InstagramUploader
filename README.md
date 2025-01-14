@@ -2,7 +2,7 @@
 
 This is a Instagram Uploader uploader built with `shadnc/ui`, and `react-dropzone`. It is bootstrapped with `create-t3-app` and inspired from the template `file-uploader` from Sadman Sakib.
 
-[![File Uploader](./public/images/screenshot.png)](https://uploader.sadmn.com)
+[![File Uploader](./public/images/screenshot.png)](https://software-engineering-project-eight.vercel.app/)
 
 ## Tech Stack
 
