@@ -1,12 +1,10 @@
-// app/login/page.tsx
-
 "use client"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { FaInstagram } from "react-icons/fa"
 
-import { LoadingSpinner } from "@/components/loading-spinner" // Import the spinner
+import { LoadingSpinner } from "@/components/loading-spinner"
 import { LoginForm } from "@/components/login-form"
 
 interface Config {
@@ -17,56 +15,44 @@ interface Config {
 export default function LoginPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [config, setConfig] = useState<Config | null>(null)
-  const [error, setError] = useState<string | null>(null) // State for error messages
+  const [error, setError] = useState<string | null>(null)
   const [instagramProfile, setInstagramProfile] = useState(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true) // Unified loading state
   const router = useRouter()
 
   useEffect(() => {
-    // Check authentication via API
-    fetch("/api/instagram/auth/check-auth")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.isAuthenticated) {
+    const checkAuth = async () => {
+      try {
+        const authRes = await fetch("/api/instagram/auth/check-auth")
+        const authData = await authRes.json()
+
+        if (authData.isAuthenticated) {
           setIsAuthenticated(true)
-          fetch("/api/instagram/profile", {
-              method: "GET",
-              headers: { "Content-Type": "application/json" },
-            })
-            .then((res) => res.json())
-            .then((profileData) => {
-              setInstagramProfile(profileData)
-              console.log(profileData)
-            })
-            .catch((err) => {
-              console.error("Error fetching profile data:", err)
-              setError("Failed to load profile data. Please try again later.")
-            })
-          router.push("/uploader") // Redirect to /uploader
+          const profileRes = await fetch("/api/instagram/profile")
+          const profileData = await profileRes.json()
+          setInstagramProfile(profileData)
+          router.push("/uploader") // Redirect to uploader
         } else {
-          // Fetch configuration from the server
-          fetch("/api/instagram/config") // Ensure this path matches your API route
-            .then((res) => {
-              if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`)
-              }
-              return res.json()
-            })
-            .then((data: Config) => setConfig(data))
-            .catch((err) => {
-              console.error("Error fetching config:", err)
-              setError("Failed to load configuration. Please try again later.")
-            })
+          const configRes = await fetch("/api/instagram/config")
+          if (!configRes.ok) {
+            throw new Error(`Failed to load config: ${configRes.statusText}`)
+          }
+          const configData = await configRes.json()
+          setConfig(configData)
         }
-      })
-      .catch((err) => {
-        console.error("Error checking auth:", err)
-        setError("Authentication check failed. Please try again later.")
-      })
+      } catch (err) {
+        console.error("Error during initialization:", err)
+        setError("Something went wrong. Please try again.")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    checkAuth()
   }, [router])
 
   const handleLogin = () => {
     if (!config) {
-      console.error("Config not loaded yet.")
       setError("Configuration not loaded. Please try again.")
       return
     }
@@ -81,10 +67,12 @@ export default function LoginPage() {
   }
 
   const handlePreview = () => {
-    console.log("Setting preview mode in sessionStorage...")
     sessionStorage.setItem("previewMode", "true")
-    console.log("Redirecting to uploader...")
-    router.push("/uploader") // Redirect to /uploader
+    router.push("/uploader")
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner />
   }
 
   if (error) {
@@ -93,10 +81,6 @@ export default function LoginPage() {
         <p className="text-lg text-red-500">{error}</p>
       </div>
     )
-  }
-
-  if (!config && !instagramProfile) {
-    return <LoadingSpinner /> // Use the LoadingSpinner instead of <p>Loading...</p>
   }
 
   return (
