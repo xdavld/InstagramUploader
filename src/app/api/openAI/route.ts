@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
 import { env } from "@/env";
+import OpenAI from 'openai';
+
+
+
+
 
 // Lade Umgebungsvariablen
 const openAiApiKey = env.OPENAI_API_KEY;
@@ -20,7 +24,10 @@ export async function getSuggestion(imageUrl: string): Promise<string> {
         {
           role: "user",
           content: [
-            { type: "text", text: "Generate only Hastags for this image. Just return the hashtags and nothing else. Make them funny and a bit random. Make sure they are short. Add maximum 3." },
+            {
+              type: "text",
+              text: "Generate an Instagram caption for this image with some matching hashtags. The caption should be engaging, witty, or emotional. Include 3 to 6 hashtags that are relevant, funny, and engaging. But do not include quotation marks.",
+            },
             {
               type: "image_url",
               image_url: {
@@ -30,7 +37,7 @@ export async function getSuggestion(imageUrl: string): Promise<string> {
           ],
         },
       ],
-    });
+    })
 
     const hashtags = response.choices[0]?.message?.content?.trim();
 

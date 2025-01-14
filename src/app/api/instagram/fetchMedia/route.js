@@ -1,5 +1,9 @@
-import { NextRequest, NextResponse } from "next/server"
-import { parse } from "cookie"
+import { NextRequest, NextResponse } from "next/server";
+import { parse } from "cookie";
+
+
+
+
 
 export async function GET(req) {
   try {
@@ -37,8 +41,12 @@ export async function GET(req) {
 
     const mediaList = await mediaResponse.json()
 
-    // Step 2: Fetch details for each media ID
-    const mediaDetailsPromises = mediaList.data.map(async (media) => {
+    // Step 2: Fetch details for each unique media ID
+    const uniqueMedia = Array.from(
+      new Map(mediaList.data.map((media) => [media.id, media])).values()
+    )
+
+    const mediaDetailsPromises = uniqueMedia.map(async (media) => {
       try {
         const mediaDetailsResponse = await fetch(
           `https://graph.instagram.com/v21.0/${media.id}?fields=id,media_type,media_url`,

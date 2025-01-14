@@ -72,7 +72,7 @@ export default function LoginPage() {
   }
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner containerClassName="inset-0" />
   }
 
   if (error) {

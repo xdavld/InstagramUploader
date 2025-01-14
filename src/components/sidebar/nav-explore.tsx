@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { type LucideIcon } from "lucide-react"
+import { useRouter } from "next/navigation";
+import { type LucideIcon } from "lucide-react";
 
 import {
   SidebarGroup,
@@ -10,23 +10,23 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 export function NavExplore({
   items,
 }: {
   items: {
-    name: string
-    url: string
-    icon: LucideIcon
-  }[]
+    name: string;
+    url: string;
+    icon: LucideIcon;
+  }[];
 }) {
-  const { isMobile } = useSidebar()
-  const router = useRouter()
+  const { isMobile } = useSidebar();
+  const router = useRouter();
 
   const handlePage = (url: string) => {
-    router.push(url) // Client-side navigation
-  }
+    router.push(url); // Client-side navigation
+  };
 
   return (
     <SidebarGroup>
@@ -42,5 +42,5 @@ export function NavExplore({
         ))}
       </SidebarMenu>
     </SidebarGroup>
-  )
+  );
 }

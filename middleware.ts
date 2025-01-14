@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
   console.log(`Middleware invoked for path: ${pathname}`)
 
   // Define paths that are public and do not require authentication
-  const publicPaths = ["/login", "/favicon.ico", "/_next/", "/static/"]
+  const publicPaths = ["/login", "/favicon.ico", "/_next/", "/static/", "/public"]
 
   if (previewMode) {
     console.log("Preview mode detected. Allowing access.")

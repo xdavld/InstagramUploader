@@ -14,53 +14,27 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-// Import your InstaClone
 import InstaClone from "@/components/feedview/grid-view"
-import { LoadingSpinner } from "@/components/loading-spinner"
 import { AppSidebar } from "@/components/sidebar/app-sidebar"
 
 export function FeedView() {
   const [profile, setProfile] = useState({
     username: "",
-    profilePictureUrl: "https://avatar.iran.liara.run/public/#49",
+    profilePictureUrl: "/images/dummy_pb.png",
     followersCount: 0,
     followsCount: 0,
     mediaCount: 0,
   })
   const [posts, setPosts] = useState<{ type: string; src: string }[]>([])
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Load profile from sessionStorage
     if (typeof window !== "undefined") {
       const storedProfile = sessionStorage.getItem("profile")
       if (storedProfile) {
-        const parsedProfile = JSON.parse(storedProfile)
-        setProfile(parsedProfile)
+        setProfile(JSON.parse(storedProfile))
       }
     }
-
-    const fetchMedia = async () => {
-      try {
-        const response = await fetch("/api/instagram/fetchMedia")
-        if (!response.ok) {
-          throw new Error("Failed to fetch media data")
-        }
-        const data = await response.json()
-
-        const transformedPosts = data.map((media: any) => ({
-          type: media.media_type.toLowerCase(),
-          src: media.media_url,
-        }))
-
-        setPosts(transformedPosts)
-      } catch (error) {
-        console.error("Failed to fetch media:", error.message)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchMedia()
   }, [])
 
   return (
@@ -82,19 +56,8 @@ export function FeedView() {
           </div>
         </header>
 
-        {/* Pass the isLoading state to InstaClone */}
-        <InstaClone
-          isLoading={isLoading}
-          profilePicture={profile.profilePictureUrl || ""}
-          username={profile.username || ""}
-          postsCount={profile.mediaCount || 0}
-          followersCount={profile.followersCount || 0}
-          followingCount={profile.followsCount || 0}
-          bio={"Feed View Page"}
-          website={""}
-          categories={""}
-          posts={posts}
-        />
+        {/* Pass the posts and setPosts to InstaClone */}
+        <InstaClone profile={profile} posts={posts} setPosts={setPosts} />
       </SidebarInset>
     </SidebarProvider>
   )
