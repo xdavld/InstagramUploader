@@ -48,7 +48,7 @@ export function LoginForm({
         className="flex w-full items-center justify-center"
         onClick={onPreview}
       >
-        <FaEye className="mr-2" />
+      <FaEye className="mr-2" />
         Preview
       </Button>
     </form>

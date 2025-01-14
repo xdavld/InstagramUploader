@@ -1,28 +1,24 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-// Import your InstaClone
-import InstaClone from "@/components/feedview/grid-view"
-import { LoadingSpinner } from "@/components/loading-spinner"
-import { AppSidebar } from "@/components/sidebar/app-sidebar"
+
+
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import InstaClone from "@/components/feedview/grid-view";
+import { AppSidebar } from "@/components/sidebar/app-sidebar";
+
+
+
+
 
 export function FeedView() {
   const [profile, setProfile] = useState({
     username: "",
-    profilePictureUrl: "https://avatar.iran.liara.run/public/#49",
+    profilePictureUrl:
+      "/images/dummy_pb.png",
     followersCount: 0,
     followsCount: 0,
     mediaCount: 0,
@@ -31,6 +27,15 @@ export function FeedView() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Check if in preview mode
+    const isPreviewMode = sessionStorage.getItem("previewMode") === "true"
+    if (isPreviewMode) {
+      console.log("Preview mode detected. Skipping fetch operations.")
+      setIsLoading(false) // Skip loading state
+      return
+    }
+
+    // Fetch profile from sessionStorage
     if (typeof window !== "undefined") {
       const storedProfile = sessionStorage.getItem("profile")
       if (storedProfile) {
@@ -39,6 +44,7 @@ export function FeedView() {
       }
     }
 
+    // Fetch media data
     const fetchMedia = async () => {
       try {
         const response = await fetch("/api/instagram/fetchMedia")
@@ -85,7 +91,7 @@ export function FeedView() {
         {/* Pass the isLoading state to InstaClone */}
         <InstaClone
           isLoading={isLoading}
-          profilePicture={profile.profilePictureUrl || ""}
+          profilePicture={profile.profilePictureUrl || "/images/dummy_pb.png"}
           username={profile.username || ""}
           postsCount={profile.mediaCount || 0}
           followersCount={profile.followersCount || 0}

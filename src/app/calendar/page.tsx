@@ -18,7 +18,6 @@ export default function CalendarPage() {
 
     if (preview) {
       setIsPreviewMode(true)
-      sessionStorage.removeItem("previewMode") // Clear only after detection
       setIsLoading(false)
     } else {
       // Check authentication via API

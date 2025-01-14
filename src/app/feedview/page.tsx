@@ -24,7 +24,6 @@ export default function FeedViewPage() {
 
     if (preview) {
       setIsPreviewMode(true)
-      sessionStorage.removeItem("previewMode") // Clear only after detection
       setIsLoading(false)
     } else {
       fetch("/api/instagram/auth/check-auth")

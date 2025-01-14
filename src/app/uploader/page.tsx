@@ -1,13 +1,11 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { SiteHeader } from "@/components/layouts/site-header";
-import { LoadingSpinner } from "@/components/loading-spinner"; // Import the spinner
-import { Shell } from "@/components/shell"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+
+import { SiteHeader } from "@/components/layouts/site-header"
+import { LoadingSpinner } from "@/components/loading-spinner"
 import { Uploader } from "@/components/uploader/uploader-gui"
-
 
 export default function UploaderPage() {
   const [isPreviewMode, setIsPreviewMode] = useState(false)
@@ -20,8 +18,7 @@ export default function UploaderPage() {
 
     if (preview) {
       setIsPreviewMode(true)
-      sessionStorage.removeItem("previewMode") // Clear only after detection
-      setIsLoading(false)
+      setIsLoading(false) // Mark loading complete
     } else {
       // Check authentication via API
       fetch("/api/instagram/auth/check-auth")
