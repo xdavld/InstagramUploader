@@ -15,9 +15,7 @@ import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { FileUploader } from "@/components/uploader/file-uploader";
 import { PublishPayload, publishToInstagram } from "@/components/uploader/instagramPublish";
 import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card";
-
-
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 
 export function Uploader({ disabled = false }) {
@@ -192,17 +190,24 @@ export function Uploader({ disabled = false }) {
             }}
             data-testid="uploaded-files-card"
           />
-          <div className="flex flex-col">
-            <div className="flex items-center gap-4">
+          <Card>
+            <CardHeader>
+              <CardTitle data-testid="uploaded-files-title">Caption
+              </CardTitle>
+              <CardDescription data-testid="uploaded-files-description">
+                Add a caption
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
               <Textarea
                 type="text"
                 placeholder="Write your caption here..."
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                className="mt-2 w-full"
+                className="w-full"
               />
               <Button
-                className="relative mt-2 w-[200px] rounded-full bg-transparent p-0 text-white"
+                className="relative mt-4 w-[200px] rounded-full bg-transparent p-0 text-white"
                 onClick={generateHashtags}
               >
                 <span className="pointer-events-none absolute inset-0 rounded-full border-[0px] bg-gradient-to-tl from-[#0fd850] via-[#f9f047] to-[#f9f047]"></span>
@@ -210,8 +215,8 @@ export function Uploader({ disabled = false }) {
                   Generate with AI
                 </span>
               </Button>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
           <SchedulerTabs
             value={selectedTab}
             setSelectedTab={setSelectedTab}
