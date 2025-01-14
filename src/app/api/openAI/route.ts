@@ -26,7 +26,7 @@ export async function getSuggestion(imageUrl: string): Promise<string> {
           content: [
             {
               type: "text",
-              text: "Generate an Instagram caption for this image with some matching hashtags. The caption should be engaging, witty, or emotional. Include 3 to 6 hashtags that are relevant, funny, and engaging.",
+              text: "Generate an Instagram caption for this image with some matching hashtags. The caption should be engaging, witty, or emotional. Include 3 to 6 hashtags that are relevant, funny, and engaging. But do not include quotation marks.",
             },
             {
               type: "image_url",

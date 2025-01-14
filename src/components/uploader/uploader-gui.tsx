@@ -5,17 +5,20 @@ import React, { useEffect, useState } from "react";
 import { useUploadFile } from "@/hooks/use-upload-file";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { SchedulerTabs } from "@/components/ui/schedulerTabs";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Textarea } from "@/components/ui/textarea";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { FileUploader } from "@/components/uploader/file-uploader";
-import { PublishPayload, publishToInstagram } from "@/components/uploader/instagramPublish";
+import { PublishPayload } from "@/components/uploader/instagramPublish";
 import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+
+
 
 
 export function Uploader({ disabled = false }) {
@@ -35,7 +38,8 @@ export function Uploader({ disabled = false }) {
   const [progress, setProgress] = useState<number>(0)
   const [status, setStatus] = useState<string>("")
   const [selectedTab, setSelectedTab] = useState<string>("now")
-  const [scheduledTime, setScheduledTime] = useState<Date>()
+  const [scheduledTime, setScheduledTime] = useState<Date | null>(null)
+  const [mediaType, setMediaType] = useState<string>("REELS") // Default mediaType
 
   useEffect(() => {
     console.log("Component re-rendered, selectedFile state:", selectedFile)
@@ -43,83 +47,82 @@ export function Uploader({ disabled = false }) {
   }, [selectedFile, uploadedFiles, isUploading])
 
   const handlePublishToInstagram = async () => {
-    if (disabled) return; // Prevent publishing in preview mode
-  
+    if (disabled) return // Prevent publishing in preview mode
+
     if (!selectedFile) {
-      setStatus("No file selected. Please upload and select a file.");
-      return;
+      setStatus("No file selected. Please upload and select a file.")
+      return
     }
-    setProgress(0);
-    setStatus("");
-  
-    const isVideo = selectedFile.type.startsWith("video");
+    setProgress(0)
+    setStatus("")
+
     const payload: PublishPayload = {
-      ...(isVideo
-        ? { videoUrl: selectedFile.url, mediaType: "REELS" }
-        : { imageUrl: selectedFile.url }),
+      ...(selectedFile.type.startsWith("video")
+        ? { videoUrl: selectedFile.url, mediaType }
+        : { imageUrl: selectedFile.url, mediaType }),
       caption: caption || "Default caption",
       selectedTab,
       scheduledTime,
-    };
-  
+    }
+
     try {
-      if (selectedTab === "now") {
-        setLoading(true);
+      if (selectedTab === "now" || selectedTab === "more") {
+        setLoading(true)
         for (let i = 0; i <= 100; i += 20) {
-          setProgress(i);
-          await new Promise((resolve) => setTimeout(resolve, 300));
-        }
-  
-        const response = await fetch("/api/instagram/upload", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-  
-        if (!response.ok) {
-          const errorData = await response.json();
-          setStatus(`Failed to publish: ${errorData.error}`);
-          return;
-        }
-  
-        setStatus("File published successfully!");
-        setProgress(100);
-      } else if (selectedTab === "schedule") {
-        if (!scheduledTime) {
-          setStatus("Please select a date and time to schedule your post.");
-          return;
-        }
-  
-        const now = new Date();
-        const timeDifference = scheduledTime.getTime() - now.getTime();
-  
-        if (timeDifference < 0) {
-          setStatus("Please select a date and time in the future.");
-          return;
+          setProgress(i)
+          await new Promise((resolve) => setTimeout(resolve, 300))
         }
 
-        setStatus("File scheduled successfully!");
-  
         const response = await fetch("/api/instagram/upload", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        });
-  
+        })
+
         if (!response.ok) {
-          const errorData = await response.json();
-          setStatus(`Failed to publish scheduled post: ${errorData.error}`);
-          return;
+          const errorData = await response.json()
+          setStatus(`Failed to publish: ${errorData.error}`)
+          return
+        }
+
+        setStatus("File published successfully!")
+        setProgress(100)
+      } else if (selectedTab === "schedule") {
+        if (!scheduledTime) {
+          setStatus("Please select a date and time to schedule your post.")
+          return
+        }
+
+        const now = new Date()
+        const timeDifference = scheduledTime.getTime() - now.getTime()
+
+        if (timeDifference < 0) {
+          setStatus("Please select a date and time in the future.")
+          return
+        }
+
+        setStatus("File scheduled successfully!")
+
+        const response = await fetch("/api/instagram/upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          setStatus(`Failed to publish scheduled post: ${errorData.error}`)
+          return
         }
       }
     } catch (error) {
-      console.error("Publishing error:", error);
-      setStatus("An unexpected error occurred while publishing.");
+      console.error("Publishing error:", error)
+      setStatus("An unexpected error occurred while publishing.")
     } finally {
-      setLoading(false);
-      setProgress(100);
+      setLoading(false)
+      setProgress(100)
     }
-  };
+  }
 
   const handleFileClick = (file: { url: string; type: string }) => {
     if (disabled) return // Prevent file selection in preview mode
@@ -192,8 +195,7 @@ export function Uploader({ disabled = false }) {
           />
           <Card>
             <CardHeader>
-              <CardTitle data-testid="uploaded-files-title">Caption
-              </CardTitle>
+              <CardTitle data-testid="uploaded-files-title">Caption</CardTitle>
               <CardDescription data-testid="uploaded-files-description">
                 Add a caption
               </CardDescription>
@@ -221,7 +223,8 @@ export function Uploader({ disabled = false }) {
             value={selectedTab}
             setSelectedTab={setSelectedTab}
             setScheduledTime={setScheduledTime}
-          ></SchedulerTabs>
+            setMediaType={setMediaType} // Pass the setMediaType function
+          />
           <Button
             className="mt-4 w-full"
             onClick={handlePublishToInstagram}
@@ -230,7 +233,6 @@ export function Uploader({ disabled = false }) {
             {loading ? "Publishing..." : "Publish to Instagram"}
           </Button>
           {loading && <Progress value={progress} className="mt-2 w-full" />}
-          {/* Status message */}
           {status && <p className="mt-2 text-center text-sm">{status}</p>}
         </div>
       </SidebarInset>
