@@ -30,19 +30,9 @@ export function Calendar() {
 
         const data = await response.json();
 
-        // Mapping the fetched data to the desired event structure
-        {/*const mappedEvents = data.map((item) => ({
-          id: item.id,
-          title: item.caption || "No Title",
-          type: item.media_type.toLowerCase() || "unknown",
-          description: item.caption || "No Description",
-          date: new Date(item.timestamp),
-          variant: item.media_type.toLowerCase() === "image" ? "primary" : item.media_type.toLowerCase() === "video" ? "warning" : "default",
-        }));*/}
-
         const mappedEvents = data.map((item) => ({
           id: item.id,
-          title: item.media_type || "unknown",
+          title: item.media_url || "unknown",
           description: item.caption || "unknown",
           startDate: new Date(item.timestamp),
           endDate: new Date(item.timestamp),
