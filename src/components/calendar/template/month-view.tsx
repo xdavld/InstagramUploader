@@ -7,6 +7,7 @@ import { Card } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 import { useScheduler } from "@/components/calendar/template/schedular-provider";
 import { useModalContext } from "@/components/calendar/template/modal-provider";
@@ -32,6 +33,11 @@ export function MonthView({
   const { showModal } = useModalContext();
 
   const [currentDate, setCurrentDate] = useState(new Date());
+  const router = useRouter();
+  
+  const handleUploader = () => {
+    router.push("/uploader");
+  };
 
   const daysInMonth = getters.getDaysInMonth(
     currentDate.getMonth(),
@@ -222,9 +228,9 @@ export function MonthView({
                 variants={itemVariants}
               >
                 <Card
-                  isPressable={!!dayEvents?.length}
+                  isPressable
                   className="shadow-md relative flex p-4 border border-default-100 h-full"
-                  onClick={dayEvents?.length > 0 ? () => handleShowMoreEvents(dayEvents) : undefined}
+                  onClick={dayEvents?.length > 0 ? () => handleShowMoreEvents(dayEvents) : () => handleUploader()}
                 >
                   <div
                     className={clsx(

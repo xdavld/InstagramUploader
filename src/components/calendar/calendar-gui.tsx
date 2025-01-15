@@ -11,11 +11,54 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import React, { useEffect, useState } from "react"
 import {SchedulerProvider} from "@/components/calendar/template/schedular-provider"
 import {MonthView} from "@/components/calendar/template/month-view"
 
-
 export function Calendar() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("/api/instagram/fetchMedia"); // Passe die URL entsprechend an
+
+        if (!response.ok) {
+          console.error("Failed to fetch events.", response.statusText);
+          return;
+        }
+
+        const data = await response.json();
+
+        // Mapping the fetched data to the desired event structure
+        {/*const mappedEvents = data.map((item) => ({
+          id: item.id,
+          title: item.caption || "No Title",
+          type: item.media_type.toLowerCase() || "unknown",
+          description: item.caption || "No Description",
+          date: new Date(item.timestamp),
+          variant: item.media_type.toLowerCase() === "image" ? "primary" : item.media_type.toLowerCase() === "video" ? "warning" : "default",
+        }));*/}
+
+        const mappedEvents = data.map((item) => ({
+          id: item.id,
+          title: item.media_type || "unknown",
+          description: item.caption || "unknown",
+          startDate: new Date(item.timestamp),
+          endDate: new Date(item.timestamp),
+          variant: item.media_type.toLowerCase() === "image" ? "primary" : item.media_type.toLowerCase() === "video" ? "warning" : "default",
+        }));
+
+        setEvents(mappedEvents);
+        console.log("Fetched data:", mappedEvents);
+      } catch (error) {
+        console.error("Error fetching events:", error.message);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <SidebarProvider>
       <AppSidebar className="top-14 h-[calc(100vh-14)]"/>
@@ -37,7 +80,7 @@ export function Calendar() {
           </div>
         </header>
         <div className="pt-0 p-4">
-          <SchedulerProvider>
+          <SchedulerProvider initialState={events} weekStartsOn="monday">
             <MonthView></MonthView>
           </SchedulerProvider>
         </div>
