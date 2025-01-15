@@ -14,13 +14,16 @@ import {
 import React, { useEffect, useState } from "react"
 import {SchedulerProvider} from "@/components/calendar/template/schedular-provider"
 import {MonthView} from "@/components/calendar/template/month-view"
+import { LoadingSpinner } from "@/components/loading-spinner"
 
 export function Calendar() {
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
+        setIsLoading(true)
         const response = await fetch("/api/instagram/fetchMedia"); // Passe die URL entsprechend an
 
         if (!response.ok) {
@@ -43,6 +46,8 @@ export function Calendar() {
         console.log("Fetched data:", mappedEvents);
       } catch (error) {
         console.error("Error fetching events:", error.message);
+      } finally {
+        setIsLoading(false)
       }
     };
 
@@ -69,11 +74,18 @@ export function Calendar() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="pt-0 p-4">
-          <SchedulerProvider initialState={events} weekStartsOn="monday">
-            <MonthView></MonthView>
-          </SchedulerProvider>
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <div className="pt-0 p-4">
+            {/* Spinner or Post Grid */}
+                <SchedulerProvider initialState={events} weekStartsOn="monday">
+                  <MonthView></MonthView>
+                </SchedulerProvider>
+          </div>
+        )}
       </SidebarInset>
     </SidebarProvider>
   )
