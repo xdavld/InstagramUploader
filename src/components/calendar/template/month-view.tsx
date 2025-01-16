@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
@@ -21,6 +19,7 @@ export function MonthView({
   nextButton,
   CustomEventComponent,
   CustomEventModal,
+  profile,
   classNames,
 }: {
   prevButton?: React.ReactNode;
@@ -28,13 +27,15 @@ export function MonthView({
   CustomEventComponent?: React.FC<Event>;
   CustomEventModal?: CustomEventModal;
   classNames?: { prev?: string; next?: string; addEvent?: string };
+  profile?: { userName?: string; urlProfile?: string };
 }) {
   const { getters, weekStartsOn } = useScheduler();
   const { showModal } = useModalContext();
-
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [columns, setColumns] = useState(7);
+  const gridRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  
+
   const handleUploader = () => {
     router.push("/uploader");
   };
@@ -93,10 +94,28 @@ export function MonthView({
   function handleShowMoreEvents(dayEvents: Event[]) {
     showModal({
       title: dayEvents && dayEvents[0]?.startDate.toDateString(),
-      body: <ShowMoreEventsModal />,
+      body: <ShowMoreEventsModal profile={profile} />,
       getter: async () => ({ dayEvents }),
     });
   }
+
+  useEffect(() => {
+    function updateColumns() {
+      if (gridRef.current) {
+        const gridWidth = gridRef.current.offsetWidth;
+        const columnWidth = 112;
+        const maxColumns = Math.floor(gridWidth / columnWidth);
+        setColumns(Math.max(1, Math.min(7, maxColumns)));
+      }
+    }
+
+    window.addEventListener("resize", updateColumns);
+    updateColumns(); // Initial calculation
+
+    return () => {
+      window.removeEventListener("resize", updateColumns);
+    };
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -127,7 +146,6 @@ export function MonthView({
   const startOffset =
     (firstDayOfMonth.getDay() - (weekStartsOn === "monday" ? 1 : 0) + 7) % 7;
 
-  // Calculate previous month's last days for placeholders
   const prevMonth = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth() - 1,
@@ -138,6 +156,7 @@ export function MonthView({
     prevMonth.getMonth() + 1,
     0
   ).getDate();
+
   return (
     <div>
       <div className="flex flex-col">
@@ -153,10 +172,12 @@ export function MonthView({
                 isPressable
                 className="shadow-md  relative flex p-4 border border-default-100"
                 onClick={handlePrevMonth}
-                ><div className="flex"><div className="pe-2"><ArrowLeft/></div>Prev</div>
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white tracking-tighter text-lg font-semibold">
-                  </span>
+              >
+                <div className="flex">
+                  <div className="pe-2">
+                    <ArrowLeft />
+                  </div>
+                  Prev
                 </div>
               </Card>
             </motion.div>
@@ -169,7 +190,7 @@ export function MonthView({
             transition={{ duration: 1 }}
             className="text-3xl my-5 tracking-tighter font-bold"
           >
-            {currentDate.toLocaleString("default", { month: "long" })}{" "}
+            {currentDate.toLocaleString("default", { month: "long" })} {" "}
             {currentDate.getFullYear()}
           </motion.div>
           {nextButton ? (
@@ -183,10 +204,11 @@ export function MonthView({
                 isPressable
                 className="shadow-md  relative flex p-4 border border-default-100"
                 onClick={handleNextMonth}
-                ><div className="flex">Next<div className="ps-2"><ArrowRight/></div></div>
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white tracking-tighter text-lg font-semibold">
-                  </span>
+              >
+                <div className="flex">
+                  Next<div className="ps-2">
+                    <ArrowRight />
+                  </div>
                 </div>
               </Card>
             </motion.div>
@@ -195,28 +217,34 @@ export function MonthView({
       </div>
       <AnimatePresence mode="wait">
         <motion.div
+          ref={gridRef}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           key={currentDate.getMonth()}
-          className="grid grid-cols-7 gap-1 sm:gap-2"
+          className={`grid grid-cols-${columns} gap-1 sm:gap-2`}
         >
-          {daysOfWeek.map((day, idx) => (
-            <div
-              key={idx}
-              className="text-left my-8 text-4xl tracking-tighter font-medium"
-            >
-              {day}
-            </div>
-          ))}
 
-          {Array.from({ length: startOffset }).map((_, idx) => (
-            <div key={`offset-${idx}`} className="h-[150px] opacity-50">
-              <div className={clsx("font-semibold relative text-3xl mb-1")}>
-                {lastDateOfPrevMonth - startOffset + idx + 1}
-              </div>
-            </div>
-          ))}
+          {columns === 7 && (
+            <>
+              {daysOfWeek.map((day, idx) => (
+                <div
+                  key={idx}
+                  className="text-left my-8 text-4xl tracking-tighter font-medium"
+                >
+                  {day}
+                </div>
+              ))}
+
+              {Array.from({ length: startOffset }).map((_, idx) => (
+                <div key={`offset-${idx}`} className="h-[150px] opacity-50">
+                  <div className={clsx("font-semibold relative text-3xl mb-1")}>
+                    {lastDateOfPrevMonth - startOffset + idx + 1}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
 
           {daysInMonth.map((dayObj) => {
             const dayEvents = getters.getEventsForDay(dayObj.day, currentDate);
@@ -230,17 +258,19 @@ export function MonthView({
                 <Card
                   isPressable
                   className="shadow-md relative flex p-4 border border-default-100 h-full"
-                  onClick={dayEvents?.length > 0 ? () => handleShowMoreEvents(dayEvents) : () => handleUploader()}
+                  onClick={dayEvents?.length > 0
+                    ? () => handleShowMoreEvents(dayEvents)
+                    : () => handleUploader()}
                 >
                   <div
                     className={clsx(
                       "font-semibold relative text-3xl mb-1",
-                      "text-muted-foreground",
                       new Date().getDate() === dayObj.day &&
                         new Date().getMonth() === currentDate.getMonth() &&
-                        new Date().getFullYear() === currentDate.getFullYear()
+                        new Date().getFullYear() ===
+                          currentDate.getFullYear()
                         ? "text-[#49DB4F]"
-                        : ""
+                        : "text-muted-foreground"
                     )}
                   >
                     {dayObj.day}
@@ -253,6 +283,10 @@ export function MonthView({
                             ...dayEvents[0],
                             CustomEventComponent,
                             minmized: true,
+                          }}
+                          profile={{
+                            userName: profile?.userName,
+                            urlProfile: profile?.urlProfile,
                           }}
                           CustomEventModal={CustomEventModal}
                         />
