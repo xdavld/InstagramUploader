@@ -47,7 +47,7 @@ export async function POST(req) {
       };
       
       const supabaseResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/posts`,
+        `${process.env.NEXT_PUBLIC_APP_URL}api/posts`,
         {
           method: "POST",
           headers: {
@@ -168,7 +168,7 @@ export async function POST(req) {
     const publishData = await publishResponse.json()
     if (selectedTab === "schedule") {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/posts?id=${savedData.id}`,
+        `${process.env.NEXT_PUBLIC_APP_URL}api/posts?id=${savedData.id}`,
         {
           method: "DELETE",
         }
