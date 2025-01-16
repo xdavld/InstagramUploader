@@ -42,7 +42,7 @@ export async function POST(req) {
         is_story: isStory ? "true" : "false",
       };
       
-      const supabaseResponse = await fetch("https://localhost:3000/api/posts", {
+      const supabaseResponse = await fetch("/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export async function POST(req) {
 
     const publishData = await publishResponse.json()
     if (selectedTab === "schedule") {
-      const response = await fetch(`https://localhost:3000/api/posts?id=${savedData.id}`, {
+      const response = await fetch(`/api/posts?id=${savedData.id}`, {
         method: "DELETE",
       });
 
