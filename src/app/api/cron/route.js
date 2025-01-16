@@ -1,9 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-
-
-
+import { NextRequest, NextResponse } from "next/server"
+import { createClient } from "@supabase/supabase-js"
 
 export async function GET() {
   try {
@@ -112,13 +108,13 @@ export async function GET() {
 
         // =========== (D) Mark as published or delete ===========
         // Option 1: Mark as published
-        await supabase.from("posts").update({ published: true }).eq("id", id)
+        // await supabase.from("posts").update({ published: true }).eq("id", id)
 
         // Option 2: Delete from DB (uncomment if you prefer removing the record)
-        // await supabase
-        //   .from("posts")
-        //   .delete()
-        //   .eq("id", id)
+        await supabase
+          .from("posts")
+          .delete()
+          .eq("id", id)
       } catch (err) {
         console.error("Error publishing post (ID: " + post.id + "):", err)
       }
