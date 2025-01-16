@@ -2,7 +2,7 @@ name: Process Scheduled Posts
 
 on:
   schedule:
-    - cron: '*/2 * * * *' # Runs every 2 minutes
+    - cron: '*/5 * * * *'
 
 jobs:
   process_posts:
@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: Trigger Process Scheduled Posts API
         run: |
-          curl -X POST https://software-engineering-project-eight.vercel.app/api/processScheduledPosts
+          curl -X POST https://software-engineering-project-eight.vercel.app/api/instagram/cron
