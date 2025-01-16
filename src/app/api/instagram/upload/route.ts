@@ -159,33 +159,30 @@ export async function POST(req) {
     }
 
     const publishData = await publishResponse.json()
-
-    fetch(`https://localhost:3000/api/posts?id=${savedData.id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((errorData) => {
-            console.error("Failed to delete post:", errorData);
-          });
-        }
-        return response.json();
-      })
-      .then((result) => {
-        if (result) {
-          console.log("Post successfully deleted:", result);
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting post:", error);
+    if (selectedTab === "schedule") {
+      const response = await fetch(`https://localhost:3000/api/posts?id=${savedData.id}`, {
+        method: "DELETE",
       });
 
-    return NextResponse.json(publishData, { status: 200 })
-  } catch (error) {
-    console.error("Internal server error:", error)
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Failed to delete post:", errorData);
+        return NextResponse.json(
+          { error: "Failed to delete post", details: errorData },
+          { status: response.status }
+        );
+      }
+
+      const result = await response.json();
+      console.log("Post successfully deleted:", result);
+    }
+
+    return NextResponse.json(publishData, { status: 200 });
+  } catch (error: any) {
+    console.error("Internal server error:", error);
     return NextResponse.json(
       { error: "Internal server error", details: error.message },
       { status: 500 }
-    )
+    );
   }
 }
