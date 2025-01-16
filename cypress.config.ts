@@ -14,7 +14,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // Use EXACTLY the same key names:
       config.env.INSTAGRAM_ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN
-      config.env.INSTAGRAM_USER_ID = process.env.INSTAGRAM_USER_ID
+      config.env.INSTAGRAM_CLIENT_ID = process.env.INSTAGRAM_CLIENT_ID
 
       return config
     },

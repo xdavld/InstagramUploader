@@ -16,7 +16,7 @@ describe("Upload to Instagram", () => {
       Cypress.env("INSTAGRAM_ACCESS_TOKEN")
     )
 
-    cy.setCookie("instagram_user_id", Cypress.env("INSTAGRAM_USER_ID") || "")
+    cy.setCookie("instagram_user_id", Cypress.env("INSTAGRAM_CLIENT_ID"))
 
     cy.visit("/uploader")
   })
@@ -50,6 +50,8 @@ describe("Upload to Instagram", () => {
 
     // Click the "Publish to Instagram" button
     cy.get("button").contains("Publish to Instagram").click()
+
+    cy.wait(3600)
   })
 
   it("should show an error if the upload fails", () => {
