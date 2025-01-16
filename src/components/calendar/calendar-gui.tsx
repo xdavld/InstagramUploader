@@ -109,7 +109,6 @@ export function Calendar() {
                   ? "warning"
                   : "default",
             }))
-            console.log("Fetched posts:", responseDatabaseRaw);
           }
         } catch (error) {
           console.error("Error fetching posts:", error);
