@@ -38,10 +38,10 @@ export function PreviewPost({ urlProfile, urlPost, caption, userName, type }: Pr
       {/* Content */}
       <CardContent className="p-0">
         {type === "image" ? (
-            <img src={urlPost} alt="Post" className="object-cover aspect-square w-full" />
+            <img src={urlPost} alt="Post" className="object-cover w-full" />
             ) : (
             <video
-                className="object-cover aspect-square"
+                className="object-cover"
                 src={urlPost}
                 controls
                 loop

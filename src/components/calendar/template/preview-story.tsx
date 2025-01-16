@@ -45,7 +45,7 @@ export function PreviewStory({ urlProfile, urlPost, userName }: PreviewPostProps
 
       {/* Content */}
       <CardContent className="p-0 flex-grow flex items-center justify-center">
-        <img src={urlPost} alt="Post" className="object-cover aspect-square w-full"></img>
+        <img src={urlPost} alt="Post" className="object-cover w-full"></img>
       </CardContent>
 
       {/* Footer */}

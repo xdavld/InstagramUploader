@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
 // Supabase-Client initialisieren
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -10,10 +10,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { media_url, media_type, caption, user_id, scheduled_time } = body;
+    const { media_url, media_type, caption, user_id, upload_at, accessToken } = body;
 
     // Validierung der Eingaben
-    if (!media_url || !media_type || !caption || !user_id || !scheduled_time) {
+    if (!media_url || !media_type || !caption || !user_id || !upload_at || !accessToken) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -29,7 +29,8 @@ export async function POST(req) {
           media_type,
           caption,
           user_id,
-          scheduled_time,
+          upload_at,
+          accessToken,
         },
       ]);
 
