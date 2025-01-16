@@ -1,5 +1,9 @@
-import { NextRequest, NextResponse } from "next/server"
-import { parse } from "cookie"
+import { NextRequest, NextResponse } from "next/server";
+import { parse } from "cookie";
+
+
+
+
 
 export async function POST(req) {
   try {
@@ -42,13 +46,16 @@ export async function POST(req) {
         is_story: isStory ? "true" : "false",
       };
       
-      const supabaseResponse = await fetch("/api/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      })
+      const supabaseResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/posts`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      )
 
       console.log(supabaseResponse)
 
@@ -160,9 +167,12 @@ export async function POST(req) {
 
     const publishData = await publishResponse.json()
     if (selectedTab === "schedule") {
-      const response = await fetch(`/api/posts?id=${savedData.id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/posts?id=${savedData.id}`,
+        {
+          method: "DELETE",
+        }
+      )
 
       if (!response.ok) {
         const errorData = await response.json();
