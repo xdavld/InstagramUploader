@@ -6,6 +6,10 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")! // Service Role Key benötigt
 );
 
+console.log("Before")
+console.log(Deno.env.get("SUPABASE_URL"));
+console.log("after")
+
 serve(async () => {
   try {
     // Holen der aktuellen Zeit
