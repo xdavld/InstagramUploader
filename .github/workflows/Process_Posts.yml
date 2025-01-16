@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: Trigger Process Scheduled Posts API
         run: |
-          curl -X POST https://software-engineering-project-eight.vercel.app/api/instagram/cron
+          curl -X GET https://software-engineering-project-eight.vercel.app/api/instagram/cron
