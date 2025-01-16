@@ -1,8 +1,14 @@
-import React from "react" // React for JSX
-import { fireEvent, render, screen, waitFor } from "@testing-library/react" // Testing utilities
-import { toast } from "sonner" // For mocking toast notifications
+import React from "react"; // React for JSX
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"; // Testing utilities
+import { toast } from "sonner"; // For mocking toast notifications
 
-import { FileUploader } from "@/components/uploader/file-uploader" // Your component under test
+
+
+import { FileUploader } from "@/components/uploader/file-uploader"; // Your component under test
+
+
+
+
 
 it("should display an error when uploading a file of unsupported type", async () => {
   // Mock the toast function
@@ -31,7 +37,7 @@ it("should display an error when uploading a file of unsupported type", async ()
   // Wait for the toast.error to be called
   await waitFor(() => {
     expect(toast.error).toHaveBeenCalledWith(
-      `File unsupported-file.txt was rejected`
+      `File unsupported-file.txt was rejected: File type must be one of image/jpeg, .jpg, .jpeg, image/png, .png, image/gif, .gif, video/mp4, .mp4, video/x-matroska, .mkv, video/x-msvideo, .avi`
     )
   })
 

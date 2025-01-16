@@ -1,38 +1,59 @@
+;
+
 // /components/Uploader.js
 
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner"; // Import the toast function from Sonner
 
+
+
 import { useUploadFile } from "@/hooks/use-upload-file";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { SchedulerTabs } from "@/components/ui/schedulerTabs";
 import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Textarea } from "@/components/ui/textarea";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { FileUploader } from "@/components/uploader/file-uploader";
 import { UploadedFilesCard } from "@/components/uploader/uploaded-files-card";
+
+
+
+
+
+;
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Spinner Component
 const Spinner = () => (
@@ -354,24 +375,6 @@ export function Uploader({ disabled = false }) {
             onSelectFile={handleSelectFile}
             data-testid="uploaded-files-card"
           />
-          {/* Display selected file with an option to unselect */}
-          {selectedFile && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Selected File</CardTitle>
-              </CardHeader>
-              <CardContent className="flex items-center justify-between">
-                <span>{selectedFile.url}</span>
-                <Button
-                  type="button"
-                  onClick={handleRemoveFile}
-                  className="text-red-500"
-                >
-                  Unselect
-                </Button>
-              </CardContent>
-            </Card>
-          )}
           <Card>
             <CardHeader>
               <CardTitle data-testid="uploaded-files-title">Caption</CardTitle>
@@ -387,9 +390,10 @@ export function Uploader({ disabled = false }) {
                 onChange={(e) => setCaption(e.target.value)}
                 className="w-full"
                 disabled={isAnimating} // Disable during animation
+                data-testid="caption-input"
               />
               <Button
-                className="relative mt-4 w-[200px] rounded-full bg-transparent p-0 text-white flex items-center justify-center"
+                className="relative mt-4 flex w-[200px] items-center justify-center rounded-full bg-transparent p-0 text-white"
                 onClick={generateHashtags}
                 disabled={
                   isAnimating || !isImageSelected || isGeneratingHashtags
@@ -398,7 +402,8 @@ export function Uploader({ disabled = false }) {
                 <span className="pointer-events-none absolute inset-0 rounded-full border-[0px] bg-gradient-to-tl from-[#0fd850] via-[#f9f047] to-[#f9f047]"></span>
                 <span className="relative flex h-[80%] w-[95%] items-center justify-center rounded-full bg-black hover:bg-[#2F2F31]">
                   Generate with AI
-                  {isGeneratingHashtags && <Spinner />} {/* Conditionally render spinner */}
+                  {isGeneratingHashtags && <Spinner />}{" "}
+                  {/* Conditionally render spinner */}
                 </span>
               </Button>
             </CardContent>
@@ -471,12 +476,10 @@ export function Uploader({ disabled = false }) {
             >
               {loading ? "Publishing..." : "Publish to Instagram"}
             </Button>
-            {loading && (
-              <Progress value={progress} className="mt-2 w-full" />
-            )}
+            {loading && <Progress value={progress} className="mt-2 w-full" />}
           </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
-  );
+  )
 }

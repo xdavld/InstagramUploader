@@ -39,7 +39,7 @@ export function UploadedFilesCard({
       <CardHeader>
         <CardTitle data-testid="uploaded-files-title">Uploaded files</CardTitle>
         <CardDescription data-testid="uploaded-files-description">
-          Select the files here
+          Select a file here, by clicking on it
         </CardDescription>
       </CardHeader>
       <CardContent>
