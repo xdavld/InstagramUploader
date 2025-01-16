@@ -1,10 +1,25 @@
 {
-  "name": "File Uploader",
-  "short_name": "File Uploader",
+  "name": "Instagram File Uploader",
+  "short_name": "Instagram Uploader",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "/favicon.ico",
       "sizes": "32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "50x50",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-150x150.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-500x500.png",
+      "sizes": "500x500",
       "type": "image/png"
     }
   ],
@@ -12,3 +27,4 @@
   "background_color": "#ffffff",
   "display": "standalone"
 }
+
