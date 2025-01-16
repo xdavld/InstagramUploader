@@ -85,7 +85,7 @@ export function Calendar() {
 
         let mappedEventsDatabase;
         try {
-          const response = await fetch(`https://localhost:3000/api/posts?user_id=${dataCookies}`, {
+          const response = await fetch(`/api/posts?user_id=${dataCookies}`, {
             method: "GET",
           });
 
