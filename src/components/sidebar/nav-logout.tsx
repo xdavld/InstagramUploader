@@ -26,14 +26,13 @@ export function NavLogout() {
     if (isPreviewMode) {
       // Clear sessionStorage and redirect to /login
       sessionStorage.removeItem("previewMode")
-      sessionStorage.clear()
       console.log("Exiting preview mode")
       router.push("/login")
     } else {
       try {
         // Call the logout API
         const res = await fetch("/api/instagram/auth/logout", { method: "GET" })
-
+        sessionStorage.removeItem("profile")
         if (res.ok) {
           console.log("Logout successful")
           router.push("/login")
