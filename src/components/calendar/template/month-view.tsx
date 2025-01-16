@@ -170,7 +170,7 @@ export function MonthView({
             >
               <Card
                 isPressable
-                className="shadow-md  relative flex p-4 border border-default-100"
+                className="shadow-md relative flex p-4 border border-default-100"
                 onClick={handlePrevMonth}
               >
                 <div className="flex">
@@ -188,7 +188,7 @@ export function MonthView({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
-            className="text-3xl my-5 tracking-tighter font-bold"
+            className="text-3xl my-5 tracking-tighter font-bold text-center"
           >
             {currentDate.toLocaleString("default", { month: "long" })} {" "}
             {currentDate.getFullYear()}
@@ -269,7 +269,7 @@ export function MonthView({
                         new Date().getMonth() === currentDate.getMonth() &&
                         new Date().getFullYear() ===
                           currentDate.getFullYear()
-                        ? "text-[#49DB4F]"
+                        ? "text-[#016FEF]"
                         : "text-muted-foreground"
                     )}
                   >
