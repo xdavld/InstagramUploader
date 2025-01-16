@@ -27,8 +27,42 @@ export async function POST(req) {
       )
     }
 
+    let savedData 
+
     // Handle scheduled posts
     if (selectedTab === "schedule") {
+
+      const postData = {
+        media_url: imageUrl ? imageUrl : videoUrl,
+        media_type: imageUrl ? "image" : "video",
+        caption: caption,
+        user_id: userId,
+        access_token: accessToken,
+        upload_at: scheduledTime,
+        is_story: isStory ? "true" : "false",
+      };
+      
+      const supabaseResponse = await fetch("https://localhost:3000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      })
+
+      console.log(supabaseResponse)
+
+      if (!supabaseResponse.ok) {
+        const supabaseError = await supabaseResponse.json();
+        console.error("Failed to save data to Supabase:", supabaseError);
+        return NextResponse.json(
+          { error: "Failed to save scheduled post data" },
+          { status: 500 }
+        );
+      }
+
+      savedData = await supabaseResponse.json();
+
       const now = new Date()
       const delay = new Date(scheduledTime).getTime() - now.getTime()
       await new Promise((resolve) => setTimeout(resolve, delay))
@@ -125,6 +159,27 @@ export async function POST(req) {
     }
 
     const publishData = await publishResponse.json()
+
+    fetch(`https://localhost:3000/api/posts?id=${savedData.id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            console.error("Failed to delete post:", errorData);
+          });
+        }
+        return response.json();
+      })
+      .then((result) => {
+        if (result) {
+          console.log("Post successfully deleted:", result);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
+      });
+
     return NextResponse.json(publishData, { status: 200 })
   } catch (error) {
     console.error("Internal server error:", error)

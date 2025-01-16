@@ -15,10 +15,12 @@ import React, { useEffect, useState } from "react";
 import { SchedulerProvider } from "@/components/calendar/template/schedular-provider";
 import { MonthView } from "@/components/calendar/template/month-view";
 import { LoadingSpinner } from "@/components/loading-spinner";
+import { useCookies } from 'react-cookie';
 
 export function Calendar() {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies();
   const [profile, setProfile] = useState({
       userName: "",
       urlProfile: "",
@@ -72,8 +74,49 @@ export function Calendar() {
           variant: "danger",
         }));
 
+        const responseCookies = await fetch("/api/instagram/cookies");
+
+        if (!responseCookies.ok) {
+          console.error("Failed to fetch media.", responseCookies.statusText);
+          return;
+        }
+
+        const dataCookies = await responseCookies.json();
+
+        let mappedEventsDatabase;
+        try {
+          const response = await fetch(`https://localhost:3000/api/posts?user_id=${dataCookies}`, {
+            method: "GET",
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Failed to fetch posts:", errorData);
+          } else {
+            const responseDatabaseRaw = await response.json();
+            mappedEventsDatabase = responseDatabaseRaw.map((item) => ({
+              id: item.id,
+              title: item.media_url || "unknown",
+              description: item.caption || "unknown",
+              startDate: new Date(item.upload_at),
+              endDate: new Date(item.upload_at),
+              variant:
+                item.is_story 
+                  ? "danger" 
+                  : item.media_type.toLowerCase() === "image"
+                  ? "success"
+                  : item.media_type.toLowerCase() === "video"
+                  ? "warning"
+                  : "default",
+            }))
+            console.log("Fetched posts:", responseDatabase);
+          }
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+        }
+
         // Combine Media and Stories
-        const combinedEvents = [...mappedEventsMedia, ...mappedEventsStory];
+        const combinedEvents = [...mappedEventsMedia, ...mappedEventsStory, ...mappedEventsDatabase];
 
         setEvents(combinedEvents);
 

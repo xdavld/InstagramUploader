@@ -3,9 +3,9 @@ import { supabase } from "@/lib/supabase";
 
 export async function handlePost(req: NextRequest) {
   try {
-    const { media_url, media_type, caption, user_id, upload_at, access_token} = await req.json();
+    const { media_url, media_type, caption, user_id, upload_at, access_token, is_story} = await req.json();
 
-    if (!media_url || !media_type || !caption || !user_id || !upload_at || !access_token) {
+    if (!media_url || !media_type || !caption || !user_id || !upload_at || !access_token || !is_story) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -14,7 +14,7 @@ export async function handlePost(req: NextRequest) {
 
     const { data, error } = await supabase
       .from("posts")
-      .insert([{ media_url, media_type, caption, user_id, upload_at, access_token}])
+      .insert([{ media_url, media_type, caption, user_id, upload_at, access_token, is_story}])
       .select();
 
     if (error) {
