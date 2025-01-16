@@ -57,25 +57,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
   },
 icons: {
-    icon: "/icon.png",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
     other: [
       {
-        rel: "apple-touch-icon",
-        url: "/apple-touch-icon.png",
-      },
-      {
         rel: "icon",
         type: "image/png",
-        sizes: "32x32",
-        url: "/favicon-32x32.png",
-      },
-      {
-        rel: "icon",
-        type: "image/png",
-        sizes: "16x16",
-        url: "/favicon-16x16.png",
+        sizes: "50x50",
+        url: "/favicon.png",
       },
     ],
   },
