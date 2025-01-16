@@ -28,7 +28,7 @@ export default function AddEventModal({
   const { onClose, data } = useModalContext();
 
   const [selectedColor, setSelectedColor] = useState<string>(
-    getEventColor(data?.variant || "primary")
+    getEventColor(data?.variant || "success")
   );
 
   const typedData = data as Event;
@@ -48,7 +48,7 @@ export default function AddEventModal({
       description: "",
       startDate: new Date(),
       endDate: new Date(),
-      variant: data?.variant || "primary",
+      variant: data?.variant || "success",
       color: data?.color || "blue",
     },
   });
@@ -61,7 +61,7 @@ export default function AddEventModal({
         description: data.description || "",
         startDate: data.startDate,
         endDate: data.endDate,
-        variant: data.variant || "primary",
+        variant: data.variant || "success",
         color: data.color || "blue",
       });
     }
@@ -76,7 +76,7 @@ export default function AddEventModal({
 
   function getEventColor(variant: Variant) {
     switch (variant) {
-      case "primary":
+      case "success":
         return "blue";
       case "danger":
         return "red";
@@ -92,7 +92,7 @@ export default function AddEventModal({
   function getEventStatus(color: string) {
     switch (color) {
       case "blue":
-        return "primary";
+        return "success";
       case "red":
         return "danger";
       case "green":
@@ -188,7 +188,7 @@ export default function AddEventModal({
             <Button color="danger" variant="light" onPress={onClose}>
               Cancel
             </Button>
-            <Button color="primary" type="submit">
+            <Button color="success" type="submit">
               Save Event
             </Button>
           </ModalFooter>
