@@ -1,10 +1,16 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { LogOut } from "lucide-react"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { LogOut } from "lucide-react";
 
-import { SidebarMenu, SidebarMenuButton } from "@/components/ui/sidebar"
+
+
+import { SidebarMenu, SidebarMenuButton } from "@/components/ui/sidebar";
+
+
+
+
 
 export function NavLogout() {
   const [isPreviewMode, setIsPreviewMode] = useState(false)
@@ -20,6 +26,7 @@ export function NavLogout() {
     if (isPreviewMode) {
       // Clear sessionStorage and redirect to /login
       sessionStorage.removeItem("previewMode")
+      sessionStorage.clear()
       console.log("Exiting preview mode")
       router.push("/login")
     } else {
