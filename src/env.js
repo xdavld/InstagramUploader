@@ -20,8 +20,6 @@ export const env = createEnv({
     OPENAI_API_KEY: z.string().min(1),
     INSTAGRAM_CLIENT_ID: z.string().min(1),
     INSTAGRAM_REDIRECT_URI: z.string().url(),
-    SUPABASE_URL: z.string().url(),
-    SUPABASE_ANON_KEY: z.string().min(1),
   },
 
   /**
@@ -50,8 +48,6 @@ export const env = createEnv({
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     INSTAGRAM_CLIENT_ID: process.env.INSTAGRAM_CLIENT_ID,
     INSTAGRAM_REDIRECT_URI: process.env.INSTAGRAM_REDIRECT_URI,
-    SUPABASE_URL: process.env.SUPABASE_URL,
-    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
   },
   /**
    * Run ⁠ build ⁠ or ⁠ dev ⁠ with ⁠ SKIP_ENV_VALIDATION ⁠ to skip env validation. This is especially
