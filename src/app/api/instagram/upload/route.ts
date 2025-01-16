@@ -1,11 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { parse } from "cookie";
+import { NextRequest, NextResponse } from "next/server"
+import { parse } from "cookie"
 
-
-
-
-
-export async function POST(req) {
+export async function POST(req: NextRequest) {
   try {
     const { imageUrl, videoUrl, caption, isStory, selectedTab, scheduledTime } =
       await req.json()
@@ -31,28 +27,26 @@ export async function POST(req) {
       )
     }
 
-    let savedData 
+    let savedData
 
     // Handle scheduled posts
     if (selectedTab === "schedule") {
-
       const postData = {
-        media_url: imageUrl ? imageUrl : videoUrl,
+        media_url: imageUrl || videoUrl,
         media_type: imageUrl ? "image" : "video",
         caption: caption,
         user_id: userId,
         access_token: accessToken,
         upload_at: scheduledTime,
         is_story: isStory ? "true" : "false",
-      };
-      
+        processed: false, // Add a processed flag
+      }
+
       const supabaseResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL}api/posts`,
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/posts`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(postData),
         }
       )
@@ -60,21 +54,22 @@ export async function POST(req) {
       console.log(supabaseResponse)
 
       if (!supabaseResponse.ok) {
-        const supabaseError = await supabaseResponse.json();
-        console.error("Failed to save data to Supabase:", supabaseError);
+        const supabaseError = await supabaseResponse.json()
+        console.error("Failed to save data to Supabase:", supabaseError)
         return NextResponse.json(
           { error: "Failed to save scheduled post data" },
           { status: 500 }
-        );
+        )
       }
 
-      savedData = await supabaseResponse.json();
-
-      const now = new Date()
-      const delay = new Date(scheduledTime).getTime() - now.getTime()
-      await new Promise((resolve) => setTimeout(resolve, delay))
+      savedData = await supabaseResponse.json()
+      return NextResponse.json(
+        { success: true, data: savedData },
+        { status: 201 }
+      )
     }
 
+    // Handle immediate publishing (existing logic)
     // Prepare the payload dynamically based on input
     let payload = {
       caption,
@@ -83,13 +78,9 @@ export async function POST(req) {
 
     if (videoUrl) {
       payload.video_url = videoUrl
-
-      // Set media type for videos
       payload.media_type = isStory ? "STORIES" : "REELS"
     } else if (imageUrl) {
       payload.image_url = imageUrl
-
-      // No need to set media_type for images unless it's a story
       if (isStory) {
         payload.media_type = "STORIES"
       }
@@ -117,39 +108,6 @@ export async function POST(req) {
     const uploadData = await uploadResponse.json()
     const creationId = uploadData.id
 
-    // Wait for media to be ready
-    const statusUrl = `https://graph.instagram.com/v21.0/${creationId}?fields=status&access_token=${accessToken}`
-    let mediaReady = false
-    const maxAttempts = 10
-    let attempts = 0
-
-    while (!mediaReady && attempts < maxAttempts) {
-      try {
-        const statusResponse = await fetch(statusUrl)
-        if (!statusResponse.ok) throw new Error("Failed to get status")
-
-        const statusData = await statusResponse.json()
-        console.log("Media status:", statusData)
-
-        if (statusData.status?.startsWith("FINISHED")) {
-          mediaReady = true
-        } else {
-          attempts++
-          await new Promise((resolve) => setTimeout(resolve, 10000))
-        }
-      } catch (statusError) {
-        console.error("Error checking media status:", statusError)
-        break
-      }
-    }
-
-    if (!mediaReady) {
-      return NextResponse.json(
-        { error: "Media is not ready after multiple attempts" },
-        { status: 408 }
-      )
-    }
-
     // Publish the media
     const publishResponse = await fetch(
       `https://graph.instagram.com/v21.0/${userId}/media_publish?creation_id=${creationId}&access_token=${accessToken}`,
@@ -166,33 +124,17 @@ export async function POST(req) {
     }
 
     const publishData = await publishResponse.json()
-    if (selectedTab === "schedule") {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL}api/posts?id=${savedData.id}`,
-        {
-          method: "DELETE",
-        }
-      )
+    console.log("Post published:", publishData)
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Failed to delete post:", errorData);
-        return NextResponse.json(
-          { error: "Failed to delete post", details: errorData },
-          { status: response.status }
-        );
-      }
-
-      const result = await response.json();
-      console.log("Post successfully deleted:", result);
-    }
-
-    return NextResponse.json(publishData, { status: 200 });
+    return NextResponse.json(
+      { success: true, data: publishData },
+      { status: 200 }
+    )
   } catch (error: any) {
-    console.error("Internal server error:", error);
+    console.error("Internal server error:", error)
     return NextResponse.json(
       { error: "Internal server error", details: error.message },
       { status: 500 }
-    );
+    )
   }
 }
