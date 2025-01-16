@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "app/api/cron": {
-      "maxDuration": 60 // cron function can run for a maximum of 5 seconds
-    }
-  }
-}
