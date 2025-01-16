@@ -9,12 +9,15 @@ import "cypress-iframe";
 
 describe("Upload to Instagram", () => {
   beforeEach(() => {
+
     // Set authentication cookies using environment variables
     cy.setCookie(
       "instagram_access_token",
       Cypress.env("INSTAGRAM_ACCESS_TOKEN")
     )
-    cy.setCookie("instagram_user_id", Cypress.env("INSTAGRAM_USER_ID"))
+
+    cy.setCookie("instagram_user_id", Cypress.env("INSTAGRAM_USER_ID") || "")
+
     cy.visit("/uploader")
   })
 
