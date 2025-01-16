@@ -256,11 +256,19 @@ export function MonthView({
                 variants={itemVariants}
               >
                 <Card
-                  isPressable
+                  isPressable={
+                    dayEvents?.length > 0 || 
+                    new Date(currentDate.getFullYear(), currentDate.getMonth(), dayObj.day) >= new Date()
+                  }
                   className="shadow-md relative flex p-4 border border-default-100 h-full"
-                  onClick={dayEvents?.length > 0
-                    ? () => handleShowMoreEvents(dayEvents)
-                    : () => handleUploader()}
+                  onClick={
+                    dayEvents?.length > 0 || 
+                    new Date(currentDate.getFullYear(), currentDate.getMonth(), dayObj.day) >= new Date()
+                      ? dayEvents?.length > 0
+                        ? () => handleShowMoreEvents(dayEvents)
+                        : () => handleUploader()
+                      : undefined
+                  }
                 >
                   <div
                     className={clsx(
