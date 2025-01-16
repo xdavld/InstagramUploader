@@ -66,8 +66,8 @@ export default function EventStyled({
         className="min-w-full items-start p-0 flex-grow flex-col flex h-full rounded-md"
       >
         <div className="flex p-0 flex-col flex-grow px-1 rounded-md items-start justify-center w-full h-full">
-          <h1 className="p-0 font-semibold line-clamp-1 text-[1.2vw]">
-            {event?.variant === "primary"
+          <h1 className="p-0 font-semibold line-clamp-1 text-lg">
+            {event?.variant === "success"
               ? "Post"
               : event?.variant === "warning"
               ? "Reel"
@@ -76,7 +76,7 @@ export default function EventStyled({
               : "Unknown Type"}
           </h1>
           <div className="flex justify-between w-full pt-2">
-            <p className="text-sm text-[1.2vw]">{formatDate(event?.startDate)}</p>
+            <p className="text-sm">{formatDate(event?.startDate)}</p>
           </div>
         </div>
       </Chip>
@@ -88,8 +88,8 @@ export default function EventStyled({
       className="w-full"
       style={{
         backgroundColor:
-          event?.variant === "primary"
-            ? "var(--nextui-colors-primary)"
+          event?.variant === "success"
+            ? "var(--nextui-colors-success)"
             : event?.variant === "warning"
             ? "var(--nextui-colors-warning)"
             : event?.variant === "danger"
@@ -98,17 +98,19 @@ export default function EventStyled({
       }}
     >
       <AccordionItem value={event?.id} className="border-b-0">
-      <AccordionTrigger onClick={handleToggle} className="py-1.5">
+      <AccordionTrigger onClick={handleToggle} className="py-1.5 no-underline hover:no-underline">
       <Chip
         variant="flat"
         color={event?.variant}
         classNames={{ content: "p-0 w-full" }}
-        className="min-w-full items-start p-3 flex-grow flex-col flex h-full rounded-md"
+        className="min-w-full items-start p-3 flex-grow flex-col flex h-full rounded-md border border-default-400/60 transition duration-300 
+          hover:bg-opacity-80 hover:before:content-[''] hover:before:absolute hover:before:inset-0 
+          dark:hover:before:bg-white dark:hover:before:opacity-10 hover:before:bg-black hover:before:opacity-30 hover:before:rounded-md"
       >
         <div className="flex items-center justify-between w-full">
           <div className="flex p-0 flex-col flex-grow px-1 rounded-md items-start justify-center h-full">
-            <h1 className="p-0 font-semibold line-clamp-1 text-[1.2vw]">
-              {event?.variant === "primary"
+            <h1 className="p-0 font-semibold line-clamp-1 text-lg">
+              {event?.variant === "success"
                 ? "Post"
                 : event?.variant === "warning"
                 ? "Reel"
@@ -117,7 +119,7 @@ export default function EventStyled({
                 : "Unknown Type"}
             </h1>
             <div className="flex justify-between w-full pt-2">
-              <p className="text-sm text-[1.2vw]">{formatDate(event?.startDate)}</p>
+              <p className="text-sm">{formatDate(event?.startDate)}</p>
             </div>
           </div>
           {/* ChevronDown mit Animation */}
@@ -130,14 +132,14 @@ export default function EventStyled({
       </Chip>
     </AccordionTrigger>
         <AccordionContent className="flex items-center justify-center">
-        {event?.variant === "primary" || event?.variant === "warning" ? (
+        {event?.variant === "success" || event?.variant === "warning" ? (
           <PreviewPost
             urlProfile={profile?.urlProfile || ""}
             urlPost={event?.title || ""}
             caption={event?.description || ""}
             userName={profile?.userName || "Default User"}
             type={
-              event?.variant === "primary"
+              event?.variant === "success"
                 ? "image"
                 : event?.variant === "warning"
                 ? "video"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ interface PreviewPostProps {
 
 export function PreviewStory({ urlProfile, urlPost, userName }: PreviewPostProps) {
   return (
-    <Card className="w-full aspect-[9/16] max-w-sm flex flex-col justify-between">
+    <Card className="w-full aspect-[9/16] max-w-sm flex flex-col justify-between bg-black text-white">
       {/* Header */}
       <CardHeader className="p-4">
         {/* Progress Bar */}
@@ -29,15 +29,15 @@ export function PreviewStory({ urlProfile, urlPost, userName }: PreviewPostProps
               <AvatarImage src={urlProfile} />
               <AvatarFallback></AvatarFallback>
             </Avatar>
-            <span>{userName}</span>
+            <span className="text-white">{userName}</span>
           </div>
           <div className="flex items-center gap-2 ml-auto mt-0">
             <Button variant="ghost" size="icon">
-              <MoreHorizontal className="!w-6 !h-6" />
+              <MoreHorizontal className="!w-6 !h-6 text-white" />
               <span className="sr-only">More options</span>
             </Button>
             <Button variant="ghost" size="icon">
-              <X className="!w-6 !h-6" />
+              <X className="!w-6 !h-6 text-white" />
             </Button>
           </div>
         </div>
@@ -53,13 +53,13 @@ export function PreviewStory({ urlProfile, urlPost, userName }: PreviewPostProps
         <div className="flex items-center gap-2 px-2 w-full">
           <Input
             placeholder="Add a comment..."
-            className="flex-1 bg-transparent focus:ring-0 focus:border-transparent rounded-full"
+            className="flex-1 bg-transparent focus:ring-0 focus:border-transparent rounded-full text-white placeholder-white"
           />
-          <Button variant="ghost" size="icon" className="text-primary">
+          <Button variant="ghost" size="icon" className="text-white">
             <HeartIcon className="!w-6 !h-6" />
             <span className="sr-only">Like</span>
           </Button>
-          <Button variant="ghost" size="icon" className="text-primary">
+          <Button variant="ghost" size="icon" className="text-white">
             <Send className="!w-6 !h-6" />
             <span className="sr-only">Send</span>
           </Button>

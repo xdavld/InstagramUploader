@@ -47,7 +47,7 @@ export function Calendar() {
           endDate: new Date(item.timestamp),
           variant:
             item.media_type.toLowerCase() === "image"
-              ? "primary"
+              ? "success"
               : item.media_type.toLowerCase() === "video"
               ? "warning"
               : "default",
