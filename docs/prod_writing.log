@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  14 JAN 2025 23:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  18 JAN 2025 14:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1095,41 +1095,91 @@ File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 
 ] (./includes/chapter1.tex
 chapter 1.
+) (./includes/chapter2.tex [1
 
-Overfull \hbox (21.64413pt too wide) in paragraph at lines 30--38
- [][] 
+
+
+{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+chapter 2.
+Package acronym Info: Label `acro:UML' newly defined as it shall be overridden
+although it is yet undefined on input line 6.
+
+Overfull \hbox (4.96043pt too wide) in paragraph at lines 16--16
+[]|\T1/cmr/m/n/10.95 Berechtigungsverwaltung| 
  []
 
-<graphics/sprint_3_jira.png, id=55, 1174.3875pt x 407.5225pt>
+
+Underfull \hbox (badness 1152) in paragraph at lines 17--17
+[]|\T1/cmr/m/n/10.95 Hinzufügen von Has-h-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+[]|\T1/cmr/m/n/10.95 Automatische An-pas-
+ []
+
+
+Underfull \hbox (badness 1466) in paragraph at lines 18--18
+[]|\T1/cmr/m/n/10.95 Erinnerung an aus-ste-
+ []
+
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 25.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+<graphics/sprint_3_jira.png, id=91, 1174.3875pt x 407.5225pt>
 File: graphics/sprint_3_jira.png Graphic file (type png)
 <use graphics/sprint_3_jira.png>
-Package pdftex.def Info: graphics/sprint_3_jira.png  used on input line 47.
+Package pdftex.def Info: graphics/sprint_3_jira.png  used on input line 29.
 (pdftex.def)             Requested size: 364.19667pt x 126.37419pt.
-[1
+ [2
 
-
-
-{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [2 <./graphics/sprint_3_jira.png>]
-<graphics/activity_diagram.png, id=90, 767.86874pt x 1927.2pt>
+ <./graphics/sprint_3_jira.png>]
+Package acronym Info: Label `acro:API' newly defined as it shall be overridden
+although it is yet undefined on input line 51.
+ [3]
+<graphics/activity_diagram.png, id=129, 767.86874pt x 1927.2pt>
 File: graphics/activity_diagram.png Graphic file (type png)
 <use graphics/activity_diagram.png>
-Package pdftex.def Info: graphics/activity_diagram.png  used on input line 87.
-(pdftex.def)             Requested size: 364.20247pt x 409.72308pt.
- [3 <./graphics/activity_diagram.png>]
-<graphics/use_case_diagram.png, id=97, 683.55376pt x 553.06625pt>
+Package pdftex.def Info: graphics/activity_diagram.png  used on input line 75.
+(pdftex.def)             Requested size: 364.20247pt x 478.00537pt.
+ [4 <./graphics/activity_diagram.png>]
+<graphics/use_case_diagram.png, id=136, 683.55376pt x 553.06625pt>
 File: graphics/use_case_diagram.png Graphic file (type png)
 <use graphics/use_case_diagram.png>
-Package pdftex.def Info: graphics/use_case_diagram.png  used on input line 104.
+Package pdftex.def Info: graphics/use_case_diagram.png  used on input line 93.
 (pdftex.def)             Requested size: 364.19667pt x 294.67651pt.
- [4 <./graphics/use_case_diagram.png>]
-<graphics/sequence_diagram.png, id=104, 307.1475pt x 302.12875pt>
+ [5
+
+ <./graphics/use_case_diagram.png>]
+<graphics/sequence_diagram.png, id=143, 884.30376pt x 773.89125pt>
 File: graphics/sequence_diagram.png Graphic file (type png)
 <use graphics/sequence_diagram.png>
-Package pdftex.def Info: graphics/sequence_diagram.png  used on input line 138.
-(pdftex.def)             Requested size: 227.62206pt x 223.90369pt.
-) (./includes/chapter2.tex [5 <./graphics/sequence_diagram.png>] [6]
-chapter 2.
-) [7
+Package pdftex.def Info: graphics/sequence_diagram.png  used on input line 127.
+(pdftex.def)             Requested size: 364.19667pt x 318.7263pt.
+ [6] [7 <./graphics/sequence_diagram.png>]
+<graphics/components_diagram.png, id=165, 1117.17375pt x 1368.11125pt>
+File: graphics/components_diagram.png Graphic file (type png)
+<use graphics/components_diagram.png>
+Package pdftex.def Info: graphics/components_diagram.png  used on input line 176.
+(pdftex.def)             Requested size: 364.19667pt x 445.98781pt.
+ [8 <./graphics/components_diagram.png>] [9
+
+]) (./includes/chapter3.tex [10]
+chapter 3.
+[11
+
+]) (./includes/chapter4.tex [12]
+chapter 4.
+) [13
+
+]
+Overfull \hbox (11.77832pt too wide) in paragraph at lines 67--67
+[][]\T1/cmr/bx/n/10.95 Meta Plat-forms, Inc. (2025)\T1/cmr/m/n/10.95 : Fa-ce-book Graph API Do-cu-men-ta-ti-on. \T1/cmr/m/sc/10.95 url\T1/cmr/m/n/10.95 : []$\T1/cmtt/m/n/10.95 https : / / developers .
+ []
+
+[14
+
 
 ] (./includes/erklaerung_ki.tex
 Overfull \hbox (1.558pt too wide) in paragraph at lines 103--103
@@ -1146,11 +1196,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 103--103
 []|\T1/cmr/bx/n/10.95 Eingesetzte(s)
  []
 
-) (./template/_dhbw_erklaerung.tex [8
+) (./template/_dhbw_erklaerung.tex [15
 
 
 
-]) [9
+]) [16
 
 ] (./prod_writing.aux)
  ***********
@@ -1164,30 +1214,18 @@ Package logreq Info: Writing requests to 'prod_writing.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 29158 strings out of 474116
- 579639 string characters out of 5743682
- 1939187 words of memory out of 5000000
- 51097 multiletter control sequences out of 15000+600000
- 575376 words of font info for 70 fonts, out of 8000000 for 9000
+ 29279 strings out of 474116
+ 581881 string characters out of 5743682
+ 1941187 words of memory out of 5000000
+ 51170 multiletter control sequences out of 15000+600000
+ 576679 words of font info for 73 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  108i,17n,107p,10983b,2369s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{cite.0@tailwindcss_v2_docs} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{cite.0@shadcn_ui_docs} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{cite.0@facebook_graph_api} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{cite.0@nextjs_docs} has been referenced but does not exist, replaced by a fixed one
-
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on prod_writing.pdf (14 pages, 505932 bytes).
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on prod_writing.pdf (21 pages, 657515 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 168 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 369 PDF objects out of 1000 (max. 8388607)
+ 303 compressed objects within 4 object streams
+ 73 named destinations out of 1000 (max. 500000)
+ 138 words of extra memory for PDF output out of 10000 (max. 10000000)
 

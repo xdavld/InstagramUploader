@@ -2,7 +2,14 @@
 \contentsline {chapter}{Abkürzungsverzeichnis}{III}{chapter*.1}%
 \contentsline {chapter}{Abbildungsverzeichnis}{IV}{section*.2}%
 \contentsline {chapter}{Tabellenverzeichnis}{V}{section*.3}%
-\contentsline {chapter}{\numberline {1}Zielsetzung und Konzeption}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Zielsetzung}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Konzeption}{1}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Umsetzung}{7}{chapter.2}%
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Konzeption}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Technische Konzeption}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Architektur}{4}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Arbeitspakete und Dokumentation der Beiträge}{11}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Umsetzung}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Beschreibung des Programms}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Beschreibung der verwendeten Services}{13}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Beschreibung der APIs}{13}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Anleitung zum Starten der Anwendung}{13}{section.4.4}%
+\contentsline {chapter}{Literaturverzeichnis}{14}{section*.12}%

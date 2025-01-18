@@ -1,10 +1,7 @@
-\chapter{Zielsetzung und Konzeption}
+\chapter{Einleitung}
 \label{sec:chapter1}
 
-\section{Zielsetzung}
-\label{sec:chapter1-1}
-
-Das Ziel dieses Projekts ist die Entwicklung einer Webanwendung, die das tägliche Posten von Beiträgen auf Instagram automatisiert. Dabei sollen drei verschiedene 
+\textbf{Zielsetzung}\quad Das Ziel dieses Projekts ist die Entwicklung einer Webanwendung, die das tägliche Posten von Beiträgen auf Instagram automatisiert. Dabei sollen drei verschiedene 
 Beitragstypen unterstützt werden:
 
 \begin{itemize}
@@ -16,133 +13,7 @@ Beitragstypen unterstützt werden:
 Jeder Beitrag soll mit passenden Hashtags versehen werden, um die Sichtbarkeit in sozialen Netzwerken zu erhöhen. Die Automatisierung soll über eine Weboberfläche 
 gesteuert werden, sodass Nutzer die Beiträge zentral verwalten und planen können.
 
-\section{Konzeption}
-\label{sec:chapter1-2}
-
-Um die Zielsetzung zu erreichen, sind verschiedene Funktionalitäten erforderlich. Diese werden als Anforderungen definiert und in drei Kategorien unterteilt: 
-\textbf{MUSS}, \textbf{SOLL} und \textbf{KANN}. Dadurch wird eine klare Priorisierung der Anforderungen ermöglicht. Zur Planung kommen Jira und verschiedene 
-UML-Diagramme zum Einsatz. Die Anforderungen werden in Jira als Stories erfasst und einer Kategorie zugeordnet. Im Laufe der Entwicklung werden die Stories den 
-jeweiligen Sprints zugewiesen. Diese Zuweisung erfolgt im wöchentlichen Rhythmus, um flexibel auf unerwartete Herausforderungen oder Hindernisse reagieren zu können.
-
-\begin{table}[htb]
-    \centering
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabular}{|c|c|c|}
-        \hline
-        \multicolumn{3}{|c|}{\textbf{Anforderung}} \\ \hline
-        \textbf{MUSS} & \textbf{SOLL} & \textbf{KANN} \\ \hline
-        Bild/Video hochladen & Instagram-Login & Berechtigungsverwaltung \\ \hline
-        Hinzufügen von Hashtags & Planung der Veröffentlichung & Automatische Anpassung von Medien \\ \hline
-        Hinzufügen von Text & Responsive Design & Erinnerung an ausstehende Beiträge \\ \hline
-    \end{tabular}
-    \caption{Kategoriesierung der Anforderungen}
-    \label{tab:tab-1}
-\end{table}
-
-\hyperref[tab:tab-1]{Tabelle 1} zeigt wie die Anforderungen in Kategorien unterteilt werden. Es handelt sich hierbei um besonders relevante Anforderungen aus
-allen drei Kategorien. Eine vollständige Liste der Anforderung kann in Jira eingesehen werden.
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=0.8\textwidth]{graphics/sprint_3_jira.png}
-    \caption{Sprint 3}
-    \label{fig:fig-1}
-\end{figure}
-
-In \hyperref[fig:fig-1]{Abbildung 1} ist eine Übersicht von Sprint 3 zu sehen. Die Anzahl der Stories pro Sprint variiert je nach Komplexität und Umfang.
-Die Entscheidung wie viele Stories in einen Sprint aufgenommen werden, wird im Team getroffen. Dabei wird darauf geachtet, dass die Stories in einem Sprint
-realistisch umsetzbar und die Storypoints von Sprint zu Sprint annähernd gleich sind. Wird eine Storie in einem Sprint nicht fertiggestellt, wird sie in
-den nächsten Sprint übernommen.
-
-Die Definition der Anforderungen und die Planung der Sprints in Jira sind wesentliche Bestandteile des Projekts. Sie gewährleisten einen klaren Überblick über die 
-Anforderungen und den Fortschritt während des gesamten Entwicklungsprozesses. Im Folgenden wird die technische Konzeption dargelegt.
-
-\textbf{Technische Konzeption}\quad Im Rahmen der Entwicklung der Webanwendung wurden verschiedene Frameworks und Tools eingesetzt, um eine effiziente, flexible und 
-skalierbare Lösung zu gewährleisten. Diese werden nachfolgend erläutert.
-
-\textbf{Next.js}\footnote{Vgl. \cite{nextjs_docs}} wurde als zentrales Framework für die Entwicklung der Webanwendung verwendet. Es bietet leistungsstarke Funktionen wie Server-Side Rendering (SSR) 
-und eine hohe Performance, wodurch die Ladezeiten optimiert werden. Zudem ermöglicht die Flexibilität von Next.js eine reibungslose Integration weiterer Technologien.
-
-Für die Automatisierung der Instagram-Beiträge wird die offizielle API von \textbf{Meta}\footnote{Vgl. \cite{facebook_graph_api}} genutzt. Diese erlaubt den Zugriff auf Beitragsdaten sowie die Planung von 
-Posts, was die zentrale Funktion der Anwendung unterstützt.
-
-Zur Implementierung einer modernen und modularen Benutzeroberfläche wurde \textbf{shadcn/ui}\footnote{Vgl. \cite{shadcn_ui_docs}} eingesetzt. Dieses UI-Framework zeichnet sich durch modulare Komponenten 
-aus, die einfach erweiterbar sind. Zudem profitiert das Projekt von einer aktiven Community-Driven-Entwicklung, die regelmäßige Updates und Verbesserungen ermöglicht.
-
-Für das Styling der Anwendung wurde \textbf{Tailwind CSS}\footnote{Vgl. \cite{tailwindcss_v2_docs}} verwendet. Der Utility-First-Ansatz erlaubt eine schnelle und konsistente Gestaltung der Benutzeroberfläche. Dank 
-Responsive Design passt sich die Anwendung an verschiedene Bildschirmgrößen an. Zudem steigert Tailwind die Produktivität, da wiederverwendbare Klassen eine 
-effiziente Entwicklung ermöglichen.
-
-Zur sicheren und skalierbaren Verwaltung von Medieninhalten wurde \textbf{uploadthing} integriert. Dieses Tool bietet eine hohe Sicherheit für den Datei-Upload, eine 
-nahtlose Next.js-Integration und eine gute Skalierbarkeit, um den wachsenden Anforderungen der Anwendung gerecht zu werden.
-
-Diese beschriebenen Technologien bilden das Fundament der Webanwendung. Im nächsten Abschnitt wird die verwendete Architektur näher betrachtet.
-
-\textbf{Architektur}\quad Um eine durchdachte und strukturierte Architektur zu gewährleisten, wurden zunächst verschiedene UML-Diagramme erstellt. Diese dienen als 
-Grundlage für die Implementierung und ermöglichen eine klare Strukturierung, aus der die einzelnen Komponenten der Anwendung abgeleitet werden können. Durch die 
-Zusammenführung dieser Komponenten entsteht die Gesamtarchitektur der Anwendung.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth, height=0.6\textheight]{graphics/activity_diagram.png}
-    \caption{Aktivitätsdiagramm}
-    \label{fig:fig-2}
-\end{figure}
-
-In \hyperref[fig:fig-2]{Abbildung 2} ist das \textbf{Aktivitätsdiagramm} dargestellt, das den typischen Ablauf der Benutzerinteraktion mit der Webanwendung zur 
-automatisierten Veröffentlichung von Instagram-Beiträgen veranschaulicht. Es zeigt die einzelnen Schritte von der Anmeldung bis zur Veröffentlichung eines Beitrags 
-und der anschließenden Abmeldung des Nutzers. Der Prozess beginnt mit einem bereits registrierten Nutzer, der sich in die Anwendung einloggt. Anschließend erfolgt 
-eine Überprüfung der Eingabedaten. Falls diese nicht korrekt sind, wird der Nutzer zur erneuten Eingabe aufgefordert. Andernfalls erfolgt die erfolgreiche Anmeldung, 
-und der Nutzer gelangt zur Hauptfunktionalität der Anwendung. Nach der Anmeldung kann der Nutzer eine Datei auswählen und diese anschließend hochladen. Dieser Schritt 
-kann sich wiederholen, falls der Nutzer mehrere Dateien hochladen möchte. Anschließend wird eine Beschreibung hinzugefügt, um den Beitrag zu vervollständigen. Danach 
-erfolgt die Planung der Veröffentlichung, bei der der Nutzer den gewünschten Veröffentlichungszeitpunkt festlegt. Sobald die Planung abgeschlossen ist, wird die 
-Medienveröffentlichung durchgeführt. Abschließend meldet sich der Nutzer von der Anwendung ab, womit der Ablauf endet. Das Diagramm bietet eine strukturierte 
-Darstellung der Benutzerinteraktion und stellt alle relevanten Schritte für eine erfolgreiche Beitragserstellung dar.
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=0.8\textwidth]{graphics/use_case_diagram.png}
-    \caption{Use Case Diagramm}
-    \label{fig:fig-3}
-\end{figure}
-
-\hyperref[fig:fig-3]{Abbildung 3} stellt das \textbf{Use Case Diagramm} dar, das die wesentlichen Use Cases der Webanwendung beschreibt. Es zeigt die Interaktionen 
-des Nutzers mit dem System und verdeutlicht die Beziehungen zwischen den einzelnen Anwendungsfällen. Der Nutzer kann sich zunächst über die Instagram-Anmeldung in 
-die Anwendung einloggen.
-
-Nach erfolgreicher Anmeldung stehen ihm mehrere Hauptfunktionen zur Verfügung:
-\begin{itemize}
-    \item Bild hochladen
-    \item Video hochladen
-    \item Uploadverlauf einsehen
-    \item Instagram-Abmeldung
-\end{itemize}
-
-Die beiden Anwendungsfälle Bild hochladen und Video hochladen beinhalten jeweils optionale Erweiterungen (\textit{<<extend>>}):
-\begin{itemize}
-    \item Terminierung festlegen: Der Nutzer kann den Zeitpunkt der Veröffentlichung bestimmen.
-    \item Beschreibung und Hashtags setzen: Zusätzlich kann er eine Bildbeschreibung und relevante Hashtags hinzufügen.
-\end{itemize}
-
-Zudem gibt es \textit{<<include>>}-Beziehungen, die darauf hinweisen, dass bestimmte Aktionen zwingend erforderlich sind:
-\begin{itemize}
-    \item Bild hochladen und Video hochladen beinhalten jeweils das Auswählen einer Datei (Bild oder Video), bevor der Upload erfolgen kann.
-    \item Uploadverlauf einsehen ist ein separater Use Case, der dem Nutzer ermöglicht, eine Übersicht über bereits hochgeladene Inhalte zu erhalten.
-\end{itemize}
-
-Das Diagramm visualisiert die Modularität und Erweiterbarkeit der Anwendung, indem es optionale (\textit{<<extend>>}) und zwingend notwendige (\textit{<<include>>}) 
-Abhängigkeiten zwischen den Use Cases darstellt. Dadurch wird eine strukturierte und skalierbare Architektur unterstützt.
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=0.5\textwidth]{graphics/sequence_diagram.png}
-    \caption{Sequenzdiagramm}
-    \label{fig:fig-4}
-\end{figure}
-
-In \hyperref[fig:fig-4]{Abbildung 4} ist das \textbf{Sequenzdiagramm} dargestellt, das die Interaktion zwischen zwei Objekten im System beschreibt. Es zeigt den Ablauf einer 
-synchronen Kommunikation zwischen den Objekten, einschließlich Nachrichtenfluss, Rückgabewerten und Lebenslinien. Der Prozess beginnt mit einer Dispatch-Nachricht, 
-die von einem Objekt an ein zweites Objekt gesendet wird. Nach dem Empfang der Nachricht verarbeitet das zweite Objekt die Anfrage und sendet eine Callback-Nachricht 
-an das erste Objekt zurück. Anschließend werden zwei Rückgabenachrichten (Return) ausgetauscht, um die Kommunikation abzuschließen. Die vertikalen gestrichelten 
-Linien (Lebenslinien) zeigen die Existenzdauer der Objekte während der Interaktion. Die horizontalen Pfeile repräsentieren den Nachrichtenfluss zwischen den Objekten, 
-wobei durchgezogene Pfeile direkte Methodenaufrufe und gestrichelte Pfeile Rückgaben oder asynchrone Antworten darstellen.
+\textbf{Aufbau der Arbeit}\quad Die Arbeit gliedert sich in die folgenden Teile. \hyperref[sec:chapter1]{Kapitel 1} beschreibt die Zielsetzung des Projekts und legt den Grundstein für diese Arbeit.
+In \hyperref[sec:chapter2]{Kapitel 2} wird die Konzeption erläutert, die das Fundament für die Entwicklung der Webanwendung bildet. \hyperref[sec:chapter3]{Kapitel 3} zeigt die Arbeitspakete 
+auf und gibt eine Übersicht über die Beiträge der einzelnen Gruppenmitglieder. In \hyperref[sec:chapter4]{Kapitel 4} wird die Umsetzung detailliert beschrieben und eine Anleitung zum Starten der
+Anwendung gegeben.
