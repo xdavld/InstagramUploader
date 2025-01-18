@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'prod_writing.blg'
+[69] biber-darwin:340> INFO - === Tue Jan 14, 2025, 23:58:01
+[84] Biber.pm:418> INFO - Reading 'prod_writing.bcf'
+[170] Biber.pm:972> INFO - Found 4 citekeys in bib section 0
+[184] Biber.pm:4383> INFO - Processing section 0
+[194] Biber.pm:4574> INFO - Looking for bibtex file 'includes/literature-database.bib' for section 0
+[195] bibtex.pm:1713> INFO - LaTeX decoding ...
+[198] bibtex.pm:1518> INFO - Found BibTeX data source 'includes/literature-database.bib'
+[240] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[240] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[240] Biber.pm:4203> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'de-DE'
+[240] Biber.pm:4209> INFO - No sort tailoring available for locale 'de-DE'
+[249] bbl.pm:654> INFO - Writing 'prod_writing.bbl' with encoding 'UTF-8'
+[250] bbl.pm:757> INFO - Output to prod_writing.bbl

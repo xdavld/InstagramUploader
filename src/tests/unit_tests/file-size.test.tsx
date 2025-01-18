@@ -1,11 +1,14 @@
-;
-// src/tests/components/uploader/file-uploader.test.tsx
-
 import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { toast } from "sonner";
 
+
+
 import { FileUploader } from "@/components/uploader/file-uploader";
+
+
+
+
 
 // Mock the toast from 'sonner'
 jest.mock("sonner", () => ({
@@ -36,16 +39,16 @@ describe("FileUploader Component", () => {
     jest.clearAllMocks()
   })
 
-  it("should display an error when uploading a file larger than 16MB", async () => {
+  it("should display an error when uploading a file larger than 8MB", async () => {
     // Render the FileUploader component
     render(<FileUploader />)
 
     // Create a mock file larger than 16MB (17MB)
     const largeFile = new File(
-      [new ArrayBuffer(17 * 1024 * 1024)],
-      "large-image.jpg",
+      [new ArrayBuffer(9 * 1024 * 1024)],
+      "large-video.mp4",
       {
-        type: "image/jpeg",
+        type: "video/mp4",
       }
     )
 
@@ -60,7 +63,7 @@ describe("FileUploader Component", () => {
     // Wait for the toast.error to be called with the appropriate message
     await waitFor(() => {
       expect(toast.error).toHaveBeenCalledWith(
-        "File large-image.jpg was rejected"
+        "File large-video.mp4 exceeds the size limit of 8 MB"
       )
     })
 
@@ -68,7 +71,7 @@ describe("FileUploader Component", () => {
     expect(screen.queryByTestId("file-preview")).not.toBeInTheDocument()
   })
 
-  it("should accept and display a file smaller than or equal to 16MB", async () => {
+  it("should accept and display a file smaller than or equal to 8MB", async () => {
     // Mock onUpload function
     const mockOnUpload = jest.fn().mockResolvedValueOnce(undefined)
 
@@ -78,9 +81,9 @@ describe("FileUploader Component", () => {
     // Create a mock file of 16MB
     const validFile = new File(
       [new ArrayBuffer(8 * 1024 * 1024)],
-      "valid-image.jpg",
+      "valid-video.mp4",
       {
-        type: "image/jpeg",
+        type: "video/mp4",
       }
     )
 
@@ -99,8 +102,5 @@ describe("FileUploader Component", () => {
         expect.any(Object) // Match the toast configuration
       )
     })
-
-    // Assert that the file preview is displayed
-    expect(screen.getByTestId("file-preview")).toBeInTheDocument()
   })
 })

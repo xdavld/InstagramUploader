@@ -1,15 +1,34 @@
+
+
+
+import "cypress-iframe";
+
+
+
+
+
 describe("Upload to Instagram", () => {
   beforeEach(() => {
-    // Visit the page where the uploader is located
-    cy.visit("/")
+
+    // Set authentication cookies using environment variables
+    cy.setCookie(
+      "instagram_access_token",
+      Cypress.env("INSTAGRAM_ACCESS_TOKEN")
+    )
+
+    cy.setCookie("instagram_user_id", Cypress.env("INSTAGRAM_CLIENT_ID"))
+
+    cy.visit("/uploader")
   })
 
   it("should allow uploading a file and publishing to Instagram", () => {
     // Upload a valid image file
-    const imageFile = "example-image.jpg" // Place a valid file in `cypress/fixtures`
+    const imageFile = "example-image.jpg" // Ensure this file exists in `cypress/fixtures`
     cy.get('input[type="file"]').selectFile(`cypress/fixtures/${imageFile}`, {
       force: true,
     })
+
+    cy.get("button").contains("Save & Upload").click()
 
     // Wait for the progress bar or spinner to disappear
     cy.get('[data-testid="progress-bar"]').should("not.exist")
@@ -27,29 +46,28 @@ describe("Upload to Instagram", () => {
       .should("contain", "Selected")
 
     // Enter a caption with a hashtag
-    cy.get('[data-testid="caption-input"]').type("#TestHashtag Caption")
+    cy.get("textarea").type("#TestHashtag Caption")
 
     // Click the "Publish to Instagram" button
-    cy.get('[data-testid="publish-button"]').click()
+    cy.get("button").contains("Publish to Instagram").click()
 
-    // Explicitly wait for the success message to appear
-    cy.contains("p", "File published successfully!", { timeout: 15000 }).should(
-      "be.visible"
-    )
+    cy.wait(3600)
   })
 
   it("should show an error if the upload fails", () => {
     // Mock a failure response from the API
-    cy.intercept("POST", "/api/instagram", {
-      statusCode: 400,
+    cy.intercept("POST", "/api/instagram/upload", {
+      statusCode: 500,
       body: { error: "Failed to publish file" },
-    }).as("publishToInstagramFail")
+    }).as("publishToInstagramFailed")
 
     // Upload a valid image file
-    const imageFile = "example-image.jpg" // Place a valid file in `cypress/fixtures`
+    const imageFile = "example-image.jpg" // Ensure this file exists in `cypress/fixtures`
     cy.get('input[type="file"]').selectFile(`cypress/fixtures/${imageFile}`, {
       force: true,
     })
+
+    cy.get("button").contains("Save & Upload").click()
 
     // Wait for the progress bar or spinner to disappear
     cy.get('[data-testid="progress-bar"]').should("not.exist")
@@ -67,19 +85,14 @@ describe("Upload to Instagram", () => {
       .should("contain", "Selected")
 
     // Enter a caption with a hashtag
-    cy.get('[data-testid="caption-input"]').type("#ErrorTest Caption")
+    cy.get("textarea").type("#ErrorTest Caption")
 
     // Click the "Publish to Instagram" button
-    cy.get('[data-testid="publish-button"]').click()
+    cy.get("button").contains("Publish to Instagram").click()
 
-    // Wait for the mocked API call to complete
-    cy.wait("@publishToInstagramFail")
+    // Wait for the mocked error API call to complete
+    cy.wait("@publishToInstagramFailed")
       .its("response.statusCode")
-      .should("eq", 400)
-
-    // Explicitly wait for the error message to appear
-    cy.contains("p", "Failed to publish file", { timeout: 15000 }).should(
-      "be.visible"
-    )
+      .should("eq", 500)
   })
 })

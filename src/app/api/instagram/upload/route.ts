@@ -27,14 +27,47 @@ export async function POST(req) {
       )
     }
 
-    // Handle scheduled posts
+    // If user wants to schedule a post, just save it in DB and return.
     if (selectedTab === "schedule") {
-      const now = new Date()
-      const delay = new Date(scheduledTime).getTime() - now.getTime()
-      await new Promise((resolve) => setTimeout(resolve, delay))
+      const postData = {
+        media_url: imageUrl || videoUrl,
+        media_type: imageUrl ? "image" : "video",
+        caption,
+        user_id: userId,
+        access_token: accessToken,
+        upload_at: scheduledTime, // When to actually post
+        is_story: isStory ? "true" : "false",
+      }
+
+      // Save the scheduled post to the DB (via your existing /api/posts route)
+      const supabaseResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}api/posts`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(postData),
+        }
+      )
+
+      if (!supabaseResponse.ok) {
+        const supabaseError = await supabaseResponse.json()
+        console.error("Failed to save data to Supabase:", supabaseError)
+        return NextResponse.json(
+          { error: "Failed to save scheduled post data" },
+          { status: 500 }
+        )
+      }
+
+      const savedData = await supabaseResponse.json()
+
+      // Return a simple JSON response
+      return NextResponse.json(
+        { message: "Post scheduled successfully", savedData },
+        { status: 200 }
+      )
     }
 
-    // Prepare the payload dynamically based on input
+    // Otherwise (if user is posting right now), run the actual upload/publish steps:
     let payload = {
       caption,
       access_token: accessToken,
@@ -42,28 +75,23 @@ export async function POST(req) {
 
     if (videoUrl) {
       payload.video_url = videoUrl
-
-      // Set media type for videos
       payload.media_type = isStory ? "STORIES" : "REELS"
     } else if (imageUrl) {
       payload.image_url = imageUrl
-
-      // No need to set media_type for images unless it's a story
       if (isStory) {
         payload.media_type = "STORIES"
       }
     }
 
-    // Upload media
+    // 1. Upload media
     const uploadResponse = await fetch(
       `https://graph.instagram.com/v21.0/${userId}/media`,
       {
         method: "POST",
-        body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       }
     )
-
     if (!uploadResponse.ok) {
       const errorData = await uploadResponse.json()
       console.error("Upload failed:", errorData)
@@ -76,29 +104,23 @@ export async function POST(req) {
     const uploadData = await uploadResponse.json()
     const creationId = uploadData.id
 
-    // Wait for media to be ready
+    // 2. Wait for media to be ready
     const statusUrl = `https://graph.instagram.com/v21.0/${creationId}?fields=status&access_token=${accessToken}`
     let mediaReady = false
     const maxAttempts = 10
     let attempts = 0
 
     while (!mediaReady && attempts < maxAttempts) {
-      try {
-        const statusResponse = await fetch(statusUrl)
-        if (!statusResponse.ok) throw new Error("Failed to get status")
+      const statusResponse = await fetch(statusUrl)
+      if (!statusResponse.ok) throw new Error("Failed to get status")
 
-        const statusData = await statusResponse.json()
-        console.log("Media status:", statusData)
-
-        if (statusData.status?.startsWith("FINISHED")) {
-          mediaReady = true
-        } else {
-          attempts++
-          await new Promise((resolve) => setTimeout(resolve, 10000))
-        }
-      } catch (statusError) {
-        console.error("Error checking media status:", statusError)
-        break
+      const statusData = await statusResponse.json()
+      console.log("Media status:", statusData)
+      if (statusData.status?.startsWith("FINISHED")) {
+        mediaReady = true
+      } else {
+        attempts++
+        await new Promise((resolve) => setTimeout(resolve, 10000)) // 10s
       }
     }
 
@@ -109,12 +131,11 @@ export async function POST(req) {
       )
     }
 
-    // Publish the media
+    // 3. Publish the media
     const publishResponse = await fetch(
       `https://graph.instagram.com/v21.0/${userId}/media_publish?creation_id=${creationId}&access_token=${accessToken}`,
       { method: "POST" }
     )
-
     if (!publishResponse.ok) {
       const publishData = await publishResponse.json()
       console.error("Publish failed:", publishData)

@@ -1,9 +1,15 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { SidebarMenu } from "@/components/ui/sidebar"
+
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SidebarMenu } from "@/components/ui/sidebar";
+
+
+
+
 
 export function NavProfile() {
   const [profile, setProfile] = useState({
@@ -18,6 +24,23 @@ export function NavProfile() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const isPreviewMode = sessionStorage.getItem("previewMode") === "true"
+
+      if (isPreviewMode) {
+        const newProfile = {
+          username: "username",
+          profilePictureUrl: "", // Empty string to trigger AvatarFallback
+          followersCount: 0,
+          followsCount: 0,
+          mediaCount: 0,
+        }
+
+        setProfile(newProfile)
+        
+        setLoading(false) // Ensure loading is set to false
+        return // Skip fetching profile in preview mode
+      }
+
       // Check sessionStorage on client side
       const storedProfile = sessionStorage.getItem("profile")
       if (storedProfile) {
@@ -66,7 +89,7 @@ export function NavProfile() {
     return (
       <SidebarMenu className="flex items-center justify-center">
         <Avatar className="relative top-3 h-[7rem] w-[7rem]">
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback />
         </Avatar>
         <div className="relative top-4 pb-4 text-transparent">username</div>
       </SidebarMenu>
@@ -90,8 +113,11 @@ export function NavProfile() {
           <AvatarFallback>Profile</AvatarFallback>
         )}
       </Avatar>
-      <div className="relative top-4 pb-4">@{profile.username}</div>
+      <div className="relative top-4 pb-4">
+        @{profile.username || "username"}
+      </div>
       <div className="text-sm text-gray-600">
+        {/* Additional profile information can go here */}
       </div>
     </SidebarMenu>
   )

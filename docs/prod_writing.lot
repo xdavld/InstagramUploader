@@ -1,6 +1,10 @@
 \babel@toc {ngerman}{}\relax 
 \addvspace {10\p@ }
+<<<<<<< HEAD
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {1}{\ignorespaces Kategoriesierung der Anforderungen}}{2}{table.caption.5}%
 \addvspace {10\p@ }
+=======
+\contentsline {table}{\numberline {1}{\ignorespaces Kategoriesierung der Anforderungen\relax }}{1}{table.caption.4}%
+>>>>>>> 85d03636b4bb22971ae70420e09f6883f497bed6
 \addvspace {10\p@ }
