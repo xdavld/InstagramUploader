@@ -66,17 +66,18 @@ Diese beschriebenen Technologien bilden das Fundament der Webanwendung. Im näch
 \section{Architektur}
 \label{sec:chapter2-2}
 
-Um eine durchdachte und strukturierte Architektur zu gewährleisten, wurden zunächst verschiedene \ac{UML}-Diagramme erstellt. Diese dienen als 
-Grundlage für die Implementierung und ermöglichen eine klare Strukturierung, aus der die einzelnen Komponenten der Anwendung abgeleitet werden können. Durch die 
+Um eine durchdachte und strukturierte Architektur zu gewährleisten, wurden zunächst verschiedene \ac{UML}-Diagramme erstellt.
+Diese dienen als Grundlage für die Implementierung und ermöglichen eine klare Strukturierung, aus der die einzelnen Komponenten der Anwendung abgeleitet werden können. Durch die 
 Zusammenführung dieser Komponenten entsteht die Gesamtarchitektur der Anwendung.
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.8\textwidth, height=0.7\textheight]{graphics/activity_diagram.png}
-    \caption{Aktivitätsdiagramm}
+    \caption[Aktivitätsdiagramm]{Aktivitätsdiagramm\footnotemark}
     \label{fig:fig-2}
 \end{figure}
-\clearpage
+\footnotetext{Notation nach: \url{https://www.lucidchart.com/pages/uml-activity-diagram}}
+\newpage
 
 In \hyperref[fig:fig-2]{Abbildung 2} ist das \textbf{Aktivitätsdiagramm} dargestellt, das den typischen Ablauf der Benutzerinteraktion mit der Webanwendung zur 
 automatisierten Veröffentlichung von Instagram-Beiträgen veranschaulicht. Es zeigt die einzelnen Schritte von der Anmeldung bis zur Veröffentlichung eines Beitrags 
@@ -91,9 +92,10 @@ Darstellung der Benutzerinteraktion und stellt alle relevanten Schritte für ein
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.8\textwidth]{graphics/use_case_diagram.png}
-    \caption{Use Case Diagramm}
+    \caption[Use Case Diagramm]{Use Case Diagramm\footnotemark}
     \label{fig:fig-3}
 \end{figure}
+\footnotetext{Notation nach: \url{https://www.lucidchart.com/pages/uml-use-case-diagram}}
 
 \hyperref[fig:fig-3]{Abbildung 3} stellt das \textbf{Use Case Diagramm} dar, das die wesentlichen Use Cases der Webanwendung beschreibt. Es zeigt die Interaktionen 
 des Nutzers mit dem System und verdeutlicht die Beziehungen zwischen den einzelnen Anwendungsfällen. Der Nutzer kann sich zunächst über die Instagram-Anmeldung in 
@@ -125,9 +127,10 @@ Abhängigkeiten zwischen den Use Cases darstellt. Dadurch wird eine strukturiert
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.8\textwidth]{graphics/sequence_diagram.png}
-    \caption{Sequenzdiagramm}
+    \caption[Sequenzdiagramm]{Sequenzdiagramm\footnotemark}
     \label{fig:fig-4}
 \end{figure}
+\footnotetext{Notation nach: \url{https://www.lucidchart.com/pages/uml-sequence-diagram}}
 
 In \hyperref[fig:fig-4]{Abbildung 4} ist das Sequenzdiagramm dargestellt, das den Ablauf für das Hochladen und Veröffentlichen eines Bildes in der Webanwendung beschreibt. Es zeigt die 
 Interaktionen zwischen dem User, dem Webfrontend, dem Webbackend, dem Uploadthing-Service und der Instagram-\ac{API}. Im Folgeden wird der Ablauf der Interaktion beschrieben:
@@ -139,6 +142,8 @@ Interaktionen zwischen dem User, dem Webfrontend, dem Webbackend, dem Uploadthin
         \item Das Webfrontend zeigt dem Nutzer eine Bildvorschau an, aus der er ein Bild auswählen und markieren kann.
         \item Nach Auswahl klickt der Nutzer auf den Hochladen-Button, um den Upload-Vorgang zu starten.
     \end{itemize}
+
+\newpage
 
     \item \textbf{Kommunikation zwischen Frontend und Backend}
     \begin{itemize}
@@ -174,13 +179,14 @@ und die Abhängigkeiten zwischen Frontend, Backend, externen Services und \acp{A
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.8\textwidth]{graphics/components_diagram.png}
-    \caption{Komponentendiagramm}
+    \caption[Komponentendiagramm]{Komponentendiagramm\footnotemark}
     \label{fig:fig-5}
 \end{figure}
+\footnotetext{Notation nach: \url{https://www.lucidchart.com/pages/uml-component-diagram}}
+\newpage
 
 \hyperref[fig:fig-5]{Abbildung 5} zeigt das \textbf{Komponentendiagramm}, das die Architektur der Webanwendung beschreibt. Es zeigt die Hauptkomponenten sowie ihre Beziehungen und 
 Abhängigkeiten zueinander. Nachfolgend werden die einzelnen Komponenten und ihre jeweiligen Funktionen beschrieben sowie die Beziehungen zwischen ihnen erläutert:
-\clearpage
 
 \begin{enumerate}
     \item \textbf{Frontend}

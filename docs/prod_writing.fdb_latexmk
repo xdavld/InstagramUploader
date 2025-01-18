@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber prod_writing"] 0 "prod_writing.bcf" "prod_writing.bbl" "prod_writing" 1737206963.60346 -1
+["biber prod_writing"] 0 "prod_writing.bcf" "prod_writing.bbl" "prod_writing" 1737208686.33775 -1
   "includes/literature-database.bib" 1736894185.76158 737 3bccc7d9ddf8210d70558acdaffa0b91 ""
-  "prod_writing.bcf" 1737206963.45897 107915 b343ca37fc27f74848c8d5e90548d6c4 "pdflatex"
+  "prod_writing.bcf" 1737208686.18851 107915 b343ca37fc27f74848c8d5e90548d6c4 "pdflatex"
   (generated)
   "prod_writing.bbl"
   "prod_writing.blg"
   (rewritten before read)
-["pdflatex"] 1737206961.31782 "/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/docs/prod_writing.tex" "prod_writing.pdf" "prod_writing" 1737206963.60373 0
+["pdflatex"] 1737208683.98673 "/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/docs/prod_writing.tex" "prod_writing.pdf" "prod_writing" 1737208686.33801 0
   "/Users/tobias/src/Software Engineering I/SoftwareEngineering-Project/docs/prod_writing.tex" 1737045439.01443 2248 ec8584cc95355da3eef783b097d484e1 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -193,19 +193,19 @@
   "graphics/use_case_diagram.png" 1736890461.42076 52194 b35c33c09cf9e8c720792c2a6b3b367a ""
   "includes/abkuerzungen.tex" 1737201568.51519 156 1e55fd5af78b73c3116cfbd9bdefa2d2 ""
   "includes/chapter1.tex" 1737045641.10438 1238 6036017e24ddd8b78faedcdc5fcd2c75 ""
-  "includes/chapter2.tex" 1737101971.58638 14747 f443fef73addfe4fbeb40a796327437a ""
+  "includes/chapter2.tex" 1737208683.75056 15243 22dbdf18b1c8ba6665602196b6a27d12 ""
   "includes/chapter3.tex" 1737206115.24958 4392 a1409edd0216bac7f82f68114905133b ""
   "includes/chapter4.tex" 1737206251.7538 271 66b8a96d2cb69519d4e0cfb8454b35b7 ""
   "includes/config.tex" 1737198619.55652 2678 71ef9e33844ef9f1e6c51a963f12a664 ""
   "includes/erklaerung_ki.tex" 1737043618.14598 4282 5820f25d355c7cd3f1c9c4da3f67bff1 ""
-  "prod_writing.aux" 1737206963.45413 10325 a9ba7444b984711c32caa353a147e75b "pdflatex"
+  "prod_writing.aux" 1737208686.18478 10325 a9ba7444b984711c32caa353a147e75b "pdflatex"
   "prod_writing.bbl" 1737206282.83539 4836 77fe0b7b67509ee8ea09cdafc97ec200 "biber prod_writing"
-  "prod_writing.lof" 1737206963.45981 580 739b2d542f65f2838071b1f828de2118 "pdflatex"
-  "prod_writing.lot" 1737206963.45983 220 a0c382929cee2fe939fd4a8b6fb34296 "pdflatex"
-  "prod_writing.out" 1737206962.73771 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "prod_writing.run.xml" 1737206963.45971 2421 627078c4ccd8e95d77ce2be1591e27bd "pdflatex"
+  "prod_writing.lof" 1737208686.18939 580 739b2d542f65f2838071b1f828de2118 "pdflatex"
+  "prod_writing.lot" 1737208686.18941 220 a0c382929cee2fe939fd4a8b6fb34296 "pdflatex"
+  "prod_writing.out" 1737208685.454 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "prod_writing.run.xml" 1737208686.1893 2421 627078c4ccd8e95d77ce2be1591e27bd "pdflatex"
   "prod_writing.tex" 1737045439.01443 2248 ec8584cc95355da3eef783b097d484e1 ""
-  "prod_writing.toc" 1737206963.45979 1100 5d71e695d71d9192c60ae3ed742cf912 "pdflatex"
+  "prod_writing.toc" 1737208686.18936 1100 5d71e695d71d9192c60ae3ed742cf912 "pdflatex"
   "template/_dhbw_biblatex-config.tex" 1736878850.86488 5294 ff8bf64f96bf7c22fb3f69fff76a9e71 ""
   "template/_dhbw_deckblatt.tex" 1736878850.86507 2090 79fd048f1419a7a34db06adbee403f9c ""
   "template/_dhbw_erklaerung.tex" 1736878850.86549 924 13f182951ae36c7ba91049ce26ef857d ""

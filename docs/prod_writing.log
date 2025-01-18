@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  18 JAN 2025 14:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.27)  18 JAN 2025 14:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1144,28 +1144,24 @@ File: graphics/activity_diagram.png Graphic file (type png)
 Package pdftex.def Info: graphics/activity_diagram.png  used on input line 75.
 (pdftex.def)             Requested size: 364.20247pt x 478.00537pt.
  [4 <./graphics/activity_diagram.png>]
-<graphics/use_case_diagram.png, id=136, 683.55376pt x 553.06625pt>
+<graphics/use_case_diagram.png, id=139, 683.55376pt x 553.06625pt>
 File: graphics/use_case_diagram.png Graphic file (type png)
 <use graphics/use_case_diagram.png>
-Package pdftex.def Info: graphics/use_case_diagram.png  used on input line 93.
+Package pdftex.def Info: graphics/use_case_diagram.png  used on input line 94.
 (pdftex.def)             Requested size: 364.19667pt x 294.67651pt.
- [5
-
- <./graphics/use_case_diagram.png>]
-<graphics/sequence_diagram.png, id=143, 884.30376pt x 773.89125pt>
+ [5 <./graphics/use_case_diagram.png>]
+<graphics/sequence_diagram.png, id=150, 884.30376pt x 773.89125pt>
 File: graphics/sequence_diagram.png Graphic file (type png)
 <use graphics/sequence_diagram.png>
-Package pdftex.def Info: graphics/sequence_diagram.png  used on input line 127.
+Package pdftex.def Info: graphics/sequence_diagram.png  used on input line 129.
 (pdftex.def)             Requested size: 364.19667pt x 318.7263pt.
  [6] [7 <./graphics/sequence_diagram.png>]
-<graphics/components_diagram.png, id=165, 1117.17375pt x 1368.11125pt>
+<graphics/components_diagram.png, id=173, 1117.17375pt x 1368.11125pt>
 File: graphics/components_diagram.png Graphic file (type png)
 <use graphics/components_diagram.png>
-Package pdftex.def Info: graphics/components_diagram.png  used on input line 176.
+Package pdftex.def Info: graphics/components_diagram.png  used on input line 181.
 (pdftex.def)             Requested size: 364.19667pt x 445.98781pt.
- [8 <./graphics/components_diagram.png>] [9
-
-]) (./includes/chapter3.tex [10]
+ [8 <./graphics/components_diagram.png>] [9]) (./includes/chapter3.tex [10]
 chapter 3.
 [11
 
@@ -1214,18 +1210,18 @@ Package logreq Info: Writing requests to 'prod_writing.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 29279 strings out of 474116
- 581881 string characters out of 5743682
+ 29283 strings out of 474116
+ 581926 string characters out of 5743682
  1941187 words of memory out of 5000000
  51170 multiletter control sequences out of 15000+600000
  576679 words of font info for 73 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  108i,17n,107p,10983b,2369s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on prod_writing.pdf (21 pages, 657515 bytes).
+Output written on prod_writing.pdf (21 pages, 666832 bytes).
 PDF statistics:
- 369 PDF objects out of 1000 (max. 8388607)
- 303 compressed objects within 4 object streams
- 73 named destinations out of 1000 (max. 500000)
+ 381 PDF objects out of 1000 (max. 8388607)
+ 315 compressed objects within 4 object streams
+ 77 named destinations out of 1000 (max. 500000)
  138 words of extra memory for PDF output out of 10000 (max. 10000000)
 
