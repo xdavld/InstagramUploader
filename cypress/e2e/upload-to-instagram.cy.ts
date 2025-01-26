@@ -51,7 +51,7 @@ describe("Upload to Instagram", () => {
     // Click the "Publish to Instagram" button
     cy.get("button").contains("Publish to Instagram").click()
 
-    cy.wait(3600)
+    cy.wait(360)
   })
 
   it("should show an error if the upload fails", () => {
